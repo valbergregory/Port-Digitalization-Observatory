@@ -1,0 +1,17 @@
+Data: 2026-09-03 21:53:12.628743
+R: R version 4.4.3 (2025-02-28 ucrt)
+Plataforma: x86_64-w64-mingw32
+Raiz: D:/Claude code - projetos/Port-Digitalization-Observatory
+
+Pacotes-chave:
+  targets      1.12.0
+  renv         1.2.4
+  data.table   1.18.4
+  fixest       0.14.2
+  did          2.5.0
+  duckdb       AUSENTE
+  sfaR         AUSENTE
+  synthdid     AUSENTE
+  quarto       1.5.1
+  testthat     3.3.2
+  pointblank   AUSENTE

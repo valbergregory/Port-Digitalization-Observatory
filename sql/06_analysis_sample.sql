@@ -1,0 +1,7 @@
+-- Amostras congeladas por estimando (docs/estimand_table.md).
+-- Cada amostra é uma TABELA nomeada e datada — nunca uma view volátil —
+-- para que o artigo cite exatamente o que foi estimado.
+-- Exemplo (E1): portos públicos, 2010-2016, confiança >= média:
+-- CREATE TABLE analysis_sample_e1_v1 AS
+-- SELECT * FROM panel_with_treatment
+-- WHERE ano BETWEEN 2010 AND 2016 AND tipo_autoridade = 'Porto Público';

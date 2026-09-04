@@ -1,0 +1,82 @@
+# Registro PRELIMINAR de intervenções digitais — 2026-09-03
+# Regras de datação e níveis de confiança: docs/intervention_registry_protocol.md
+# ATENÇÃO: data de tratamento = entrada em PRODUÇÃO, nunca o anúncio.
+# Este arquivo é o rascunho de trabalho; o registro definitivo exigirá validação
+# ato a ato (DOU, portarias, notas oficiais) antes de entrar no modelo principal.
+
+- id: PSP
+  nome: "Porto Sem Papel (Concentrador de Dados Portuários / DUV)"
+  categoria: "janela única marítima (maritime single window)"
+  responsavel: "SEP/PR (depois SNP/MInfra), desenvolvido pelo SERPRO"
+  organizacoes_integradas: ["Autoridade Portuária", "ANVISA", "Polícia Federal", "Vigiagro/MAPA", "Marinha", "Receita Federal"]
+  funcionalidades: "DUV substitui ~140 formulários e ~1.000 itens redundantes; anuência eletrônica de estadia da embarcação"
+  processos_afetados: ["autorização de atracação", "estadia", "liberação da embarcação"]
+  abrangencia: "34-35 portos públicos (obrigatório); TUPs em fase posterior"
+  adocao_escalonada: true
+  datas_producao:                      # nível porto — coortes documentadas
+    - {porto: "Santos",         data: "2011-08-01", confianca: media, fonte: "SERPRO (notícia oficial); Portos e Navios"}
+    - {porto: "Rio de Janeiro", data: "2011-08-15", confianca: media, fonte: "SERPRO (notícia oficial)"}
+    - {porto: "Vitória",        data: "2011-09-10", confianca: media, fonte: "SERPRO (notícia oficial)"}
+    - {porto: "coorte 2012 (Niterói, Itaguaí, Angra, Forno, Barra do Riacho, Fortaleza, Pecém, Recife, Suape, Natal, Areia Branca, Maceió, Cabedelo, Salvador, Aratu, Ilhéus e outros)",
+       data: "2012", confianca: baixa, fonte: "notícias convergentes; datas mês a mês a levantar no DOU/SEP"}
+    - {porto: "Manaus (35º porto)", data: "2013-05", confianca: media, fonte: "notícias convergentes (LabTrans/SEP)"}
+    - {porto: "TUPs (terminais privados)", data: "a validar (2015+)", confianca: baixa, fonte: "Portos e Navios"}
+  validar_com: ["portarias SEP/DOU por porto", "relatórios de gestão SEP/SERPRO", "evidência operacional (queda de DUVs em papel)"]
+  status_registro: "VALIDADA PARCIALMENTE (programa e coortes iniciais confirmados em fontes oficiais; datas por porto da coorte 2012 pendentes)"
+
+- id: VTMIS
+  nome: "Vessel Traffic Management Information System"
+  categoria: "gestão de tráfego de embarcações (sensores + integração de dados)"
+  responsavel: "Autoridades portuárias / SNP"
+  adocao_escalonada: true
+  datas_producao:
+    - {porto: "Vitória", data: "2017", confianca: media, fonte: "gov.br (página Tráfego Portuário - VTMIS); contrato CODESA 2014"}
+    - {porto: "Santos",  data: "a validar (contrato recente após tentativa fracassada de 2012)", confianca: baixa, fonte: "Portogente"}
+    - {porto: "Rio de Janeiro, Itaguaí, Salvador, Aratu", data: "a validar", confianca: baixa, fonte: "programa 2012 (R$ 146,3 mi) — produção incerta"}
+  validar_com: ["atos das autoridades portuárias", "notas técnicas SNP", "notícias de inauguração com evidência operacional"]
+  status_registro: "CANDIDATA (variação escalonada real, mas datas de produção majoritariamente pendentes)"
+
+- id: PU_DUE
+  nome: "Portal Único Siscomex — DUE (exportação)"
+  categoria: "janela única de comércio exterior (processo nacional)"
+  responsavel: "Receita Federal + SECEX"
+  adocao_escalonada: false             # rollout nacional por PROCESSO, não por porto
+  datas_producao:
+    - {escopo: "nacional — piloto DUE", data: "2017 (a validar ato)", confianca: media}
+    - {escopo: "nacional — obrigatoriedade DUE", data: "2018 (a validar ato)", confianca: media}
+  uso_no_desenho: "choque comum temporal; exposição heterogênea por composição de carga/porto pode gerar intensidade"
+  validar_com: ["portarias conjuntas RFB/SECEX no DOU", "cronogramas oficiais do Portal Único"]
+  status_registro: "CANDIDATA (nacional; não serve para DiD porto a porto, serve para desenho de intensidade)"
+
+- id: PU_DUIMP
+  nome: "Portal Único — DUIMP / Novo Processo de Importação"
+  categoria: "janela única de comércio exterior (importação)"
+  adocao_escalonada: false
+  datas_producao:
+    - {escopo: "nacional — rollout gradual por modal/regime", data: "2020-2025 (a validar)", confianca: baixa}
+  status_registro: "CANDIDATA (mesma lógica do PU_DUE)"
+
+- id: AGENDAMENTO_SANTOS
+  nome: "Cadeia Logística Portuária Inteligente / Portolog (agendamento de caminhões — Santos)"
+  categoria: "agendamento digital de acesso terrestre"
+  adocao_escalonada: true              # concentrada em Santos; doadores plausíveis p/ synthetic DiD
+  datas_producao:
+    - {porto: "Santos", data: "a validar (2013+)", confianca: baixa, fonte: "notícias setoriais"}
+  status_registro: "CANDIDATA (afeta congestionamento terrestre; outcome marítimo indireto)"
+
+- id: GATE_AUTOMATION_TERMINAIS
+  nome: "Automação de gates/OCR em terminais de contêineres (BTP, DPW/Embraport, Itapoá, etc.)"
+  categoria: "automação de terminal (nível terminal, não porto)"
+  adocao_escalonada: true
+  datas_producao:
+    - {terminal: "BTP e Embraport (Santos)", data: "2013 (inauguração dos terminais; automação embarcada)", confianca: baixa}
+    - {terminal: "Porto Itapoá", data: "a validar", confianca: baixa}
+  observacao: "confundido com a própria entrada de capacidade nova; tratar com muito cuidado"
+  status_registro: "CANDIDATA COM RESSALVA (colinearidade com expansão física)"
+
+- id: JUP
+  nome: "Janela Única Portuária / programa de digitalização MPor-ANTAQ (2023+)"
+  categoria: "integração interorganizacional de dados"
+  datas_producao:
+    - {escopo: "a mapear", data: "a validar", confianca: baixa}
+  status_registro: "A INVESTIGAR (segunda rodada documental)"

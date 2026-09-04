@@ -1,0 +1,17 @@
+id;nome;categoria;escopo;data_producao;confianca;fonte;adocao_escalonada;data_tratamento;utilizavel_modelo_principal
+PSP;Porto Sem Papel (Concentrador de Dados Portuários / DUV);janela única marítima (maritime single window);Santos;2011-08-01;media;"SERPRO (notícia oficial); Portos e Navios";TRUE;2011-08-01;TRUE
+PSP;Porto Sem Papel (Concentrador de Dados Portuários / DUV);janela única marítima (maritime single window);Rio de Janeiro;2011-08-15;media;SERPRO (notícia oficial);TRUE;2011-08-15;TRUE
+PSP;Porto Sem Papel (Concentrador de Dados Portuários / DUV);janela única marítima (maritime single window);Vitória;2011-09-10;media;SERPRO (notícia oficial);TRUE;2011-09-10;TRUE
+PSP;Porto Sem Papel (Concentrador de Dados Portuários / DUV);janela única marítima (maritime single window);coorte 2012 (Niterói, Itaguaí, Angra, Forno, Barra do Riacho, Fortaleza, Pecém, Recife, Suape, Natal, Areia Branca, Maceió, Cabedelo, Salvador, Aratu, Ilhéus e outros);2012;baixa;"notícias convergentes; datas mês a mês a levantar no DOU/SEP";TRUE;2012-01-01;FALSE
+PSP;Porto Sem Papel (Concentrador de Dados Portuários / DUV);janela única marítima (maritime single window);Manaus (35º porto);2013-05;media;notícias convergentes (LabTrans/SEP);TRUE;2013-05-01;TRUE
+PSP;Porto Sem Papel (Concentrador de Dados Portuários / DUV);janela única marítima (maritime single window);TUPs (terminais privados);a validar (2015+);baixa;Portos e Navios;TRUE;;FALSE
+VTMIS;Vessel Traffic Management Information System;gestão de tráfego de embarcações (sensores + integração de dados);Vitória;2017;media;"gov.br (página Tráfego Portuário - VTMIS); contrato CODESA 2014";TRUE;2017-01-01;TRUE
+VTMIS;Vessel Traffic Management Information System;gestão de tráfego de embarcações (sensores + integração de dados);Santos;a validar (contrato recente após tentativa fracassada de 2012);baixa;Portogente;TRUE;;FALSE
+VTMIS;Vessel Traffic Management Information System;gestão de tráfego de embarcações (sensores + integração de dados);Rio de Janeiro, Itaguaí, Salvador, Aratu;a validar;baixa;programa 2012 (R$ 146,3 mi) — produção incerta;TRUE;;FALSE
+PU_DUE;Portal Único Siscomex — DUE (exportação);janela única de comércio exterior (processo nacional);nacional — piloto DUE;2017 (a validar ato);media;;FALSE;;FALSE
+PU_DUE;Portal Único Siscomex — DUE (exportação);janela única de comércio exterior (processo nacional);nacional — obrigatoriedade DUE;2018 (a validar ato);media;;FALSE;;FALSE
+PU_DUIMP;Portal Único — DUIMP / Novo Processo de Importação;janela única de comércio exterior (importação);nacional — rollout gradual por modal/regime;2020-2025 (a validar);baixa;;FALSE;;FALSE
+AGENDAMENTO_SANTOS;Cadeia Logística Portuária Inteligente / Portolog (agendamento de caminhões — Santos);agendamento digital de acesso terrestre;Santos;a validar (2013+);baixa;notícias setoriais;TRUE;;FALSE
+GATE_AUTOMATION_TERMINAIS;Automação de gates/OCR em terminais de contêineres (BTP, DPW/Embraport, Itapoá, etc.);automação de terminal (nível terminal, não porto);BTP e Embraport (Santos);"2013 (inauguração dos terminais; automação embarcada)";baixa;;TRUE;;FALSE
+GATE_AUTOMATION_TERMINAIS;Automação de gates/OCR em terminais de contêineres (BTP, DPW/Embraport, Itapoá, etc.);automação de terminal (nível terminal, não porto);Porto Itapoá;a validar;baixa;;TRUE;;FALSE
+JUP;Janela Única Portuária / programa de digitalização MPor-ANTAQ (2023+);integração interorganizacional de dados;a mapear;a validar;baixa;;FALSE;;FALSE
