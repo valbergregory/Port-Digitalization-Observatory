@@ -1,0 +1,5 @@
+-- Carga dos txt anuais da ANTAQ para port_calls/port_call_times.
+-- Placeholders {ANO}: executado via R (DBI) por ano. BLOQUEADO até retorno do EA.
+-- Exemplo de ingestão direta DuckDB (conferir nomes reais das colunas na volta):
+-- INSERT INTO port_calls SELECT ... FROM read_csv('data/raw/antaq/{ANO}Atracacao.txt',
+--   delim=';', header=true, encoding='utf-8');

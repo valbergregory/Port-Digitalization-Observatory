@@ -1,0 +1,61 @@
+# Fontes de dados — auditadas em 2026-09-03 (detalhes em docs/data_inventory.md)
+
+antaq_estatistico_aquaviario:
+  instituicao: "ANTAQ"
+  status: "BLOQUEADA TEMPORARIAMENTE (painel em manutenção; host web3.antaq.gov.br desativado)"
+  host_atual: "https://estatistica.antaq.gov.br"        # redireciona p/ página de indisponibilidade
+  painel_qlik: "https://aquarela.antaq.gov.br/hub/"     # hub Qlik Sense (consulta interativa)
+  padrao_url_txt: "https://estatistica.antaq.gov.br/ea/txt/{ANO}{Tabela}.zip"
+  tabelas_microdados:
+    - "Atracacao"                    # 1 linha por atracação, timestamps completos
+    - "TemposAtracacao"              # T1, T2, T3, T4, TA, TE por atracação
+    - "TemposAtracacaoParalisacao"   # paralisações (a confirmar no retorno)
+    - "Carga"                        # carga por atracação/mercadoria
+    - "CargaConteinerizada"          # TEU
+    - "TaxaOcupacao"                 # ocupação de berço
+  tabelas_cadastro: ["InstalacaoOrigem", "InstalacaoDestino", "Mercadoria", "MercadoriaConteinerizada"]
+  dicionario: "MetadadosMovimentacao.zip (recuperado via Wayback, em data/documents/metadados_movimentacao/)"
+  anos: "2010-2025 (conforme página de download arquivada)"
+  formato: "txt ';' UTF-8-BOM dentro de zip"
+  licenca: "dados abertos governamentais"
+  fallback: "Internet Archive (apenas cadastros e dicionário); Base dos Dados (anuário 2014-2020, agregado)"
+
+comexstat_api:
+  instituicao: "MDIC/SECEX"
+  status: "ACESSIVEL (verificado 2026-09-03; atualizada até 2026-07)"
+  url: "https://api-comexstat.mdic.gov.br"
+  endpoint_geral: "POST /general (JSON)"
+  observacoes:
+    - "rate limit ~1 req/10s (HTTP 429)"
+    - "filtro 'via' não aceitou values [1]/['1']; solução: detalhar por via e filtrar MARITIMA no cliente"
+    - "URF não é 1:1 com porto (há ALF/IRF com fluxo marítimo); crosswalk URF-porto necessário"
+  granularidade: "mensal; dimensões NCM, país, UF, município, URF, via"
+
+comexstat_bulk:
+  instituicao: "MDIC/SECEX"
+  status: "ACESSIVEL (verificado 2026-09-03)"
+  url_padrao: "https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/{EXP|IMP}_{ANO}.csv"
+  colunas: [CO_ANO, CO_MES, CO_NCM, CO_UNID, CO_PAIS, SG_UF_NCM, CO_VIA, CO_URF, QT_ESTAT, KG_LIQUIDO, VL_FOB]
+  nota: "CO_VIA=01 marítima; CO_URF identifica a unidade da Receita (porto), ex.: 0817800 Santos"
+
+imf_portwatch:
+  instituicao: "FMI / Oxford"
+  status: "ACESSIVEL (verificado 2026-09-03)"
+  url: "https://services9.arcgis.com/weJ1QsnbMYJlCHdG/arcgis/rest/services"
+  uso: "chamadas de navios/derivados de AIS por porto; validação cruzada da movimentação e controles"
+
+infraestrutura_portuaria:
+  candidatas:
+    - "ANTAQ: cadastro de instalações, berços (páginas ConsultarPorto/ConsultarBerco do SDP)"
+    - "Anuário ANTAQ / Plano Mestre (SNP-LabTrans): berços, calado, equipamentos, capacidade"
+    - "ANTAQ: arrendamentos e concessões"
+  status: "A VERIFICAR (segunda rodada)"
+
+intervencoes_digitais:
+  fontes:
+    - "gov.br (SNP/Ministério de Portos e Aeroportos): páginas de programas (PSP, VTMIS, Inteligência Logística)"
+    - "SERPRO: notícias de entrada em operação do Porto Sem Papel"
+    - "Diário Oficial da União: portarias e atos de obrigatoriedade"
+    - "Portal Único Siscomex: cronogramas DUE/DUIMP/CCT"
+    - "Notícias setoriais (Portos e Navios, Portogente) como fonte secundária"
+  registro: "config/digital_interventions.yml + docs/intervention_registry_protocol.md"

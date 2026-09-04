@@ -1,0 +1,40 @@
+# Especificações de modelo — rascunho pré-registro (detalhes: docs/identification_strategy.md,
+# docs/estimand_table.md, docs/efficiency_model.md). Nada aqui foi estimado.
+
+outcomes:
+  operacionais:
+    principais: [t1_espera_atracacao_h, t3_operacao_h, ta_atracado_h, te_estadia_h]
+    secundarios: [prancha_media_operacional, carga_por_atracacao_t, iqr_t1_previsibilidade]
+  economicos:
+    principais: [vl_fob_usd, kg_liquido, n_atracacoes, participacao_porto]
+  ambientais_condicionados:
+    - "combustível/emissões de espera SOMENTE com fatores verificados (IMO GHG Study; não estimado por padrão)"
+
+did_principal:
+  tratamento: "PSP — entrada em produção por porto (config/digital_interventions.yml)"
+  estimador: "Callaway-Sant'Anna (did::att_gt), comparação: not-yet-treated"
+  alternativa: "Sun-Abraham (fixest::sunab)"
+  proibido: "TWFE ingênuo como modelo principal"
+  nivel_cluster: "porto"
+  janela_event_study: [-12, 24]        # meses; limitada pelo início dos dados em 2010
+  amostra: "portos públicos com microdados EA 2010+; excluir tratados de confiança baixa"
+
+fronteira_estocastica:
+  outputs_candidatos: [toneladas, teu, n_atracacoes]
+  inputs_candidatos: [horas_de_berco (TA agregado), n_bercos, calado_maximo, capacidade]
+  forma: ["cobb_douglas", "translog"]
+  ineficiencia: "variante no tempo; determinantes incluem índice de digitalização"
+  robustez: "DEA como verificação, nunca substituto"
+  condicao: "só estimar após verificar cobertura de inputs (docs/efficiency_model.md)"
+
+ppml:
+  uso: "fluxos porto(URF)-país-mês com zeros; FE alta dimensão via fixest::fepois"
+  atencao: "crosswalk URF-porto obrigatório antes de qualquer estimação"
+
+robustez_minima:
+  - datas alternativas (anúncio vs produção)
+  - exclusão de intervenções de confiança baixa
+  - janelas alternativas
+  - placebos temporais e de porto
+  - controle de obras físicas/dragagem/concessões simultâneas
+  - exclusão da pandemia (2020-2021) e greves

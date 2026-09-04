@@ -1,0 +1,9 @@
+arquivo;sha256;bytes;origem_url;data_download;observacao
+data/raw/MetadadosMovimentacao.zip;7a51bcd9866a6ed7d6bb3942bf3b73e7012fb0baed7c27c687f1d2c914a24d29;8320;http://web.archive.org/web/20240717115457/https://web3.antaq.gov.br/ea/txt/MetadadosMovimentacao.zip;2026-09-03;dicionario oficial de metadados do EA (snapshot Wayback 2024-07-17)
+data/raw/InstalacaoOrigem.zip;3231f449fbc092ca926f003e6f30baf0d93986678d40e855440099db8f2de818;68234;http://web.archive.org/web/20240717125114/https://web3.antaq.gov.br/ea/txt/InstalacaoOrigem.zip;2026-09-03;cadastro de instalacoes de origem (snapshot Wayback 2024-07-17)
+data/raw/Mercadoria.zip;d71ec9c6c388dcf84bcd2ceca63d5b64e4f3c8683584671c01e2f7af2cae6f19;58185;http://web.archive.org/web/20240717095546/https://web3.antaq.gov.br/ea/txt/Mercadoria.zip;2026-09-03;cadastro de mercadorias (snapshot Wayback 2024-07-17)
+data/documents/modelo_dados_antaq.png;c6a4347e3da70fde660f3c8fa73f68758538af65d40d539d68cec2737872e158;154637;http://web.archive.org/web/20240717150329/https://web3.antaq.gov.br/ea/txt/modelo_dados.png;2026-09-03;diagrama do modelo de dados do EA
+data/raw/comex_export_urf_via_2024Q1.json;05a1c64c075e3ef403142559960eefd02c5993b459830f255c5dbd1079c7a914;37619;POST https://api-comexstat.mdic.gov.br/general (export, urf+via, 2024-01..2024-03);2026-09-03;
+data/raw/comex_import_urf_via_2024Q1.json;9b4796b862323e094b54a97d8d57592631c87264b18ebb68ab82db0ad155487a;50901;POST https://api-comexstat.mdic.gov.br/general (import, urf+via, 2024-01..2024-03);2026-09-03;
+data/raw/Instalacao_Origem.txt;258ebddbddce45414418d3e3aa7a34683519e94bdac4b3d69fd8feeb8df03a28;352576;extraido de InstalacaoOrigem.zip;2026-09-03;
+data/raw/Mercadoria.txt;2cd4b7aca760435b136200364a99885fd27c328b869576678006770f4fe70025;318465;extraido de Mercadoria.zip;2026-09-03;

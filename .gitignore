@@ -1,0 +1,39 @@
+# Dados brutos e derivados nunca são versionados; apenas metadados e checksums.
+data/raw/
+data/interim/
+data/processed/
+data/documents/
+!data/metadata/
+
+# Saídas regeneráveis
+outputs/figures/
+outputs/tables/
+outputs/models/
+outputs/logs/
+outputs/dashboard/
+outputs/diagnostics/*.html
+
+# R
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+_targets/
+renv/library/
+renv/staging/
+renv/local/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Quarto
+article/manuscript_files/
+article/*_cache/
+/.quarto/
+
+# SO / editor
+Thumbs.db
+.DS_Store

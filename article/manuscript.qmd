@@ -1,0 +1,139 @@
+---
+title: "Port Digitalization, Efficiency and Trade Costs: Evidence from Brazilian Ports"
+author:
+  - name: "Valber Gregory"
+    email: valber.gregory@gmail.com
+format:
+  pdf:
+    number-sections: true
+    keep-tex: true
+  html: default
+bibliography: references.bib
+abstract: >
+  [ABSTRACT TO BE WRITTEN AFTER RESULTS] We study whether port digitalization
+  reduces vessel delays and trade costs, exploiting the staggered rollout of
+  Brazil's maritime single window (Porto Sem Papel) across public ports
+  between 2011 and 2013. We combine ANTAQ berthing microdata, Comex Stat
+  trade flows and a curated registry of digital interventions integrated in a
+  purpose-built information system, the Brazilian Port Digital Transformation
+  Observatory. [RESULT TO BE GENERATED]
+keywords: [port digitalization, maritime single window, trade costs, difference-in-differences, stochastic frontier, information systems]
+---
+
+<!-- REGRA: nenhum resultado inventado. Placeholders [RESULT TO BE GENERATED].
+     Todas as citações de references.bib devem ser conferidas no original
+     antes da submissão. -->
+
+# Introduction
+
+[TO BE DRAFTED] Motivation: time in port is a trade cost [@hummels2013;
+@djankov2010]; ports are multi-organization information-processing systems;
+Brazil's Porto Sem Papel (PSP) replaced ~140 paper forms with a single
+electronic document (DUV) integrating six federal agencies, rolled out across
+public ports in staggered cohorts (Aug/2011–May/2013). Research question and
+preview of findings. [RESULT TO BE GENERATED]
+
+# Institutional Background
+
+[TO BE DRAFTED] Brazilian port governance (public ports vs. private
+terminals), the agencies involved in a vessel call (port authority, customs,
+sanitary, agriculture, federal police, navy), and the 2013 port reform as a
+confounder to be handled explicitly.
+
+# Port Digitalization in Brazil
+
+[TO BE DRAFTED] Taxonomy of interventions (maritime single window, trade
+single window, VTMIS, PCS, scheduling, gate automation); what counts as
+digital transformation vs. mere computerization; the intervention registry
+and its confidence grading (see `docs/intervention_registry_protocol.md`).
+
+# Economic and IS Theory
+
+[TO BE DRAFTED] Transaction costs and time costs of trade; queuing at
+anchorage; Organizational Information Processing Theory [@galbraith1974] —
+the single window as an increase in information-processing capacity that
+substitutes for slack (waiting time); IS business value [@melville2004] —
+complementarities between digital capabilities and organizational resources
+[@milgrom1990]; TOE [@tornatzky1990] for adoption heterogeneity. Hypotheses
+H1–H10 (protocol §2).
+
+# The Port Digital Transformation Observatory
+
+[TO BE DRAFTED] Design-science artifact: DuckDB integration layer, curated
+intervention registry, quality audits, dashboards; people, processes,
+organizations and technology dimensions.
+
+# Data
+
+[TO BE DRAFTED] ANTAQ waterway statistics microdata (2010–2025): berthing
+records and official operational times (T1 waiting, T2 pre-operation, T3
+operation, T4 pre-departure, TA = T2+T3+T4, TE = T1+TA); Comex Stat monthly
+trade by customs unit (URF) and transport mode; auxiliary infrastructure and
+control data. [SAMPLE TABLE TO BE GENERATED]
+
+# Measuring Digitalization
+
+[TO BE DRAFTED] Treatment dating rules (production, not announcement);
+confidence levels; optional digitalization index (only if comparable
+information exists; transparent weights; no significance-hacking).
+
+# Efficiency Model
+
+[TO BE DRAFTED] Stochastic frontier: outputs (tonnes; TEU for container
+ports), inputs (berth-hours, active berths, draft) [@aigner1977;
+@battese1995]; time-varying inefficiency with digitalization as a
+determinant; DEA as robustness only.
+
+# Identification Strategy
+
+[TO BE DRAFTED] Staggered DiD with heterogeneity-robust estimators
+[@callaway2021; @sunabraham2021]; not-yet-treated comparisons; event-study
+dynamics; pretrend sensitivity [@rambachan2023]; synthetic DiD for
+concentrated interventions [@arkhangelsky2021]; PPML for trade flows
+[@santossilva2006]. Estimand table in appendix.
+
+# Results
+
+[RESULT TO BE GENERATED]
+
+# Mechanisms
+
+[RESULT TO BE GENERATED] Digitalization → time/uncertainty → efficiency →
+trade, tested with the same design; no formal causal mediation claims.
+
+# Heterogeneity
+
+[RESULT TO BE GENERATED] Public vs. private, container vs. bulk, size,
+region, infrastructure, number of integrated agencies.
+
+# Robustness
+
+[RESULT TO BE GENERATED] Announcement-date placebo (H10); excluding
+low-confidence treatments; excluding the 2011 cohort (short pre-period);
+excluding 2020–21; permutation placebos; simultaneous physical investments.
+
+# Information Systems Contributions
+
+[TO BE DRAFTED] Artifact + causal evaluation; implications for OIPT and IS
+business value in interorganizational government settings.
+
+# Economic and Environmental Implications
+
+[TO BE DRAFTED] Time savings valued as trade costs; anchorage fuel/emissions
+computed only with citable factors, otherwise reported as avoided waiting
+time.
+
+# Limitations
+
+[TO BE DRAFTED] Short pre-period for the 2011 cohort; all public ports
+treated by 2013 (long-run identification limited); URF–port mapping in trade
+data; reporting quality of operational times.
+
+# Conclusion
+
+[TO BE DRAFTED]
+
+# References {.unnumbered}
+
+::: {#refs}
+:::

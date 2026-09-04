@@ -1,0 +1,21 @@
+---
+title: "Online Appendix — Port Digitalization, Efficiency and Trade Costs"
+format: pdf
+---
+
+# A. Estimand table
+
+[Ported from `docs/estimand_table.md` when frozen.]
+
+# B. Intervention registry
+
+[Full registry with sources and confidence grades — from
+`config/digital_interventions.yml` after DOU validation.]
+
+# C. Data quality audits
+
+[RESULT TO BE GENERATED]
+
+# D. Additional robustness
+
+[RESULT TO BE GENERATED]

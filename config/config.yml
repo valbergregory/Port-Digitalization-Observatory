@@ -1,0 +1,23 @@
+# Configuração geral do projeto
+default:
+  projeto: "Port Digitalization, Efficiency and Trade Costs"
+  artefato: "Brazilian Port Digital Transformation Observatory"
+  data_inicio_analise: "2010-01-01"   # início dos microdados do EA/ANTAQ
+  data_fim_analise: "2025-12-31"      # revisar após retorno do painel ANTAQ
+  granularidade_painel: "porto-mes"
+  duckdb_path: "data/processed/observatory.duckdb"
+  seed: 20260903
+  encoding_antaq: "UTF-8-BOM"         # arquivos txt do EA usam UTF-8 com BOM, separador ';'
+  rscript_win: "C:/Program Files/R/R-4.4.3/bin/Rscript.exe"
+
+caminhos:
+  raw: "data/raw"
+  interim: "data/interim"
+  processed: "data/processed"
+  documents: "data/documents"
+  metadata: "data/metadata"
+  diagnostics: "outputs/diagnostics"
+  figures: "outputs/figures"
+  tables: "outputs/tables"
+  models: "outputs/models"
+  logs: "outputs/logs"
