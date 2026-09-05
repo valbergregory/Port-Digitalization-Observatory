@@ -17,12 +17,22 @@
     - {porto: "Santos",         data: "2011-08-01", confianca: media, fonte: "SERPRO (notícia oficial); Portos e Navios"}
     - {porto: "Rio de Janeiro", data: "2011-08-15", confianca: media, fonte: "SERPRO (notícia oficial)"}
     - {porto: "Vitória",        data: "2011-09-10", confianca: media, fonte: "SERPRO (notícia oficial)"}
-    - {porto: "coorte 2012 (Niterói, Itaguaí, Angra, Forno, Barra do Riacho, Fortaleza, Pecém, Recife, Suape, Natal, Areia Branca, Maceió, Cabedelo, Salvador, Aratu, Ilhéus e outros)",
-       data: "2012", confianca: baixa, fonte: "notícias convergentes; datas mês a mês a levantar no DOU/SEP"}
+    - {porto: "Pecém e Fortaleza", data: "2012-05", confianca: media,
+       fonte: "portaria SEP assinada pelo ministro Leônidas Cristino disciplinando o uso do Concentrador (notícia oficial do Complexo do Pecém, 08/05/2012); número da portaria a confirmar no DOU"}
+    - {porto: "Recife e Suape", data: "2012-07", confianca: media,
+       fonte: "Portaria SEP nº 162/2012 (publicada no DOU ~28/06/2012) define a data de entrada em operação; íntegra a localizar no DOU"}
+    - {porto: "demais da coorte 2012 (Niterói, Itaguaí, Angra, Forno, Barra do Riacho, Natal, Areia Branca, Maceió, Cabedelo, Salvador, Aratu, Ilhéus, Itajaí, São Francisco do Sul, Imbituba, Laguna, Porto Alegre, Pelotas, Rio Grande, São Sebastião, Paranaguá, Antonina)",
+       data: "2012", confianca: baixa, fonte: "notícias convergentes; EXISTE série de portarias SEP porto a porto (ex.: portaria do porto organizado de Manaus, Diário das Leis id 222859) — minerar DOU"}
     - {porto: "Manaus (35º porto)", data: "2013-05", confianca: media, fonte: "notícias convergentes (LabTrans/SEP)"}
     - {porto: "TUPs (terminais privados)", data: "a validar (2015+)", confianca: baixa, fonte: "Portos e Navios"}
+  atos_oficiais_identificados:
+    - "Portaria SEP nº 106, de 14/06/2011 — obrigatoriedade do PSP para atracação/operação/desatracação no Porto de Santos (íntegra a localizar no DOU)"
+    - "Portaria SEP nº 162, de ~28/06/2012 — define data de entrada em operação em Recife e Suape (íntegra a localizar no DOU)"
+    - "Série de portarias SEP porto a porto disciplinando o uso do Concentrador (confirmada p/ Manaus e Pecém/Fortaleza) — alvo da mineração do DOU"
+  documentos_locais:
+    - "data/documents/interventions/PSP/ENAP_Projeto_Porto_Sem_Papel.pdf (estudo de caso oficial SEP/ENAP: DUV, Concentrador, Sinaleiro, fases 1-2, custos PAC R$ 405,3 mi; gráficos oficiais de queda de ~8h no tempo médio de espera em Santos 2010→2012)"
   validar_com: ["portarias SEP/DOU por porto", "relatórios de gestão SEP/SERPRO", "evidência operacional (queda de DUVs em papel)"]
-  status_registro: "VALIDADA PARCIALMENTE (programa e coortes iniciais confirmados em fontes oficiais; datas por porto da coorte 2012 pendentes)"
+  status_registro: "VALIDADA PARCIALMENTE (programa, atos-chave e 5 coortes datadas: 2011-08 Santos, 2011-08 Rio, 2011-09 Vitória, 2012-05 Pecém/Fortaleza, 2012-07 Recife/Suape; demais portos de 2012 pendentes de DOU)"
 
 - id: VTMIS
   nome: "Vessel Traffic Management Information System"

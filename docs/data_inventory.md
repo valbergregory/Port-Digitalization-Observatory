@@ -1,9 +1,26 @@
 # Inventário de dados
 
-Auditado em **2026-09-03**. Complementa `config/data_sources.yml`.
+Auditado em **2026-09-03**; atualizado em **2026-09-04**.
+Complementa `config/data_sources.yml`.
 Status: ✅ acessível · ⛔ bloqueada · ⚠️ parcial · ❓ a verificar.
 
-## 1. ANTAQ — Estatístico Aquaviário (microdados) ⛔→⚠️
+## 0. ATUALIZAÇÃO 2026-09-04 — ANTAQ ✅ DESBLOQUEADA
+
+Base bruta consolidada em host dedicado (achada via dados.gov.br, conjunto
+`estatistico-aquaviario-ea`, e verificada de forma independente):
+
+| Campo | Valor |
+|---|---|
+| URL | `https://download.antaq.gov.br/ea/estatistico.zip` |
+| Tamanho | 908.988.214 bytes (SHA-256 no download_log); Last-Modified 2026-08-12 |
+| Conteúdo | 181 arquivos txt `;` UTF-8-BOM: Atracacao, TemposAtracacao(+Paralisacao), Carga, Carga_Conteinerizada/Hidrovia/Regiao/Rio, CargaAreas (2023+), TaxaOcupacao(+ComCarga/TOAtracacao, 2020+), **2010-2026**, cadastros e metadados |
+| Peculiaridades | servidor Oracle API Gateway: HEAD→405, GET com Range→206; padrão antigo por tabela/ano → 404 (só existe o consolidado) |
+| Baixada | 2026-09-04, íntegra em `data/raw/antaq/estatistico.zip`; 2010-2013 Atracacao+TemposAtracacao já extraídos |
+| Qualidade (piloto 2010-2013) | 307.730 atracações; 0,6% sem tempos; identidades TA/TE conferem 100%; `Mes` textual; tipos de autoridade = Porto Organizado/Terminal Autorizado |
+
+A seção 1 abaixo permanece como registro histórico do bloqueio.
+
+## 1. ANTAQ — Estatístico Aquaviário (microdados) ⛔→✅ (histórico)
 
 | Campo | Valor |
 |---|---|

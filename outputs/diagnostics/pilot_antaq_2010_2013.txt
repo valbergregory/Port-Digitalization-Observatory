@@ -1,0 +1,22 @@
+Piloto ANTAQ 2010-2013 — gerado em 2026-09-04 21:26:00.894702
+
+Atracações lidas: 307.730
+  com movimentação de carga: 307.730
+  sem tempos (não casaram com TemposAtracacao): 1.890 (0.6%)
+  tempos negativos: 0 | extremos (> 2160 h): 3
+  TA != T2+T3+T4: 0 (0.00%) | TE != T1+TA: 0 (0.00%)
+Portos (CDTUP) distintos: 149 | públicos: 34 | privados: 115
+
+Painel porto-mês: 6.315 linhas, 148 portos, 48 meses -> D:/Claude code - projetos/Port-Digitalization-Observatory/data/interim/painel_porto_mes_operacional_2010_2013.csv
+
+Cobertura de insumos da fronteira (por tipo de autoridade):
+       tipo_autoridade meses_com_bercos meses_com_horas mediana_bercos
+                <char>            <num>           <num>          <num>
+1:       Porto Público                1       1.0000000              5
+2: Porto Privado (TUP)                1       0.9995816              1
+
+Sanidade (descritivo, NÃO causal) — Santos, T1/TA medianos médios:
+   pos_psp t1_mediano_medio_h ta_mediano_medio_h n_meses
+    <lgcl>              <num>              <num>   <int>
+1:    TRUE               16.7               29.4      35
+2:   FALSE               28.6               26.4      19

@@ -34,3 +34,25 @@ Formato: data — decisão — justificativa — alternativas rejeitadas.
 9. **renv ainda não inicializado** — decisão deliberada: inicializar apenas
    junto com a primeira instalação de pacotes novos (duckdb, sfaR, synthdid),
    para que o lockfile nasça mínimo e fiel (ver reproducibility_guide.md).
+
+## 2026-09-04
+
+10. **Bug corrigido no painel de comércio**: nomes de URF com dois " - "
+    (ex.: "ALF - PORTO DE SUAPE") eram truncados pelo split ingênuo em
+    `R/08_clean_trade.R`; agora separa apenas no primeiro separador.
+11. **Crosswalk URF↔CDTUP preliminar criado** (`python/build_urf_crosswalk.py`
+    → `data/metadata/crosswalk_urf_cdtup.csv`, versionado): casamento por nome
+    normalizado + dicionário curado; linhas `REVISAR` nunca entram em joins
+    econométricos.
+12. **Base ANTAQ desbloqueada** (descoberta em sessão paralela, verificada
+    aqui de forma independente): zip consolidado em
+    `download.antaq.gov.br/ea/estatistico.zip` (909 MB, Last-Modified
+    12/08/2026). Interpretação da instrução do pesquisador ("retomar no que
+    der") como autorização para o download — iniciado em Background Job em
+    04/09.
+13. **Coortes do PSP refinadas com fontes oficiais**: Pecém/Fortaleza
+    2012-05 (portaria SEP anunciada em 08/05/2012, notícia oficial do
+    Complexo do Pecém); Recife/Suape 2012-07 (Portaria SEP nº 162/2012);
+    atos-chave identificados (Portaria SEP 106/2011 — Santos) e confirmação
+    de que existe série de portarias porto a porto → alvo da mineração DOU.
+    Estudo de caso oficial ENAP arquivado no dossiê (`data/documents/interventions/PSP/`).
