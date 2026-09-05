@@ -102,3 +102,61 @@ improvável.
 2. Rodar mineração do DOU para datas PSP porto a porto.
 3. Revisar as hipóteses H1-H10 à luz deste relatório (protocolo §2).
 4. Autorizar segunda rodada: download do universo EA 2010-2025 + Comex bulk.
+
+---
+
+# Adendo — 2026-09-04 (segunda rodada parcial)
+
+## A1. Desbloqueio da ANTAQ
+
+Base bruta consolidada **baixada e verificada**:
+`download.antaq.gov.br/ea/estatistico.zip` (909 MB, SHA-256 registrado,
+Last-Modified 2026-08-12) — 181 arquivos: Atracacao, TemposAtracacao,
+Carga(+Conteinerizada/Hidrovia/Regiao/Rio/Areas), TaxaOcupacao (2020+),
+**2010-2026**, cadastros e metadados atualizados. O e-SIC tornou-se
+desnecessário.
+
+## A2. Piloto com microdados reais (2010-2013, janela do PSP)
+
+`scripts/08_pilot_antaq_panel.R` → painel
+`data/interim/painel_porto_mes_operacional_2010_2013.csv` e diagnóstico
+`outputs/diagnostics/pilot_antaq_2010_2013.txt`:
+
+- 307.730 atracações com movimentação de carga; 0,6% sem tempos; 0 tempos
+  negativos; 3 extremos (>90 dias); **TA=T2+T3+T4 e TE=T1+TA conferem em
+  100%** — qualidade dos tempos muito acima do temido.
+- **149 portos: 34 públicos (Porto Organizado) + 115 TUPs** → além da
+  adoção escalonada nas 5 coortes do PSP, há grupo de **nunca-tratados**
+  (TUPs) na janela — o desenho do DiD melhora em relação ao §4 (comparação
+  not-yet-treated + robustez com TUPs reponderados).
+- Painel porto-mês: 6.315 linhas × 48 meses; insumos da fronteira (berços
+  ativos e horas de berço) com cobertura ≈100% em públicos e TUPs →
+  **fronteira estocástica confirmada como viável**.
+- Sanidade descritiva (NÃO causal): T1 mediano de Santos ~28,6h pré-PSP →
+  ~16,7h pós — coerente com o gráfico oficial do estudo ENAP (~-8h).
+- Peculiaridades registradas: `Mes` textual ("jan".."dez");
+  `Tipo da Autoridade Portuária` = Porto Organizado/Terminal Autorizado;
+  arquivo Atracacao já vem 100% com FlagMCOperacaoAtracacao=1.
+
+## A3. Registro do PSP reforçado
+
+Coortes agora: Santos 2011-08, Rio 2011-08, Vitória 2011-09,
+**Pecém/Fortaleza 2012-05** (portaria SEP, notícia oficial 08/05/2012),
+**Recife/Suape 2012-07** (Portaria SEP nº 162/2012). Atos identificados:
+Portaria SEP 106/2011 (Santos) e série porto a porto (ex.: Manaus) — íntegras
+a localizar no DOU (mineração da próxima rodada). Dossiê:
+`data/documents/interventions/PSP/ENAP_Projeto_Porto_Sem_Papel.pdf`.
+
+## A4. Crosswalk URF↔CDTUP
+
+`data/metadata/crosswalk_urf_cdtup.csv`: 27/36 URFs marítimas resolvidas;
+9 em `REVISAR` (unidades interioranas/aeroportos e instalações fora do padrão
+de trigrama — decisão do pesquisador).
+
+## A5. Próxima retomada
+
+1. Extrair/ingerir o restante do zip (2014-2026 + Carga) no DuckDB
+   (`renv::install("duckdb")` inicia o renv).
+2. Minerar DOU: íntegras das portarias SEP por porto (datas dia a dia).
+3. Revisar H1-H10 e a tabela de estimandos com o painel piloto em mãos.
+4. Decidir os 9 casos `REVISAR` do crosswalk.

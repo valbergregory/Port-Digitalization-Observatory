@@ -8,3 +8,5 @@ data/raw/comex_import_urf_via_2024Q1.json;9b4796b862323e094b54a97d8d57592631c872
 data/raw/Instalacao_Origem.txt;258ebddbddce45414418d3e3aa7a34683519e94bdac4b3d69fd8feeb8df03a28;352576;extraido de InstalacaoOrigem.zip;2026-09-03;
 data/raw/Mercadoria.txt;2cd4b7aca760435b136200364a99885fd27c328b869576678006770f4fe70025;318465;extraido de Mercadoria.zip;2026-09-03;
 data/raw/URF.csv;1a20764b160cb8d75a659ae49aa69aedc1476c72b3f639dec1c4fa55accfc2bb;10714;https://balanca.economia.gov.br/balanca/bd/tabelas/URF.csv;2026-09-04;tabela auxiliar de URFs do Comex Stat (latin-1)
+data/documents/interventions/PSP/ENAP_Projeto_Porto_Sem_Papel.pdf;b882876675df1479caf21d52fdae68a2cfa189e7ccfefda27f803e0ec7fa009e;573309;https://repositorio.enap.gov.br/bitstream/1/251/1/Projeto%20Porto%20Sem%20Papel.pdf;2026-09-04;estudo de caso oficial ENAP do Porto Sem Papel
+data/raw/antaq/estatistico.zip;2808340a046445e8e88bb507cc784d6689c7a00fb0ddf66fcb7d3968af01d3ed;908988214;https://download.antaq.gov.br/ea/estatistico.zip;2026-09-04;base consolidada EA 2010-corrente (Last-Modified 2026-08-12)
