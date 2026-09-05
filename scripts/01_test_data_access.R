@@ -21,7 +21,8 @@ sondar <- function(nome, url) {
 }
 
 res <- rbindlist(list(
-  sondar("antaq_zip_2023", url_antaq("Atracacao", 2023)),
+  sondar("antaq_ea_consolidado", URL_EA_CONSOLIDADO),
+  sondar("antaq_ea_metadados", URL_EA_METADADOS),
   sondar("antaq_aquarela", "https://aquarela.antaq.gov.br/hub/"),
   sondar("comex_api", "https://api-comexstat.mdic.gov.br/general/dates/updated"),
   sondar("comex_bulk", "https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/EXP_2024.csv"),
@@ -32,6 +33,7 @@ destino <- file.path(RAIZ, "outputs", "diagnostics", "data_access_check.csv")
 dir.create(dirname(destino), recursive = TRUE, showWarnings = FALSE)
 fwrite(res, destino, append = file.exists(destino), sep = ";")
 print(res)
-if (res[fonte == "antaq_zip_2023", status] %in% c("200", "206")) {
-  cat("\n*** PAINEL ANTAQ VOLTOU — iniciar downloads via scripts/03_run_pipeline.R ***\n")
+if (res[fonte == "antaq_ea_consolidado", status] %in% c("200", "206")) {
+  cat("\n*** BASE ANTAQ ACESSÍVEL (download.antaq.gov.br) — baixar via",
+      "baixar_antaq_consolidado() / scripts/03_run_pipeline.R ***\n")
 }

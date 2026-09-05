@@ -13,6 +13,7 @@ restrição temporária e um plano de contorno).**
 | ANTAQ — hub Qlik `aquarela.antaq.gov.br` | ✅ no ar (consulta interativa; sem download em bloco) |
 | ANTAQ — dicionário e cadastros via Internet Archive (snapshot oficial 2024-07-17) | ✅ recuperados: dicionário das 12 tabelas, cadastro de 3.444 instalações, cadastro de mercadorias, modelo de dados |
 | ANTAQ — zips anuais de microdados via Wayback | ⛔ não arquivados |
+| **ANTAQ — base bruta consolidada `download.antaq.gov.br/ea/estatistico.zip` (2026-09-04)** | ✅ **VIVA: ~909 MB, todas as tabelas 2010–corrente em .txt, Last-Modified 2026-08-12; achada via dados.gov.br (conjunto `estatistico-aquaviario-ea`); + `MetadadosMovimentacao.zip`; GET com Range ok (206), HEAD dá 405; padrão por tabela/ano dá 404 — usar `baixar_antaq_consolidado()`** |
 | Comex Stat API | ✅ atualizada até 2026-07; rate limit ~1 req/10s; peculiaridade do filtro `via` documentada |
 | Comex Stat CSVs em bloco | ✅ header e linhas verificados (CO_VIA, CO_URF presentes) |
 | IMF PortWatch (ArcGIS) | ✅ acessível |

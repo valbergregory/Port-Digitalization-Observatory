@@ -5,3 +5,9 @@ Operation timed out after 40012 milliseconds with 0 bytes received";40
 2026-09-03 21:54:23.141065;comex_api;https://api-comexstat.mdic.gov.br/general/dates/updated;206;0.6
 2026-09-03 21:54:23.639708;comex_bulk;https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/EXP_2024.csv;206;0.5
 2026-09-03 21:54:24.592347;portwatch;https://services9.arcgis.com/weJ1QsnbMYJlCHdG/arcgis/rest/services?f=json;206;1
+2026-09-04 21:15:33.558168;antaq_zip_2023;https://estatistica.antaq.gov.br/ea/txt/2023Atracacao.zip;404;0.5
+2026-09-04 21:16:13.575287;antaq_aquarela;https://aquarela.antaq.gov.br/hub/;"ERRO: Timeout was reached [aquarela.antaq.gov.br]:
+Operation timed out after 40009 milliseconds with 0 bytes received";40
+2026-09-04 21:16:14.173559;comex_api;https://api-comexstat.mdic.gov.br/general/dates/updated;206;0.6
+2026-09-04 21:16:14.612185;comex_bulk;https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/EXP_2024.csv;206;0.4
+2026-09-04 21:16:15.521183;portwatch;https://services9.arcgis.com/weJ1QsnbMYJlCHdG/arcgis/rest/services?f=json;206;0.9

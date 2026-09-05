@@ -8,7 +8,10 @@ limpar_comex_api_urf <- function(paths_json) {
     d[, fluxo := fluxo][]
   })
   d <- rbindlist(linhas, fill = TRUE)[via == "MARITIMA"]
-  d[, c("co_urf", "urf_nome") := tstrsplit(urf, " - ", fixed = TRUE)[c(1, 2)]]
+  # separar APENAS no primeiro " - ": nomes como "ALF - PORTO DE SUAPE" têm
+  # o separador dentro do próprio nome (bug corrigido em 2026-09-04)
+  d[, co_urf := sub(" - .*$", "", urf)]
+  d[, urf_nome := sub("^[0-9]+ - ", "", urf)]
   d[, .(co_urf, urf_nome, ano = as.integer(year), mes = as.integer(monthNumber),
         fluxo, vl_fob_usd = as.numeric(metricFOB), kg_liquido = as.numeric(metricKG))]
 }

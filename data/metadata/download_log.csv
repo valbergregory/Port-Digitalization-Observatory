@@ -7,3 +7,4 @@ data/raw/comex_export_urf_via_2024Q1.json;05a1c64c075e3ef403142559960eefd02c5993
 data/raw/comex_import_urf_via_2024Q1.json;9b4796b862323e094b54a97d8d57592631c87264b18ebb68ab82db0ad155487a;50901;POST https://api-comexstat.mdic.gov.br/general (import, urf+via, 2024-01..2024-03);2026-09-03;
 data/raw/Instalacao_Origem.txt;258ebddbddce45414418d3e3aa7a34683519e94bdac4b3d69fd8feeb8df03a28;352576;extraido de InstalacaoOrigem.zip;2026-09-03;
 data/raw/Mercadoria.txt;2cd4b7aca760435b136200364a99885fd27c328b869576678006770f4fe70025;318465;extraido de Mercadoria.zip;2026-09-03;
+data/raw/URF.csv;1a20764b160cb8d75a659ae49aa69aedc1476c72b3f639dec1c4fa55accfc2bb;10714;https://balanca.economia.gov.br/balanca/bd/tabelas/URF.csv;2026-09-04;tabela auxiliar de URFs do Comex Stat (latin-1)
