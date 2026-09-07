@@ -1,0 +1,13 @@
+# Normaliza fins de linha: LF no repositório; checkout nativo por plataforma.
+* text=auto
+*.R   text
+*.py  text
+*.sql text
+*.md  text
+*.yml text
+*.qmd text
+*.bib text
+*.png binary
+*.pdf binary
+*.zip binary
+*.duckdb binary
