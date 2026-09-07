@@ -22,10 +22,10 @@ sf, spdep/sfdep, leaflet, pointblank/validate, gganimate.
 ## Passos de reconstrução
 
 ```powershell
-# 1. R — inicializar renv (uma única vez, no RStudio aberto em project.Rproj)
-#    renv::init(bare = TRUE); renv::snapshot()
-# 2. Instalar o conjunto mínimo da fase ativa, ex.:
-#    renv::install(c("tarchetypes", "duckdb", "pointblank")); renv::snapshot()
+# 1. R — renv JÁ INICIALIZADO (2026-09-07): hydrate da biblioteca do usuário
+#    + duckdb 1.5.5; para reconstruir noutra máquina: renv::restore()
+# 2. Para instalar pacotes novos de fases futuras:
+#    renv::install(c("tarchetypes", "pointblank", "sfaR")); renv::snapshot()
 # 3. Python — ambiente local
 python -m venv .venv
 .venv\Scripts\python.exe -m pip install -U pip

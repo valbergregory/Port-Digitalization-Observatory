@@ -160,3 +160,33 @@ de trigrama — decisão do pesquisador).
 2. Minerar DOU: íntegras das portarias SEP por porto (datas dia a dia).
 3. Revisar H1-H10 e a tabela de estimandos com o painel piloto em mãos.
 4. Decidir os 9 casos `REVISAR` do crosswalk.
+
+---
+
+# Adendo — 2026-09-07 (execução dos itens 1 e 2 do A5)
+
+## A6. Mineração do DOU — coorte 2013 em confiança ALTA
+
+`python/extract_intervention_dates.py` implementado e rodado (busca textual
+do in.gov.br; transporte via curl porque o WAF bloqueia urllib):
+
+- **Portaria SEP nº 48, de 02/04/2013** — Belém, Itaqui, Santana (Macapá),
+  Santarém e Vila do Conde; uso obrigatório pelos armadores na publicação
+  (03/04/2013); migração definitiva das autoridades até **23/04/2013**.
+- **Portaria SEP nº 52, de 11/04/2013** — Manaus; migração definitiva até
+  **14/05/2013**. Íntegras + Decreto 8.257/2014 salvos em
+  `data/documents/interventions/PSP/dou/` e catalogados em `dou_portarias.csv`.
+- As portarias confirmam textualmente os acordos de cooperação com os 6
+  anuentes (Receita, ANVISA, MAPA, PF, Marinha) — evidência direta para H4.
+- **Limitação**: o índice textual do in.gov.br começa em 2013 (jsonArray
+  vazio para 2012). Portarias 106/2011 (Santos) e 162/2012 (Recife/Suape)
+  exigem OCR das edições em PDF — próxima rodada.
+- Duas datas por porto no registro: publicação (tratamento principal) e
+  migração definitiva (robustez).
+
+## A7. renv + DuckDB
+
+renv inicializado (hydrate da biblioteca existente + duckdb 1.5.5 binário +
+snapshot em `renv.lock`). Ingestão completa 2010-2026 via
+`scripts/09_build_duckdb.R`: ver resumo ao final de
+`outputs/diagnostics/` e a atualização abaixo quando concluída.
