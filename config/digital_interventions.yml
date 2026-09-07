@@ -23,12 +23,19 @@
        fonte: "Portaria SEP nº 162/2012 (publicada no DOU ~28/06/2012) define a data de entrada em operação; íntegra a localizar no DOU"}
     - {porto: "demais da coorte 2012 (Niterói, Itaguaí, Angra, Forno, Barra do Riacho, Natal, Areia Branca, Maceió, Cabedelo, Salvador, Aratu, Ilhéus, Itajaí, São Francisco do Sul, Imbituba, Laguna, Porto Alegre, Pelotas, Rio Grande, São Sebastião, Paranaguá, Antonina)",
        data: "2012", confianca: baixa, fonte: "notícias convergentes; EXISTE série de portarias SEP porto a porto (ex.: portaria do porto organizado de Manaus, Diário das Leis id 222859) — minerar DOU"}
-    - {porto: "Manaus (35º porto)", data: "2013-05", confianca: media, fonte: "notícias convergentes (LabTrans/SEP)"}
+    - {porto: "Belém, Itaqui, Santana (Macapá), Santarém e Vila do Conde",
+       data: "2013-04-03", data_migracao_definitiva: "2013-04-23", confianca: alta,
+       fonte: "Portaria SEP nº 48, de 02/04/2013 (DOU 03/04/2013, íntegra em data/documents/interventions/PSP/dou/) — uso obrigatório pelos armadores a partir da publicação"}
+    - {porto: "Manaus", data: "2013-04-12", data_migracao_definitiva: "2013-05-14", confianca: alta,
+       fonte: "Portaria SEP nº 52, de 11/04/2013 (DOU 12/04/2013, íntegra em data/documents/interventions/PSP/dou/)"}
     - {porto: "TUPs (terminais privados)", data: "a validar (2015+)", confianca: baixa, fonte: "Portos e Navios"}
   atos_oficiais_identificados:
-    - "Portaria SEP nº 106, de 14/06/2011 — obrigatoriedade do PSP para atracação/operação/desatracação no Porto de Santos (íntegra a localizar no DOU)"
-    - "Portaria SEP nº 162, de ~28/06/2012 — define data de entrada em operação em Recife e Suape (íntegra a localizar no DOU)"
-    - "Série de portarias SEP porto a porto disciplinando o uso do Concentrador (confirmada p/ Manaus e Pecém/Fortaleza) — alvo da mineração do DOU"
+    - "Portaria SEP nº 48, de 02/04/2013 — Belém, Itaqui, Santana, Santarém, Vila do Conde (ÍNTEGRA OBTIDA do DOU em 07/09/2026)"
+    - "Portaria SEP nº 52, de 11/04/2013 — Manaus (ÍNTEGRA OBTIDA do DOU em 07/09/2026)"
+    - "Decreto nº 8.257, de 29/05/2014 — NÃO é ato do PSP: regulamenta o AFRMM (sistema Mercante, digitalização da cobrança do frete); mantido no dossiê como contexto e possível intervenção separada (categoria janela de comércio exterior)"
+    - "Portaria SEP nº 106, de 14/06/2011 — obrigatoriedade em Santos (íntegra pendente: DOU pré-2013 não indexado no in.gov.br; requer OCR da edição em PDF)"
+    - "Portaria SEP nº 162, de ~28/06/2012 — Recife e Suape (íntegra pendente, idem)"
+  limitacao_dou: "busca textual do in.gov.br cobre apenas 2013+; edições 2011-2012 só em PDF escaneado — OCR na próxima rodada (python/extract_documents.py)"
   documentos_locais:
     - "data/documents/interventions/PSP/ENAP_Projeto_Porto_Sem_Papel.pdf (estudo de caso oficial SEP/ENAP: DUV, Concentrador, Sinaleiro, fases 1-2, custos PAC R$ 405,3 mi; gráficos oficiais de queda de ~8h no tempo médio de espera em Santos 2010→2012)"
   validar_com: ["portarias SEP/DOU por porto", "relatórios de gestão SEP/SERPRO", "evidência operacional (queda de DUVs em papel)"]

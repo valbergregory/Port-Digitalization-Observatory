@@ -1,6 +1,5 @@
 # Ativado em todo início de sessão R na raiz do projeto.
-# renv ainda não inicializado: rode renv::init(bare = TRUE) e depois
-# renv::install() conforme docs/reproducibility_guide.md.
+# renv inicializado em 2026-09-07 (lockfile: renv.lock).
 if (file.exists("renv/activate.R")) source("renv/activate.R")
 
 options(

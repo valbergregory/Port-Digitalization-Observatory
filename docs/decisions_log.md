@@ -56,3 +56,25 @@ Formato: data — decisão — justificativa — alternativas rejeitadas.
     atos-chave identificados (Portaria SEP 106/2011 — Santos) e confirmação
     de que existe série de portarias porto a porto → alvo da mineração DOU.
     Estudo de caso oficial ENAP arquivado no dossiê (`data/documents/interventions/PSP/`).
+
+## 2026-09-07
+
+14. **Coorte 2013 do PSP elevada a confiança ALTA com íntegras do DOU**:
+    minerador `python/extract_intervention_dates.py` implementado (busca
+    textual do in.gov.br via curl — urllib toma 403 do WAF) e rodado:
+    Portaria SEP 48/2013 (Belém, Itaqui, Santana, Santarém, Vila do Conde;
+    migração definitiva 23/04/2013) e Portaria SEP 52/2013 (Manaus;
+    14/05/2013), íntegras salvas no dossiê + Decreto 8.257/2014.
+    **Limitação documentada**: o índice textual do in.gov.br cobre só 2013+;
+    as portarias de 2011-2012 (106/2011 Santos, 162/2012 Recife/Suape)
+    exigem OCR das edições em PDF (próxima rodada).
+15. **Duas datas por porto no registro**: `data` (publicação da portaria =
+    obrigatoriedade para armadores) como data de tratamento principal e
+    `data_migracao_definitiva` (autoridades) como robustez.
+16. **renv inicializado** (`renv::init(bare)` + `hydrate` + duckdb 1.5.5
+    binário + snapshot). O renv acrescentou sua linha ao topo do .Rprofile
+    (duplicando o source guardado — inofensivo).
+17. **Política de ingestão DuckDB**: raw imutável = `estatistico.zip`; txts
+    extraídos são intermediários apagados após cada ano; tabela Carga entra
+    AGREGADA por atracação (peso com FlagMCOperacaoCarga=1, TEU, peso por
+    natureza) — o nível-linha permanece disponível no zip.
