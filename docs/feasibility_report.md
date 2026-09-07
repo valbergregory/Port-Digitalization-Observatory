@@ -184,9 +184,25 @@ do in.gov.br; transporte via curl porque o WAF bloqueia urllib):
 - Duas datas por porto no registro: publicação (tratamento principal) e
   migração definitiva (robustez).
 
-## A7. renv + DuckDB
+## A7. renv + DuckDB — CONCLUÍDO
 
-renv inicializado (hydrate da biblioteca existente + duckdb 1.5.5 binário +
-snapshot em `renv.lock`). Ingestão completa 2010-2026 via
-`scripts/09_build_duckdb.R`: ver resumo ao final de
-`outputs/diagnostics/` e a atualização abaixo quando concluída.
+renv inicializado (hydrate + duckdb 1.5.5 **binário via Posit PM** — a fonte
+do CRAN dispararia ~1h de compilação; lockfile com 79 pacotes). Ingestão
+completa via `scripts/09_build_duckdb.R` →
+`data/processed/observatory.duckdb`:
+
+- **1.340.891 atracações** (2010-2026), 257 portos; tabelas `port_calls`,
+  `port_call_times`, `cargo_by_call` (agregada por atracação),
+  `port_month_panel` (31.917 linhas: 35 públicos × 6.383 + 222 TUPs ×
+  25.534), `digital_treatment_raw` (16 linhas do YAML).
+- Tonelagem anual 846 mi t (2010) → 1.405 mi t (2025) — coerente com a
+  série oficial ANTAQ. 2026 parcial (base gerada em ago/2026).
+- Auditoria: 2010-2013 replica o piloto (307.730 exato); zero duplicatas de
+  chave; ~100% das atracações com tempos; **identidades TA=T2+T3+T4 e
+  TE=T1+TA com 0% de falha real em todos os anos**.
+- Características documentadas: decomposição T2/T3/T4 ausente em 10-50%
+  das atracações (pior nos primeiros anos; T1/TA/TE quase universais);
+  82% das atracações de carga têm registro em `cargo_by_call` (18%
+  restantes: classificações de operação fora do FlagMCOperacaoCarga —
+  investigar na limpeza fina);
+- Log: `outputs/logs/build_duckdb_20260907.log`.

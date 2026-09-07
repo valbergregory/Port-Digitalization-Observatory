@@ -38,9 +38,15 @@ Cobertura: 2024-01..2024-03, via MARÍTIMA, 36 URFs, 181 linhas
 quando os microdados ANTAQ voltarem** — esquema já definido em
 `sql/03_port_month_panel.sql`.
 
-## Tabelas futuras (esquema DuckDB em sql/01_schema.sql)
+## data/processed/observatory.duckdb (materializado em 2026-09-07)
 
-`port_calls` (1 linha/atracação), `port_call_times` (T1-T4, TA, TE),
-`cargo` (carga por atracação), `port_month_panel`, `digital_treatment`
-(porto × data_producao × confianca), `trade_panel` (URF-país-mês),
-`analysis_sample` (amostra congelada por estimando).
+| Tabela | Linhas | Conteúdo |
+|---|---|---|
+| `port_calls` | 1.340.891 | 1 linha/atracação 2010-2026: cdtup, berço, porto, tipo_autoridade (Porto Público/Porto Privado (TUP)), ano, mes (numérico), tipos, terminal, uf, município |
+| `port_call_times` | ~1,34 mi | t1..t4, ta, te em horas (vírgula decimal convertida); decomposição t2-t4 ausente em 10-50% conforme o ano (t1/ta/te quase universais) |
+| `cargo_by_call` | ~1,1 mi | agregado por atracação (FlagMCOperacaoCarga=1): peso_ton, teu, peso por natureza da carga; nível-linha permanece no zip |
+| `port_month_panel` | 31.917 | painel porto-mês: n_atracacoes, berços ativos, medianas/IQR de tempos, horas de berço, toneladas, teu, tonelagem por natureza |
+| `digital_treatment_raw` | 16 | registro de intervenções do YAML (porto × data × confiança) |
+
+Tabelas futuras: `trade_panel` (URF-país-mês) e `analysis_sample_*`
+(amostras congeladas por estimando) — ver sql/05 e sql/06.
