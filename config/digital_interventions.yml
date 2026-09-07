@@ -14,7 +14,9 @@
   abrangencia: "34-35 portos públicos (obrigatório); TUPs em fase posterior"
   adocao_escalonada: true
   datas_producao:                      # nível porto — coortes documentadas
-    - {porto: "Santos",         data: "2011-08-01", confianca: media, fonte: "SERPRO (notícia oficial); Portos e Navios"}
+    - {porto: "Santos",         data: "2011-08-01", confianca: media,
+       fonte: "SERPRO (notícia oficial); Portos e Navios",
+       obrigatoriedade: "Portaria SEP nº 106, de 14/06/2011 — uso obrigatório do sistema em Santos (teor corroborado por SERPRO e Portogente; íntegra do DOU pendente)"}
     - {porto: "Rio de Janeiro", data: "2011-08-15", confianca: media, fonte: "SERPRO (notícia oficial)"}
     - {porto: "Vitória",        data: "2011-09-10", confianca: media, fonte: "SERPRO (notícia oficial)"}
     - {porto: "Pecém e Fortaleza", data: "2012-05", confianca: media,

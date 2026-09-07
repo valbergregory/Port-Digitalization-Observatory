@@ -206,3 +206,19 @@ completa via `scripts/09_build_duckdb.R` →
   restantes: classificações de operação fora do FlagMCOperacaoCarga —
   investigar na limpeza fina);
 - Log: `outputs/logs/build_duckdb_20260907.log`.
+
+## A8 — 2026-09-08: publicação e insumos de comércio
+
+- **Repositório PÚBLICO no GitHub** (autorizado pelo pesquisador):
+  <https://github.com/valbergregory/Port-Digitalization-Observatory> —
+  LICENSE MIT, `.gitattributes`, push completo.
+- **Comex bulk 2010-2026 baixado**: 34 CSVs NCM (EXP+IMP), 3,3 GB,
+  checksums registrados → insumo do `trade_panel` (sql/05) e do PPML (E5).
+- **`.venv` criada** (pypdf, pytest) e `python/extract_documents.py`
+  implementado sobre o visualizador legado do DOU (PDF nativo por página).
+  Varredura das seções da Presidência em 15-16/06/2011, 28-29/06/2012 e
+  02/07/2012 NÃO localizou as íntegras das Portarias 106/2011 e 162/2012
+  (datas de publicação reais diferem das inferidas); ambas seguem em
+  confiança média com teor corroborado por 3 fontes convergentes.
+  Alternativas: varredura larga de datas (custo ~130 páginas/edição) ou
+  solicitação das íntegras ao MPor via SEI/Fala.BR.

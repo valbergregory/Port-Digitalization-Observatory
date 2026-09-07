@@ -78,3 +78,17 @@ Formato: data — decisão — justificativa — alternativas rejeitadas.
     extraídos são intermediários apagados após cada ano; tabela Carga entra
     AGREGADA por atracação (peso com FlagMCOperacaoCarga=1, TEU, peso por
     natureza) — o nível-linha permanece disponível no zip.
+18. **Repositório publicado como PÚBLICO no GitHub** (autorização do
+    pesquisador em 08/09): github.com/valbergregory/Port-Digitalization-Observatory,
+    licença MIT (código; dados brutos não distribuídos), `.gitattributes`
+    normalizando LF.
+19. **Comex bulk 2010-2026 baixado** (34 CSVs NCM, 3,3 GB, checksums no
+    download_log) — insumo do trade_panel/PPML.
+20. **Caça às íntegras 2011-2012 no DOU legado**: `python/extract_documents.py`
+    implementado sobre o visualizador antigo (pesquisa.in.gov.br serve 1 PDF
+    nativo por página; busca legada quebrada no CDN). Varridas as seções da
+    Presidência de 15-16/06/2011 e 28-29/06/2012 + 02/07/2012 sem achar as
+    Portarias 106/162 — as datas de publicação reais diferem das inferidas.
+    Ambas permanecem confiança MÉDIA (número+data+teor corroborados por
+    fontes convergentes: SERPRO, Portogente, Sonave). Próxima tática:
+    varredura mais larga de datas ou pedido das íntegras via SEI/MPor.
