@@ -56,6 +56,13 @@ source("scripts/01_test_data_access.R")
 
 R está em `C:\Program Files\R\R-4.4.3` (fora do PATH; o RStudio o encontra).
 
+## Repositório e licença
+
+- GitHub: <https://github.com/valbergregory/Port-Digitalization-Observatory>
+- Código sob licença MIT (ver `LICENSE`). Dados brutos não são distribuídos:
+  provêm de fontes públicas (ANTAQ, Comex Stat) e são reconstruíveis pelo
+  pipeline com os checksums de `data/metadata/download_log.csv`.
+
 ## Política de dados
 
 - `data/raw/` **nunca** é commitado; cada download é registrado em
