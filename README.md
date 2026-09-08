@@ -58,6 +58,8 @@ R está em `C:\Program Files\R\R-4.4.3` (fora do PATH; o RStudio o encontra).
 
 ## Repositório e licença
 
+Code: MIT ([LICENSE](LICENSE)). Text, documentation and data: see [LICENSING.md](LICENSING.md).
+
 - GitHub: <https://github.com/valbergregory/Port-Digitalization-Observatory>
 - Código sob licença MIT (ver `LICENSE`). Dados brutos não são distribuídos:
   provêm de fontes públicas (ANTAQ, Comex Stat) e são reconstruíveis pelo
