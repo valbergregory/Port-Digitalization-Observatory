@@ -127,3 +127,16 @@ Formato: data — decisão — justificativa — alternativas rejeitadas.
     Recomendação ao pesquisador: outcome primário → $T_4$/$T_2$; $T_1$ com
     controles de congestionamento. Poder é a restrição (12 tratados): datar a
     coorte 2012 é prioridade. Detalhes em feasibility_report §A13–A15.
+26. **Decisões do pesquisador (2026-09-10)**: (1) outcome primário passa a
+    ser T4/T2, T1 vira secundário com controles de congestionamento —
+    aplicado em protocolo §2, estimand_table (E1/E1b) e
+    model_specifications; (2) H1 reformulada para "tempo de liberação
+    documental", H1b criada para T1 condicional; (3) autorizadas a varredura
+    larga do DOU legado 2012 (datar os 21 portos da coorte 2012) e a
+    estimação no nível da atracação.
+27. **Ameaça de medida no outcome primário (2026-09-10, após a decisão 1)**:
+    a cobertura de T2/T4 salta com o PSP nos maiores portos (Santos 0%→93%).
+    Tratamento: restringir T2/T4 aos 7 portos de cobertura estável, reportar
+    Pr(T4 registrado) como resultado de medida e incorporar à contribuição de
+    SI (information quality). Não invalida a decisão 1, mas a condiciona.
+    Detalhes em feasibility §A18.

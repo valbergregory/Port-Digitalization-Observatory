@@ -335,3 +335,64 @@ espera") tende a ser rejeitada — o que é um achado, não um fracasso.
 
 Artefatos: `outputs/models/event_study_exploratorio.txt`, `es_psp_t1_*.rds`,
 `outputs/figures/fig05_es_psp_notyet.*`, `fig06_es_psp_nevertreated.*`.
+
+---
+
+# Adendo — 2026-09-10 (tarde): decisões aplicadas e estimação no nível da atracação
+
+## A16. Decisões do pesquisador aplicadas
+
+(1) T4/T2 = outcome primário; T1 secundário com controles de congestionamento
+(protocolo §2, estimand_table E1/E1b, model_specifications). (2) H1
+reformulada — "reduz o tempo de liberação documental"; H1b criada para T1
+condicional. (3) Autorizadas: varredura larga do DOU 2012 (`python/scan_dou_legacy.py`,
+rodando em segundo plano — lê o sumário de cada edição e varre o bloco da
+Presidência da República) e estimação no nível da atracação.
+
+## A17. Sun-Abraham no nível da atracação (`scripts/14_run_call_level.R`)
+
+FE de porto e mês-calendário; cluster por porto; controles: tipo de
+navegação, log toneladas, shares de contêiner/granel. Desenho A: públicos
+datados, 2010-01..2013-03, coorte 2013-04 (Norte) como referência
+(7 tratados vs 5). Desenho B: TUPs nunca tratados, 2010-15, só T2/T4.
+
+| Outcome | A s/ctrl | A c/ctrl | A pré | A-estável c/ctrl (4 vs 3) | B c/ctrl (TUPs) |
+|---|---|---|---|---|---|
+| $T_4$ | −0,25 (p=0,10) | −0,16 (p=0,24) | +0,10 | **−0,17 (p=0,17)** | +0,08 (p=0,53) |
+| $T_2$ | −0,24 (p=0,05) | −0,16 (p=0,12) | +0,08 | **−0,18 (p=0,04)** | +0,06 (p=0,06) |
+| $T_1$ | +0,20 (p=0,37) | +0,19 (p=0,37) | −0,03 | +0,38 (pré +0,31) | — |
+| $T_A$ | −0,21 (p<0,01) | −0,23 (p<0,01) | −0,09 | — | — |
+
+## A18. AMEAÇA DE MEDIDA descoberta — cobertura de T2/T4 co-move com o PSP
+
+Share de atracações com $T_4$ registrado: **Santos 0% em 2010–11 → 93% de
+2012 em diante**; Rio 27% até 2013 → 73%; Fortaleza cai a 0% de 2014;
+Belém 94% → 40%. A decomposição documental passou a ser reportada *junto*
+com a entrada do PSP nos maiores portos — plausivelmente porque o DUV é a
+fonte desses timestamps. Consequências:
+
+1. O efeito sobre $T_4$ em Santos é estimado **sem nenhum pré-período**
+   observado → o Desenho A completo é inválido para $T_4$/$T_2$ nesses portos.
+2. Restrição a **7 portos de cobertura estável** (≥70% em todos os anos
+   2010–13: Vitória, Suape, Pecém, Recife; Itaqui, Santana, Vila do Conde)
+   mantém $T_2$ ≈ −17% (p=0,04) e $T_4$ ≈ −17% (p=0,17), com pré-tendências
+   de +0,08 a +0,11 — sugestivo, não estabelecido; 4 tratados vs 3.
+3. "Primeiro estágio" de medida: PSP → Pr($T_4$ registrado) = +0,29
+   (p=0,32; média entre portos, mas o salto de Santos é inequívoco).
+4. **Contribuição de SI**: o sistema digital alterou o processo gerador das
+   próprias estatísticas oficiais (dimensão *information quality*) — vira
+   resultado do artigo, não só ressalva.
+
+## A19. Leitura consolidada e próximos passos
+
+- $T_1$: nenhum efeito em qualquer desenho; tudo o que aparece é pré-tendência.
+- $T_2$/$T_4$: ponto estimado consistentemente negativo (−15% a −25%) no
+  desenho not-yet-treated, atenuado por controles, com pré-tendência positiva
+  pequena e poder baixíssimo. **Não passa de sugestivo** até haver mais
+  unidades tratadas.
+- TUPs: não replicam (nulo em $T_4$; $T_2$ levemente positivo) — controle
+  estruturalmente diferente também para a etapa documental.
+- Inferência com 12 clusters é frágil: próxima rodada exige wild cluster
+  bootstrap (`fwildclusterboot`) ou inferência por permutação.
+- **Alavanca decisiva continua sendo datar a coorte 2012** (varredura em
+  curso): de 7 para ~28 tratados no not-yet-treated.
