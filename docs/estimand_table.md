@@ -15,6 +15,7 @@ estimador e pressupostos. Nada estimado ainda.
 | E7 | Determinantes de ineficiência (digitalização) | portos com inputs completos | porto-ano(/mês) | índice/dummy digitalização | — | SFA (translog, ineficiência variante) | forma funcional; inputs/outputs válidos (`efficiency_model.md`) |
 | E8 | Spillover: exposição a vizinho tratado | portos não tratados no mês | porto-mês | tratamento do vizinho | não expostos | CS adaptado/exposição | definição de vizinhança; SUTVA parcial explicitada |
 | E9 | Placebo: efeito da data de ANÚNCIO (H10) | como E1 | porto-mês | data de anúncio | idem E1 | CS | se ≈0, reforça datação por produção |
+| E11 | Efeito do PSP sobre Pr($ registrado) — resultado de medida/SI (H11) | atracações 2010-2015 | atracação | idem E1 | not-yet-treated e TUPs | Sun-Abraham + descritiva porto-ano | mudança de reporte pode preceder (Santarém) ou suceder (Fortaleza) o tratamento: interpretar como heterogeneidade de qualidade de informação, não efeito uniforme |
 | E10 | Espera evitada → emissões (condicionado) | navios em portos tratados | atracação | via E1 | contrafactual E1 | cálculo paramétrico | fatores IMO citáveis; NÃO causal adicional |
 
 Notas:

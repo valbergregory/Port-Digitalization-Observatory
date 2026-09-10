@@ -140,3 +140,18 @@ Formato: data — decisão — justificativa — alternativas rejeitadas.
     Pr(T4 registrado) como resultado de medida e incorporar à contribuição de
     SI (information quality). Não invalida a decisão 1, mas a condiciona.
     Detalhes em feasibility §A18.
+28. **Decisões (2026-09-10, 2ª rodada)**: (1) colher a varredura 2012 e
+    reestimar — em curso; (2) inferência com poucos clusters implementada
+    (`R/19_robustness.R`: wild cluster bootstrap Webb com nulo imposto +
+    permutação de datas; `fwildclusterboot` foi retirado do CRAN); (3) a
+    mudança de cobertura ENTRA no artigo como resultado de SI: H11 no
+    protocolo, E11 na tabela de estimandos, §14.1 do manuscrito, fig07 e
+    macros \CobSantosPre/Pos, \CobRioPre/Pos. Leitura honesta: a mudança de
+    reporte coincide com o PSP em Santos (0→93%) mas precede o tratamento em
+    Santarém e sucede em Fortaleza — heterogeneidade de qualidade da
+    informação, não efeito uniforme.
+29. **Varredura DOU 2012 confirma íntegras** (parcial, até ago/2012):
+    Portaria SEP 142 de 30/04/2012 (Fortaleza+Pecém; migração 10/05/2012),
+    Portaria SEP 162 de 14/06/2012 (Recife+Suape — a data inferida ~28/06
+    estava errada em 2 semanas), Portaria SEP 202 de 08/08/2012 (Natal,
+    Areia Branca, Maceió — 3 portos da coorte "sem data" agora datados).

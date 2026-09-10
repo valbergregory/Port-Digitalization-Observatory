@@ -36,6 +36,7 @@ congestionamento. H1 reformulada; H1b criada.
 | H8 | Redirecionamento de fluxos de portos menos digitalizados | participação | spillovers espaciais |
 | H9 | Menos espera → menos emissões de fundeio (condicional a fatores verificáveis) | proxy condicionada | cálculo paramétrico transparente |
 | H10 | Anúncio sem produção não gera efeitos | T4 | placebo com datas de anúncio |
+| H11 | A janela única altera a **completude da informação operacional** reportada ao regulador (information quality): a cobertura da decomposição documental (T2/T4) muda com a entrada do sistema, de forma heterogênea entre portos | Pr(T4 registrado) | DiD por atracação + análise porto a porto (fig07) |
 
 ## 3. Fundamentos econômicos
 
