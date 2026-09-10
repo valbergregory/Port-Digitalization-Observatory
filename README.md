@@ -43,6 +43,17 @@ R-first, com SQL/DuckDB como camada de dados e Python como auxiliar:
   recuperados via Internet Archive. Microdados de atracação aguardam o retorno
   do painel — `R/03_download_antaq.R` já codifica o padrão de URLs para retomada.
 
+O estudo vive em `article/latex/` e é montado pelo pipeline:
+
+```powershell
+# gera figuras e tabelas a partir do DuckDB
+Rscript scripts/11_run_descriptives.R
+```
+
+Regra do projeto: **nenhum número é digitado à mão no texto**. Todos os
+valores citados vêm de `numbers.tex`, gerado do banco; resultados ainda não
+estimados aparecem como `[RESULT TO BE GENERATED]`.
+
 ## Execução rápida (Windows, esta máquina)
 
 ```powershell
