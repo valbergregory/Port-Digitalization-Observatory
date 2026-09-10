@@ -3,8 +3,9 @@
 
 outcomes:
   operacionais:
-    principais: [t1_espera_atracacao_h, t3_operacao_h, ta_atracado_h, te_estadia_h]
-    secundarios: [prancha_media_operacional, carga_por_atracacao_t, iqr_t1_previsibilidade]
+    principais: [t4_espera_desatracacao_h, t2_espera_inicio_op_h]   # decisão 2026-09-10
+    secundarios: [t1_espera_atracacao_h, ta_atracado_h, te_estadia_h, prancha_media_operacional, iqr_t4_previsibilidade]
+    controles_t1: [ton_granel_solido, ton_granel_liquido, share_conteiner, tipo_navegacao]
   economicos:
     principais: [vl_fob_usd, kg_liquido, n_atracacoes, participacao_porto]
   ambientais_condicionados:
@@ -12,7 +13,8 @@ outcomes:
 
 did_principal:
   tratamento: "PSP — entrada em produção por porto (config/digital_interventions.yml)"
-  estimador: "Callaway-Sant'Anna (did::att_gt), comparação: not-yet-treated"
+  estimador: "Callaway-Sant'Anna (did::att_gt), comparação: not-yet-treated; nível da atracação via Sun-Abraham (fixest::sunab) com FE porto e mês"
+  tups_como_controle: "somente para T2/T4 (robustez); INVÁLIDOS para T1 (pré-tendência +0,42 no exploratório)"
   alternativa: "Sun-Abraham (fixest::sunab)"
   proibido: "TWFE ingênuo como modelo principal"
   nivel_cluster: "porto"

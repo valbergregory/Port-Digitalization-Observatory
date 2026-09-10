@@ -15,20 +15,27 @@ papel da integração interorganizacional (autoridade portuária, terminais,
 Receita, ANTAQ, Marinha, operadores); digitalização sem redesenho de processos;
 qualidade do SI como moderador.
 
-## 2. Hipóteses (pré-dados; revisão obrigatória após auditoria)
+## 2. Hipóteses (revisadas em 2026-09-10 após o event study exploratório)
+
+**Revisão registrada:** o exploratório (feasibility §A13) mostrou que o PSP não
+move a fila física (T1) e que TUPs violam tendências paralelas para T1; o único
+sinal consistente é na etapa documental (T4). Decisão do pesquisador: outcome
+primário passa a ser **T4/T2**; T1 vira secundário com controles de
+congestionamento. H1 reformulada; H1b criada.
 
 | # | Hipótese | Outcome primário | Teste previsto |
 |---|---|---|---|
-| H1 | Entrada em produção de sistemas digitais reduz tempo de espera (T1) | T1 | DiD CS/event study |
+| H1 | Entrada em produção da janela única reduz o **tempo de liberação documental** — espera para desatracação (T4) e para início de operação (T2) | **T4, T2** | DiD CS/event study |
+| H1b | O efeito sobre a **espera para atracação (T1)** só aparece condicionado ao congestionamento (fila física domina) | T1 c/ controles de granel | DiD CS + controles |
 | H2 | Digitalização aumenta eficiência técnica | escore SFA | fronteira com determinantes de ineficiência |
 | H3 | Efeitos maiores com redesenho de processos | T1, T3 | heterogeneidade por categoria da intervenção |
 | H4 | Integração interorganizacional > sistemas isolados | T1, TE | heterogeneidade por nº de órgãos integrados |
 | H5 | Portos com maior capacidade obtêm ganhos maiores | T1, produtividade | interação com infraestrutura |
-| H6 | Ganhos acumulam-se gradualmente (aprendizagem) | T1 | dinâmica do event study |
+| H6 | Ganhos acumulam-se gradualmente (aprendizagem) | T4 | dinâmica do event study |
 | H7 | Menos tempo/incerteza → mais movimentação/comércio | ton, FOB | DiD + PPML |
 | H8 | Redirecionamento de fluxos de portos menos digitalizados | participação | spillovers espaciais |
 | H9 | Menos espera → menos emissões de fundeio (condicional a fatores verificáveis) | proxy condicionada | cálculo paramétrico transparente |
-| H10 | Anúncio sem produção não gera efeitos | T1 | placebo com datas de anúncio |
+| H10 | Anúncio sem produção não gera efeitos | T4 | placebo com datas de anúncio |
 
 ## 3. Fundamentos econômicos
 
