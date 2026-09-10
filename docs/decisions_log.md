@@ -120,3 +120,10 @@ Formato: data — decisão — justificativa — alternativas rejeitadas.
     DuckDB** — nenhum número é digitado à mão no manuscrito; `scripts/12`
     exporta `outputs/overleaf.zip`. O Quarto (`article/manuscript.qmd`)
     permanece como registro histórico. Compilação verificada com MiKTeX.
+25. **Event study exploratório rodado antes da revisão de hipóteses** —
+    resultado: H1 (queda de $T_1$) não aparece; TUPs violam tendências
+    paralelas para $T_1$ (pré-tendência +0,42 > "efeito" +0,33); único sinal
+    consistente é **$T_4$ negativo (−9% a −14%)**, etapa documental da saída.
+    Recomendação ao pesquisador: outcome primário → $T_4$/$T_2$; $T_1$ com
+    controles de congestionamento. Poder é a restrição (12 tratados): datar a
+    coorte 2012 é prioridade. Detalhes em feasibility_report §A13–A15.

@@ -274,3 +274,64 @@ Decisões pendentes do pesquisador: (a) H1-H10 e tabela de estimandos com o
 painel completo; (b) ratificar o crosswalk; (c) TUPs como controle auxiliar.
 Executável em seguida: event study exploratório do PSP sobre $T_1$ e
 primeira especificação da fronteira estocástica.
+
+---
+
+# Adendo — 2026-09-10 (noite): event study EXPLORATÓRIO do PSP
+
+## A13. O que foi estimado
+
+`scripts/13_run_event_study.R` (Callaway–Sant'Anna, `did::att_gt`, outcome
+$\log(1+T)$ nas medianas mensais do porto, janela 2010–2015, mínimo de 5
+atracações/mês). Amostra tratada: **12 portos com data de produção
+verificada** (Santos, Rio, Vitória, Fortaleza, Pecém, Recife, Suape, Belém,
+Itaqui, Santana, Santarém, Vila do Conde). Fora: Manaus (painel só de 2015)
+e os **21 portos públicos da coorte 2012 sem data** — não servem nem como
+tratados nem como controles. Dois grupos de comparação: (A) not-yet-treated
+entre os públicos datados; (B) TUPs como nunca tratados.
+
+| Outcome | (A) ATT | (A) pré-tend. | (B) ATT | (B) pré-tend. |
+|---|---|---|---|---|
+| $T_1$ espera p/ atracação | +0,04 (0,22) | +0,12 | +0,33 (0,11) | **+0,42** |
+| $T_2$ atracado→início op. | 0,00 (0,12) | +0,03 | 0,00 (0,07) | −0,06 |
+| $T_4$ término op.→desatracação | **−0,15 (0,14)** | +0,03 | **−0,09 (0,09)** | −0,03 |
+| $T_A$ atracado | +0,01 (0,06) | +0,23 | −0,01 (0,06) | +0,16 |
+
+(ATT dinâmico agregado; erro-padrão bootstrap entre parênteses; "pré-tend." é
+a média dos coeficientes de $e\in[-12,-2]$.)
+
+## A14. Leitura honesta
+
+1. **H1 (queda de $T_1$) NÃO aparece.** Em (A) o efeito é um zero impreciso;
+   em (B) é *positivo*, mas a pré-tendência (+0,42) é maior que o "efeito"
+   (+0,33): portos públicos já tinham espera crescente em relação aos TUPs
+   antes do PSP. **TUPs são controle inválido para $T_1$** — não têm fila
+   (operam carga própria). A queda de Santos (28,6h→16,7h) vista no piloto é
+   variação de nível confundida com o fim do ciclo de commodities de
+   2010–11 e a Lei 12.815/2013.
+2. **$T_4$ é o único outcome com sinal consistente nos dois desenhos e
+   pré-tendências planas**: −9% a −14% no tempo entre o fim da operação e a
+   desatracação — exatamente a etapa cuja anuência (autorização de saída)
+   passou a correr pelo DUV. Não é significativo a 95%: com 12 unidades
+   tratadas, o poder é baixo.
+3. **$T_2$ e $T_A$: nulos limpos** (pré-tendências planas, efeito zero).
+
+**Implicação para H1–H10 (decisão do pesquisador):** o mecanismo do PSP é
+*documental*, não de fila. O outcome primário deveria ser $T_4$ (e $T_2$),
+com $T_1$ como secundário condicionado a controles de congestionamento
+(sazonalidade de granéis). A hipótese H1 como escrita ("reduz o tempo de
+espera") tende a ser rejeitada — o que é um achado, não um fracasso.
+
+## A15. O que aumenta o poder (próximas frentes)
+
+1. **Datar os 21 portos da coorte 2012** — é a maior alavanca (triplica as
+   unidades tratadas). Requer varredura larga do DOU legado 2012
+   (`python/extract_documents.py`, ~130 páginas/edição) ou pedido ao MPor.
+2. **Estimar no nível da atracação** (1,34 mi observações) com controles de
+   tipo de navegação, natureza da carga e porte: as medianas mensais jogam
+   fora informação e escondem heterogeneidade por tipo de navio.
+3. **Controles de congestionamento**: tonelagem de granel do mês e do porto
+   (já em `port_month_panel`) para absorver os ciclos de safra.
+
+Artefatos: `outputs/models/event_study_exploratorio.txt`, `es_psp_t1_*.rds`,
+`outputs/figures/fig05_es_psp_notyet.*`, `fig06_es_psp_nevertreated.*`.
