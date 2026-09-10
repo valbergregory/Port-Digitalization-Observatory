@@ -39,6 +39,26 @@ MANUAL = {
     "PORTO DE MANAUS": "BRMAO",
 }
 
+# Casos resolvidos em 2026-09-10 a partir do cadastro ANTAQ (Instalacao_Origem),
+# com o motivo explícito. `None` = URF deliberadamente FORA do painel portuário.
+# Status "proposto" aguarda ratificação do pesquisador.
+DECISOES = {
+    # URF cujo nome é a cidade-sede do porto organizado
+    "IRF - BARCARENA":   ("BRVDC", "porto organizado de Vila do Conde fica em Barcarena/PA"),
+    "IRF - PORTO DE PECEM": ("BRCE001", "Terminal Portuário do Pecém (São Gonçalo do Amarante/CE)"),
+    "ARACAJU":           ("BRSE002", "Terminal Aquaviário de Aracaju/SE"),
+    # AMBÍGUO: a URF cobre Itaqui (porto organizado) + Ponta da Madeira e Alumar
+    # (TUPs de grande porte). Mapeado ao porto organizado; a agregação de TUPs
+    # sob a mesma URF é limitação a declarar no artigo.
+    "IRF SAO LUIS":      ("BRIQI", "porto organizado de Itaqui; convive com TUPs Ponta da Madeira/Alumar na mesma URF"),
+    # Fora do painel portuário
+    "IRF CAMPOS DOS GOYTACAZES": (None, "fluxo offshore da Bacia de Campos (plataformas), não é movimentação de porto organizado"),
+    "ALF - BELO HORIZONTE": (None, "unidade interiorana: despacho em MG de carga embarcada em outro porto"),
+    "AEROPORTO INTERNACIONAL DO RIO DE JANEIRO": (None, "unidade aeroportuária"),
+    "SANTO ANDRE":       (None, "unidade interiorana (ABC paulista)"),
+    "NOVO HAMBURGO":     (None, "unidade interiorana (RS)"),
+}
+
 
 def main() -> None:
     # portos públicos do cadastro ANTAQ (código BR + trigrama)
@@ -59,18 +79,23 @@ def main() -> None:
     linhas = []
     for co_urf, nome in urfs:
         n = norm(nome)
-        cdtup, metodo, status = "", "", "REVISAR"
+        cdtup, metodo, status, obs = "", "", "REVISAR", ""
+        base = re.sub(r"^(ALF|IRF|DRF)( -)?\s+", "", n)
+        base = re.sub(r"^PORTO D[EOA]\s+", "", base)
         if n in MANUAL:
             cdtup, metodo, status = MANUAL[n], "dicionario_curado", "manual"
-        else:
-            # remove prefixos administrativos e depois o "PORTO DE/DO/DA"
-            base = re.sub(r"^(ALF|IRF|DRF)( -)?\s+", "", n)
-            base = re.sub(r"^PORTO D[EOA]\s+", "", base)
-            if base in por_nome:
-                cdtup, metodo, status = por_nome[base], "nome_exato", "auto"
+        elif base in por_nome:
+            cdtup, metodo, status = por_nome[base], "nome_exato", "auto"
+        elif n in DECISOES:
+            alvo, motivo = DECISOES[n]
+            obs = motivo
+            if alvo is None:
+                cdtup, metodo, status = "", "fora_do_painel", "EXCLUIDA"
+            else:
+                cdtup, metodo, status = alvo, "cadastro_antaq", "proposto"
         linhas.append({"co_urf": co_urf, "urf_nome": nome, "cdtup": cdtup,
                        "porto_nome": base if not cdtup else nome,
-                       "metodo": metodo, "status": status})
+                       "metodo": metodo, "status": status, "observacao": obs})
 
     destino = RAIZ / "data/metadata/crosswalk_urf_cdtup.csv"
     with open(destino, "w", newline="", encoding="utf-8") as f:
@@ -78,9 +103,14 @@ def main() -> None:
         w.writeheader()
         w.writerows(linhas)
 
-    resolvidas = sum(1 for x in linhas if x["status"] != "REVISAR")
-    print(f"crosswalk: {len(linhas)} URFs marítimas; {resolvidas} resolvidas; "
-          f"{len(linhas) - resolvidas} para revisão manual -> {destino}")
+    from collections import Counter
+    cont = Counter(x["status"] for x in linhas)
+    print(f"crosswalk: {len(linhas)} URFs marítimas -> {destino}")
+    for st, n in cont.most_common():
+        print(f"  {st:10} {n}")
+    pend = [x["urf_nome"] for x in linhas if x["status"] == "REVISAR"]
+    if pend:
+        print("  pendentes:", ", ".join(pend))
 
 
 if __name__ == "__main__":
