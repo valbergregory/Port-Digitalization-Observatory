@@ -44,6 +44,23 @@ R-first, com SQL/DuckDB como camada de dados e Python como auxiliar:
   recuperados via Internet Archive. Microdados de atracação aguardam o retorno
   do painel — `R/03_download_antaq.R` já codifica o padrão de URLs para retomada.
 
+## Manuscrito (LaTeX / Overleaf)
+
+O manuscrito vive em `article/latex/` e é montado pelo pipeline:
+
+```powershell
+# gera figuras e tabelas a partir do DuckDB
+Rscript scripts/11_run_descriptives.R
+# gera numbers.tex (macros com os números reais) e empacota outputs/overleaf.zip
+Rscript scripts/12_export_overleaf.R
+```
+
+No Overleaf: **New Project → Upload Project → `outputs/overleaf.zip`**.
+
+Regra do projeto: **nenhum número é digitado à mão no texto**. Todos os
+valores citados vêm de `numbers.tex`, gerado do banco; resultados ainda não
+estimados aparecem como `[RESULT TO BE GENERATED]`.
+
 ## Execução rápida (Windows, esta máquina)
 
 ```powershell

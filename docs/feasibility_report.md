@@ -222,3 +222,55 @@ completa via `scripts/09_build_duckdb.R` →
   confiança média com teor corroborado por 3 fontes convergentes.
   Alternativas: varredura larga de datas (custo ~130 páginas/edição) ou
   solicitação das íntegras ao MPor via SEI/Fala.BR.
+
+---
+
+# Adendo — 2026-09-10: painel de comércio, descritivas e manuscrito
+
+## A9. `trade_panel` no DuckDB
+
+`scripts/10_build_trade_panel.R` ingeriu os 34 CSVs do Comex bulk:
+
+| Tabela | Linhas | Uso |
+|---|---|---|
+| `trade_urf_month` | 50.311 | URF × mês × via × fluxo (208 URFs, 2010-2026) |
+| `trade_urf_country` | 487.419 | URF × país × mês, marítima — insumo do PPML (E5) |
+| `trade_urf_sh2` | 420.541 | composição por capítulo SH2 — controles de mix |
+
+**Achado metodológico relevante:** os arquivos de importação trazem
+`VL_FRETE` e `VL_SEGURO`. Isso dá **frete declarado por URF-mês** — medida
+*diretamente observada* de custo de comércio, e não uma proxy. A série
+nacional (frete/FOB das importações marítimas) fica em ~4% até 2019, salta
+para **7,2% em 2022** (crise dos contêineres) e recua a 5,1% em 2025.
+Isso amplia o alcance do artigo: além de tempo e eficiência, há um outcome
+de custo na tradição de Clark, Dollar e Micco (2004).
+
+**Alerta de integridade:** 3 dos 34 arquivos estavam truncados silenciosamente
+(a rede cortou o download; o tamanho local não denuncia porque anos parciais
+são legitimamente menores). `python/validate_downloads.py` confronta com o
+tamanho da origem e rebaixa. Lição aplicável a todo download em bloco.
+
+## A10. Crosswalk URF↔CDTUP fechado
+
+36 URFs marítimas: 19 automáticas, 8 curadas, **4 novas propostas**
+(Barcarena→Vila do Conde, Pecém, Aracaju, São Luís→Itaqui) e **5 excluídas**
+do painel portuário (Belo Horizonte, Santo André, Novo Hamburgo, Aeroporto do
+Rio e Campos dos Goytacazes/offshore). Zero pendências; falta apenas a
+ratificação do pesquisador. Ressalva registrada: a URF de São Luís cobre, além
+de Itaqui, os TUPs Ponta da Madeira e Alumar.
+
+## A11. Figuras, tabelas e manuscrito LaTeX
+
+Quatro figuras e quatro tabelas geradas de dados reais (`scripts/11`),
+todas rotuladas como descritivas — nenhuma estimativa causal foi produzida.
+O manuscrito migrou para `article/latex/` (main.tex + 18 seções), com
+`numbers.tex` gerado do DuckDB (12 macros) e exportação para
+`outputs/overleaf.zip` via `scripts/12`. **Compilação verificada**: 10
+páginas, zero erros, zero citações indefinidas.
+
+## A12. Próxima retomada
+
+Decisões pendentes do pesquisador: (a) H1-H10 e tabela de estimandos com o
+painel completo; (b) ratificar o crosswalk; (c) TUPs como controle auxiliar.
+Executável em seguida: event study exploratório do PSP sobre $T_1$ e
+primeira especificação da fronteira estocástica.

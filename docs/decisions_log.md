@@ -78,6 +78,8 @@ Formato: data — decisão — justificativa — alternativas rejeitadas.
     extraídos são intermediários apagados após cada ano; tabela Carga entra
     AGREGADA por atracação (peso com FlagMCOperacaoCarga=1, TEU, peso por
     natureza) — o nível-linha permanece disponível no zip.
+## 2026-09-08
+
 18. **Repositório publicado como PÚBLICO no GitHub** (autorização do
     pesquisador em 08/09): github.com/valbergregory/Port-Digitalization-Observatory,
     licença MIT (código; dados brutos não distribuídos), `.gitattributes`
@@ -92,3 +94,29 @@ Formato: data — decisão — justificativa — alternativas rejeitadas.
     Ambas permanecem confiança MÉDIA (número+data+teor corroborados por
     fontes convergentes: SERPRO, Portogente, Sonave). Próxima tática:
     varredura mais larga de datas ou pedido das íntegras via SEI/MPor.
+
+## 2026-09-10
+
+21. **Frete observado incorporado como outcome**: descobriu-se que os arquivos
+    de IMPORTAÇÃO do Comex bulk trazem `VL_FRETE` e `VL_SEGURO` — ou seja,
+    frete declarado por URF-mês. A taxa ad valorem (frete/FOB) entra como
+    **medida direta de custo de comércio**, na tradição de Clark, Dollar e
+    Micco (2004), complementando os outcomes de tempo. Exportação é FOB e não
+    traz frete (colunas ficam nulas nesse fluxo).
+22. **Validação de downloads por tamanho remoto**: 3 dos 34 CSVs do Comex
+    haviam sido truncados silenciosamente pela rede — só apareceram quando o
+    DuckDB encontrou aspas não fechadas. Tamanho local isolado não detecta
+    (anos parciais são menores). `python/validate_downloads.py` passa a
+    confrontar com o `Content-Range` da origem e rebaixar.
+23. **Crosswalk URF↔CDTUP fechado** (proposta ao pesquisador): 4 URFs mapeadas
+    pelo cadastro ANTAQ — Barcarena→Vila do Conde (BRVDC), Pecém (BRCE001),
+    Aracaju (BRSE002) e São Luís→Itaqui (BRIQI, com a ressalva de que a mesma
+    URF cobre os TUPs Ponta da Madeira e Alumar) — e 5 excluídas do painel
+    portuário: Belo Horizonte, Santo André e Novo Hamburgo (interioranas),
+    Aeroporto do Rio (aeroportuária) e Campos dos Goytacazes (offshore da
+    Bacia de Campos). Status `proposto` aguarda ratificação.
+24. **Padrão LaTeX/Overleaf adotado** (alinhamento com a trilha de jurimetria):
+    `article/latex/` com main.tex + 18 seções + `numbers.tex` **gerado do
+    DuckDB** — nenhum número é digitado à mão no manuscrito; `scripts/12`
+    exporta `outputs/overleaf.zip`. O Quarto (`article/manuscript.qmd`)
+    permanece como registro histórico. Compilação verificada com MiKTeX.
