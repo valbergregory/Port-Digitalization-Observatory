@@ -44,6 +44,10 @@ comercio <- dbGetQuery(con, "
   SELECT COUNT(*) AS linhas_pais, COUNT(DISTINCT co_urf) AS urfs
   FROM trade_urf_country")
 pico <- frete[which.max(frete$taxa), ]
+cobq <- function(cd, a1, a2) dbGetQuery(con, sprintf("
+  SELECT 100.0*AVG(CASE WHEN t.t4 IS NOT NULL THEN 1 ELSE 0 END) AS c
+  FROM port_calls pc JOIN port_call_times t USING (id_atracacao)
+  WHERE pc.flag_mov_carga AND pc.cdtup = '%s' AND pc.ano BETWEEN %d AND %d", cd, a1, a2))$c
 
 macros <- c(
   Natracacoes      = fmt_mil(resumo$atracacoes),
@@ -57,7 +61,11 @@ macros <- c(
   Fretepico        = sprintf("%.1f\\%%", pico$taxa),
   Anofretepico     = pico$ano,
   Nfluxoscomercio  = fmt_mil(comercio$linhas_pais),
-  Nurfsmaritimas   = comercio$urfs
+  Nurfsmaritimas   = comercio$urfs,
+  CobSantosPre     = sprintf("%.0f\\%%", cobq("BRSSZ", 2010, 2011)),
+  CobSantosPos     = sprintf("%.0f\\%%", cobq("BRSSZ", 2012, 2016)),
+  CobRioPre        = sprintf("%.0f\\%%", cobq("BRRIO", 2010, 2013)),
+  CobRioPos        = sprintf("%.0f\\%%", cobq("BRRIO", 2014, 2016))
 )
 
 writeLines(c(
