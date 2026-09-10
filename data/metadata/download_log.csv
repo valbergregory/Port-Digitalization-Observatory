@@ -26,7 +26,7 @@ data/raw/comex/EXP_2022.csv;2d5148d6afb2749a4eb1f11807242d85166d186b4aa82b19b49a
 data/raw/comex/EXP_2023.csv;3bfaeb2751ded80c4387ad2d4964f8fb7e4529c45810777d77a48a466e9c6b36;103932897;https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/EXP_2023.csv;2026-09-07;Comex bulk NCM
 data/raw/comex/EXP_2024.csv;9dcddfcb2089709c6e738f4a7fd1e529e66f1ceae8c66dcc1550884277548b78;106702953;https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/EXP_2024.csv;2026-09-07;Comex bulk NCM
 data/raw/comex/EXP_2025.csv;34571d3fb125db0423f4a0785e7b40c26c815a90ccfa9783e457a1c34a96b96c;113715007;https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/EXP_2025.csv;2026-09-07;Comex bulk NCM
-data/raw/comex/EXP_2026.csv;318b2da079af59f4969bf11b1e917ad3438332442eb3da39aef0f66c9cfe7400;54623967;https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/EXP_2026.csv;2026-09-07;Comex bulk NCM
+data/raw/comex/EXP_2026.csv;ef6c4fc3d62e00d9917d2f6c4f1f82382475284c3ad05016c47cb260eaa7b042;75055366;https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/EXP_2026.csv;2026-09-07;Comex bulk NCM
 data/raw/comex/IMP_2010.csv;28041089949591ab5fa3716f431b0a19665237853cb7136cd168237f7e8eee4b;122367788;https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/IMP_2010.csv;2026-09-07;Comex bulk NCM
 data/raw/comex/IMP_2011.csv;8118f9bea86d1b26ca890cec84089b49aac71724ff7894dc0a16357227275e71;65246;https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/IMP_2011.csv;2026-09-07;Comex bulk NCM
 data/raw/comex/IMP_2012.csv;0bca8d2be1b2e041ab1a20fd6e26809b677fa6402b363442bd4031ad7bb36fa5;134991941;https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/IMP_2012.csv;2026-09-07;Comex bulk NCM
@@ -42,5 +42,5 @@ data/raw/comex/IMP_2021.csv;9f2448d99b8073c089ebf70b259888966e923a64946ca21ad182
 data/raw/comex/IMP_2022.csv;f4b5abe1617dda2c422665d5b1cb8d2eedffe440a7ef32566364d9b9d6082da1;148650131;https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/IMP_2022.csv;2026-09-07;Comex bulk NCM
 data/raw/comex/IMP_2023.csv;9b33eb6151390d50516e490b2b02d639f75af90c37baac15fa2f92a149b497bc;152969373;https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/IMP_2023.csv;2026-09-07;Comex bulk NCM
 data/raw/comex/IMP_2024.csv;d0e7cce0b93d2a6d80f8bf7cf898264dba8144f25679ff0a5fa669a3cdc505e0;166729221;https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/IMP_2024.csv;2026-09-07;Comex bulk NCM
-data/raw/comex/IMP_2025.csv;62b9166d465298b771e098ccad0e147c20284c3febc8cd830ba3471daa9951d2;156450526;https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/IMP_2025.csv;2026-09-07;Comex bulk NCM
-data/raw/comex/IMP_2026.csv;c6f6a0d89c02c265e23353b5874d77c8e6b53956c566f17c0f00aa689835aa18;20807390;https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/IMP_2026.csv;2026-09-07;Comex bulk NCM
+data/raw/comex/IMP_2025.csv;b2bca7c775bf361ddb9fb3f3807e05504e9d5f7dd163e0c7a3b93e59aa81628c;175549886;https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/IMP_2025.csv;2026-09-07;Comex bulk NCM
+data/raw/comex/IMP_2026.csv;2caa195ab4d85ee14a6da1827f50d87dc20ee75c7f9224d6eaa295170a670449;120181098;https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/IMP_2026.csv;2026-09-07;Comex bulk NCM

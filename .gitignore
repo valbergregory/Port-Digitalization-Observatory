@@ -34,6 +34,20 @@ article/manuscript_files/
 article/*_cache/
 /.quarto/
 
+# LaTeX — auxiliares de compilação (os fontes .tex são versionados)
+article/latex/*.aux
+article/latex/*.bbl
+article/latex/*.blg
+article/latex/*.fdb_latexmk
+article/latex/*.fls
+article/latex/*.log
+article/latex/*.out
+article/latex/*.toc
+article/latex/main.pdf
+# figuras/tabelas são cópias geradas pelo pipeline (fonte: outputs/)
+article/latex/figures/
+article/latex/tables/
+
 # SO / editor
 Thumbs.db
 .DS_Store

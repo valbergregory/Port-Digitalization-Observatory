@@ -1,0 +1,92 @@
+%==============================================================================
+% Port Digitalization, Efficiency and Trade Costs: Evidence from Brazilian Ports
+%
+% Esqueleto do manuscrito. REGRA DO PROJETO: nenhum resultado é digitado à mão.
+% Todo número no texto vem de \input{numbers.tex}, gerado pelo pipeline R
+% (scripts/12_export_overleaf.R) a partir do DuckDB. Resultados ainda não
+% estimados aparecem como [RESULT TO BE GENERATED].
+%
+% Compilação: pdflatex -> bibtex -> pdflatex x2  (ou apenas "Recompile" no Overleaf)
+%==============================================================================
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{placeins}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf}
+\usepackage[hidelinks]{hyperref}
+\usepackage[capitalise,noabbrev]{cleveref}
+\usepackage{natbib}
+\bibliographystyle{apalike}
+
+% Macros com números do pipeline (NUNCA editar à mão: é gerado)
+\input{numbers.tex}
+
+% Marcador visível para o que ainda não foi estimado
+\newcommand{\TBG}{\textbf{[RESULT TO BE GENERATED]}}
+
+\title{\textbf{Port Digitalization, Efficiency and Trade Costs:\\
+Evidence from Brazilian Ports}}
+\author{Valber Gregory\thanks{Contact: valber.gregory@gmail.com. Replication
+materials: \url{https://github.com/valbergregory/Port-Digitalization-Observatory}.}}
+\date{This version: \today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+% ATENÇÃO: abstract a ser escrito pelo autor após os resultados.
+\TBG
+\medskip
+
+\noindent \textbf{Keywords:} port digitalization; maritime single window;
+trade costs; staggered difference-in-differences; stochastic frontier;
+information systems. \\
+\textbf{JEL:} L92, F14, D24, O33.
+\end{abstract}
+
+\clearpage
+\tableofcontents
+\clearpage
+
+\input{sections/01_introduction}
+\input{sections/02_institutional_background}
+\input{sections/03_port_digitalization_brazil}
+\input{sections/04_theory}
+\input{sections/05_observatory}
+\input{sections/06_data}
+\input{sections/07_measuring_digitalization}
+\input{sections/08_efficiency_model}
+\input{sections/09_identification}
+\input{sections/10_results}
+\input{sections/11_mechanisms}
+\input{sections/12_heterogeneity}
+\input{sections/13_robustness}
+\input{sections/14_is_contributions}
+\input{sections/15_implications}
+\input{sections/16_limitations}
+\input{sections/17_conclusion}
+
+\clearpage
+\bibliography{refs}
+
+\clearpage
+\appendix
+\input{sections/A1_appendix}
+
+\end{document}

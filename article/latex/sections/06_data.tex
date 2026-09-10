@@ -1,0 +1,31 @@
+\section{Data}
+\label{sec:data}
+
+% ROTEIRO: ANTAQ (Estatistico Aquaviario) e Comex Stat; construcao do painel
+% porto--mes; conceitos oficiais de tempo; crosswalk URF--porto e ressalvas.
+
+The operational panel combines \Natracacoes\ vessel calls with cargo
+movement recorded by ANTAQ between \Anoinicio\ and \Anofim, aggregated into
+\Npainellinhas\ port--month observations covering \Nportos\ ports
+(\Nportospublicos\ public ports and \Nportostups\ private terminals).
+
+\input{tables/tab01_amostra}
+
+Operational times follow the official definitions of the agency: $T_1$ is the
+interval between arrival at the anchorage and berthing; $T_2$ the wait between
+berthing and the start of operations; $T_3$ the cargo operation itself; and
+$T_4$ the wait until unberthing, with $T_A = T_2+T_3+T_4$ and $T_E = T_1+T_A$.
+
+\input{tables/tab02_tempos}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig01_distribuicao_t1.pdf}
+\caption{Distribution of median monthly waiting time ($T_1$) by year and port
+type.}
+\label{fig:t1dist}
+\end{figure}
+
+\input{tables/tab04_qualidade}
+
+\FloatBarrier
