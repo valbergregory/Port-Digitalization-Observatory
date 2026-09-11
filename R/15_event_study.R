@@ -13,21 +13,46 @@ suppressPackageStartupMessages({
   library(DBI); library(duckdb); library(data.table); library(did); library(ggplot2)
 })
 
-COORTES_PSP <- data.table(
-  cdtup = c("BRSSZ", "BRRIO", "BRVIX", "BRFOR", "BRCE001", "BRREC", "BRSUA",
-            "BRBEL", "BRIQI", "BRMCP", "BRSTM", "BRVDC"),
-  porto = c("Santos", "Rio de Janeiro", "Vitória", "Fortaleza", "Pecém", "Recife",
-            "Suape", "Belém", "Itaqui", "Santana", "Santarém", "Vila do Conde"),
-  g_ano = c(2011, 2011, 2011, 2012, 2012, 2012, 2012, 2013, 2013, 2013, 2013, 2013),
-  g_mes = c(8, 8, 9, 5, 5, 7, 7, 4, 4, 4, 4, 4),
-  confianca = c(rep("media", 7), rep("alta", 5))
-)
-# Portos públicos tratados em 2012 sem data verificada: excluídos
-PUBLICOS_SEM_DATA <- c("BRNTR", "BRIGI", "BRADR", "BRFNO", "BRNAT", "BRARE",
-                       "BRMCZ", "BRCDO", "BRSSA", "BRARB", "BRIOS", "BRITJ",
-                       "BRSFS", "BRIBB", "BRPOA", "BRPET", "BRRIG", "BRSSO",
-                       "BRPNG", "BRANT", "BRMAO", "BRPVH", "BRETL", "BR")
+# Coortes construídas a partir das portarias com íntegra obtida no DOU
+# (data/metadata/psp_portarias_dou.csv, gerado por python/parse_dou_hits.py)
+# + as três de 2011 (Santos, Rio, Vitória: notícias oficiais SERPRO; confiança
+# média até a íntegra da Portaria 106/2011 aparecer). Data de tratamento =
+# data do ato (publicação D+1), como nas decisões 15 e 26.
+NOME_CDTUP <- c(
+  "Santos"="BRSSZ","Rio de Janeiro"="BRRIO","Vitória"="BRVIX","Fortaleza"="BRFOR",
+  "Terminal Portuário de Pecém"="BRCE001","Pecém"="BRCE001","Recife"="BRREC","Suape"="BRSUA",
+  "Cabedelo"="BRCDO","Natal"="BRNAT","Areia Branca"="BRARE","Maceió"="BRMCZ",
+  "Belém"="BRBEL","Itaqui"="BRIQI","Santana (Macapá)"="BRMCP","Santana"="BRMCP",
+  "Santarém"="BRSTM","Vila do Conde"="BRVDC","Manaus"="BRMAO",
+  "Salvador"="BRSSA","Aratu"="BRARB","Aratu-Candeias"="BRARB","Ilhéus"="BRIOS",
+  "Itajaí"="BRITJ","São Francisco do Sul"="BRSFS","Imbituba"="BRIBB","Laguna"="BRLAG",
+  "Paranaguá"="BRPNG","Antonina"="BRANT","Rio Grande"="BRRIG","Porto Alegre"="BRPOA",
+  "Pelotas"="BRPET","São Sebastião"="BRSSO","Niterói"="BRNTR","Itaguaí"="BRIGI",
+  "Angra dos Reis"="BRADR","Forno"="BRFNO","Barra do Riacho"="BRES006","Porto Velho"="BRPVH")
 
+montar_coortes <- function(raiz = RAIZ) {
+  base2011 <- data.table(cdtup = c("BRSSZ","BRRIO","BRVIX"),
+                         porto = c("Santos","Rio de Janeiro","Vitória"),
+                         data = as.IDate(c("2011-08-01","2011-08-15","2011-09-10")),
+                         confianca = "media", portaria = "SERPRO/SEP (Portaria 106/2011 p/ Santos)")
+  f <- file.path(raiz, "data", "metadata", "psp_portarias_dou.csv")
+  dou <- fread(f, sep = ";", encoding = "UTF-8")
+  dou[, portos_lista := lapply(strsplit(gsub(" e ", ", ", portos), ",\\s*"), trimws)]
+  dou <- dou[, .(porto = unlist(portos_lista)), by = .(portaria, data_ato)]
+  dou[, cdtup := NOME_CDTUP[porto]]
+  if (any(is.na(dou$cdtup))) warning("portos sem cdtup: ", paste(dou[is.na(cdtup), porto], collapse = ", "))
+  dou <- dou[!is.na(cdtup), .(cdtup, porto, data = as.IDate(data_ato), confianca = "alta", portaria)]
+  co <- rbind(base2011, dou)[!duplicated(cdtup)]
+  co[, `:=`(g_ano = as.integer(format(data, "%Y")), g_mes = as.integer(format(data, "%m")))]
+  co[]
+}
+COORTES_PSP <- montar_coortes()
+# Públicos ainda sem data verificada: fora da amostra (nem tratados nem controle)
+TODOS_PUBLICOS <- c("BRADR","BRANT","BRARB","BRARE","BRBEL","BRCDO","BRETL","BRFNO","BRFOR",
+                    "BRIOS","BRIBB","BRIGI","BRITJ","BRIQI","BRMCZ","BRMAO","BRNAT","BRNTR",
+                    "BRPNG","BRPET","BRPOA","BRPVH","BRREC","BRRIG","BRRIO","BRSSA","BRMCP",
+                    "BRSTM","BRSSZ","BRSUA","BRSFS","BRSSO","BRVDC","BRVIX","BR")
+PUBLICOS_SEM_DATA <- setdiff(TODOS_PUBLICOS, COORTES_PSP$cdtup)
 periodo <- function(ano, mes) (ano - 2010L) * 12L + mes
 
 montar_amostra_es <- function(con, ano_ini = 2010, ano_fim = 2015,

@@ -396,3 +396,49 @@ fonte desses timestamps. Consequências:
   bootstrap (`fwildclusterboot`) ou inferência por permutação.
 - **Alavanca decisiva continua sendo datar a coorte 2012** (varredura em
   curso): de 7 para ~28 tratados no not-yet-treated.
+
+---
+
+# Adendo — 2026-09-10 (noite): coorte 2012 datada com íntegras do DOU
+
+## A20. Varredura larga do DOU legado (`python/scan_dou_legacy.py`)
+
+Percorridas todas as edições úteis de 2012 (sumário → bloco da Presidência
+da República → páginas), 6 acertos novos + os 2 de 2013 já conhecidos.
+`python/parse_dou_hits.py` estrutura tudo em
+`data/metadata/psp_portarias_dou.csv` (versionado):
+
+| Portaria SEP | Data do ato | Portos | Migração definitiva até |
+|---|---|---|---|
+| 142/2012 | 30/04/2012 | Fortaleza, Pecém | 10/05/2012 |
+| 162/2012 | 14/06/2012 | Recife, Suape | 03/07/2012 |
+| 163/2012 | 14/06/2012 | Cabedelo | 01/08/2012 |
+| 202/2012 | 08/08/2012 | Natal, Areia Branca, Maceió | 28/08/2012 |
+| 231/2012 | 25/09/2012 | Antonina, Paranaguá, São Sebastião | (página seguinte) |
+| 240/2012 | 19/10/2012 | Pelotas, Porto Alegre, Rio Grande | 27/11/2012 |
+| 48/2013 | 02/04/2013 | Belém, Itaqui, Santana, Santarém, Vila do Conde | 23/04/2013 |
+| 52/2013 | 11/04/2013 | Manaus | 14/05/2013 |
+
+Correção: a Portaria 162 é de **14/06/2012**, não ~28/06 como inferido de
+notícia. **23 portos datados** (20 com confiança alta) contra 12 pela
+manhã; 13 públicos ainda sem íntegra (Bahia, Santa Catarina, Rio, Barra do
+Riacho, Porto Velho) — varredura de jun–dez/2011 e jan–mar/2013 em curso.
+O registro de coortes do estimador (`R/15_event_study.R::montar_coortes`)
+passou a ser **gerado do CSV** — nada mais é digitado à mão.
+
+## A21. Reestimação com 23 portos (nível da atracação, Sun-Abraham)
+
+Desenho A (not-yet-treated; 17 tratados vs 5 do Norte), 2010-01..2013-03:
+
+| Outcome | s/ controles | c/ controles | pré-tend. |
+|---|---|---|---|
+| $T_2$ | **−0,20 (p=0,03)** | −0,15 (p=0,10) | +0,11 |
+| $T_4$ | −0,17 (p=0,22) | −0,09 (p=0,47) | +0,08 |
+| $T_1$ | +0,17 (p=0,38) | +0,15 (p=0,46) | −0,16 |
+| $T_A$ | −0,16 (p<0,01) | −0,16 (p<0,01) | −0,05 |
+
+TUPs (desenho B, 2010-15): $T_4$ +0,05 (p=0,56), $T_2$ +0,04 (p=0,2) — nulos.
+O padrão da manhã se mantém com mais poder: **$T_2$ é o outcome que responde**
+(−15% a −20%), $T_4$ aponta na mesma direção sem precisão, $T_1$ nada.
+Inferência com poucos clusters (WCB + permutação) rodando; resultado em
+`outputs/models/inference_few_clusters.txt`.
