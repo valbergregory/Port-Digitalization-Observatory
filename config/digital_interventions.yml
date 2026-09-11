@@ -18,7 +18,8 @@
        fonte: "SERPRO (notícia oficial); Portos e Navios",
        obrigatoriedade: "Portaria SEP nº 106, de 14/06/2011 — uso obrigatório do sistema em Santos (teor corroborado por SERPRO e Portogente; íntegra do DOU pendente)"}
     - {porto: "Rio de Janeiro", data: "2011-08-15", confianca: media, fonte: "SERPRO (notícia oficial)"}
-    - {porto: "Vitória",        data: "2011-09-10", confianca: media, fonte: "SERPRO (notícia oficial)"}
+    - {porto: "Vitória",        data: "2011-07-13", data_migracao_definitiva: "2011-09-01", confianca: alta,
+       fonte: "Portaria SEP nº 135, de 13/07/2011 (DOU 14/07/2011, p. 2) — íntegra obtida; SERPRO noticiou produção em 10/09/2011"}
     # ---- coorte 2012: íntegras obtidas na varredura do DOU legado (2026-09-10) ----
     - {porto: "Fortaleza e Terminal Portuário de Pecém", data: "2012-04-30", data_migracao_definitiva: "2012-05-10", confianca: alta,
        fonte: "Portaria SEP nº 142, de 30/04/2012 (DOU 02/05/2012, p. 8-9) — íntegra em data/documents/interventions/PSP/dou/legacy_scan/"}
