@@ -62,7 +62,7 @@ tb <- rbindlist(list(linha(mA, "A: not-yet-treated (dated public ports), 2010--1
                      linha(mB, "B: private terminals never treated, 2010--15", "sunab"),
                      linha(mS, "B: static DiD", "did")))
 tabela_tex(tb, file.path(DIR_TAB, "tab06_cobertura_efeito.tex"),
-  "Effect of the single window on the probability that $T_4$ is recorded", "tab:covefeito", align = "lrrrrrr",
+  "Effect of the single window on the probability that $T_4$ is recorded", "tab:covefeito", align = "lrrrrrr", escape = FALSE,
   notas = paste("Outcome: indicator that the post-operation waiting time is recorded for the vessel call.",
                 "Sun-Abraham estimator with port and month fixed effects; standard errors clustered by port.",
                 "The average masks strong heterogeneity: coverage jumps from \\CobSantosPre\\ to \\CobSantosPos\\ in Santos",

@@ -26,7 +26,8 @@ pm[, psp := as.numeric(!is.na(g_ano) & (ano > g_ano | (ano == g_ano & mes >= g_m
 pm[, `:=`(ly = log(ton), lh = log(horas_berco), lb = log(bercos), trend = (ano - 2010) + (mes - 1)/12, sh_cont = fcoalesce(ton_cont, 0)/ton, mesf = factor(mes))]
 cat("\n(b) porto-mes publicos:", nrow(pm), "obs,", uniqueN(pm$cdtup), "portos\n")
 m_pm <- tryCatch(sfacross(ly ~ lh + lb + trend + mesf, uhet = ~ psp + sh_cont, udist = "hnormal", data = as.data.frame(pm), S = 1), error = function(e) NULL)
-if (!is.null(m_pm)) { ct <- coef(summary(m_pm)); print(round(ct[grepl("^Zu_|^lh$|^lb$|^trend$", rownames(ct)), ], 3)) } else cat("nao convergiu\n")
+if (!is.null(m_pm)) { ct <- coef(summary(m_pm)); print(round(ct[grepl("^Zu_|^lh$|^lb$|^trend$", rownames(ct)), ], 3))
+  fwrite(data.table(termo = rownames(ct), ct)[grepl("^Zu_|^lh$|^lb$|^trend$|^Zv_", termo)], caminho("outputs","models","sfa_portomes_coefs.csv")) } else cat("nao convergiu\n")
 
 # (c) DEA VRS orientacao output, porto-ano publicos; eficiencia media pre/pos PSP
 if (requireNamespace("Benchmarking", quietly = TRUE)) {

@@ -1,9 +1,17 @@
 \section{Efficiency Model}
 \label{sec:efficiency}
 
-% ROTEIRO: fronteira estocastica \citep{aigner1977,battese1995}; outputs
-% (toneladas; TEU) e inputs (horas de berco, bercos ativos, calado);
-% ineficiencia variante no tempo com digitalizacao entre os determinantes;
-% DEA apenas como robustez. Ver docs/efficiency_model.md.
+% Fronteira estocastica \citep{aigner1977,battese1995}: output ln toneladas;
+% inputs ln horas de berco, ln bercos ativos; ineficiencia meio-normal com
+% variancia heteroscedastica (PSP, share de conteiner). Ver docs/efficiency_model.md.
 
-\TBG
+Public ports only (34 ports), 2010--2025. The translog specification is
+preferred (LR $=\SfaLR$). The single window enters the inefficiency variance
+with coefficient \SfaPspTl\ ($p=\SfaPspTlP$) in the port-year translog and
+\SfaPspPm\ in the port-month specification (\Cref{tab:sfa}).
+
+\input{tables/tab11_fronteira}
+
+\PROSA
+
+\FloatBarrier

@@ -1,9 +1,18 @@
 \section{Robustness}
 \label{sec:robustness}
 
-% ROTEIRO: cada teste responde a uma ameaca nomeada --
-% placebo com datas de anuncio (H10); exclusao de tratamentos de baixa
-% confianca; exclusao da coorte de 2011 (pre-periodo curto); exclusao de
-% 2020--21; placebos temporais e de porto; investimentos fisicos simultaneos.
+% Cada teste responde a uma ameaca nomeada. WCB e permutacao: poucos clusters
+% (tab07, na secao de resultados). Placebo de antecipacao: datacao e
+% pre-tendencias. Honest DiD: violacoes limitadas de tendencias paralelas.
 
-\TBG
+The anticipation placebo shifts each treatment date twelve months earlier
+and is estimated on the true pre-period only. For cabotage $T_2$ it returns
+\PlaceboCabTdoisBeta\ ($p=\PlaceboCabTdoisPwcb$): the apparent reduction in
+$T_2$ predates adoption and is therefore a pre-trend, not an effect. The
+$T_4$ placebo is not distinguishable from zero ($p=\PlaceboCabTquatroPwcb$).
+
+\input{tables/tab09_placebo}
+
+\PROSA
+
+\FloatBarrier

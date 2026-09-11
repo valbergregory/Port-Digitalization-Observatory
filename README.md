@@ -61,6 +61,16 @@ Regra do projeto: **nenhum número é digitado à mão no texto**. Todos os
 valores citados vêm de `numbers.tex`, gerado do banco; resultados ainda não
 estimados aparecem como `[RESULT TO BE GENERATED]`.
 
+## Observatório (Shiny)
+
+```powershell
+Rscript scripts/07_launch_dashboard.R   # http://localhost:4200
+```
+
+Quatro painéis sobre o DuckDB auditado: intervenções (mapa + portarias do
+DOU), tempos operacionais por porto, qualidade da informação (cobertura de
+T4) e exportação das amostras dos estimandos.
+
 ## Execução rápida (Windows, esta máquina)
 
 ```powershell

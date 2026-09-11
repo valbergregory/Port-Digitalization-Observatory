@@ -41,3 +41,20 @@ como robustez**, nunca substituto.
   associação condicional; a identificação causal vem do DiD, não da SFA.
 - Zeros de TEU em portos graneleiros: não imputar; separar tecnologia.
 - Mudança de composição de carga é mudança de tecnologia — controlar shares.
+
+## 4. Estado em 2026-09-11 e limitação declarada (decisão do pesquisador)
+
+Estimado (`scripts/19`, `scripts/23`): portos públicos, 2010–2025,
+Cobb-Douglas e translog (preferida, LR=30,6), meio-normal com variância
+heterocedástica da ineficiência (PSP, share de contêiner); painel porto-mês
+como robustez; DEA VRS como verificação (ρ=0,68 com a SFA).
+
+**Limitação declarada — opção (i), 11/09/2026:** calado máximo e capacidade
+instalada NÃO entram na fronteira. O cadastro de berços do SDP/ANTAQ
+(`web.antaq.gov.br`) está fora do ar e a alternativa (Planos Mestres, um
+PDF por porto) só será extraída se solicitado em revisão. Consequência:
+parte da "ineficiência" estimada reflete diferenças de infraestrutura entre
+portos; os determinantes da ineficiência (inclusive o PSP) devem ser lidos
+como associações condicionais. Isso está no manuscrito (§8 e §16).
+Também descartados: truncada-normal com 235 portos (não converge), TEU como
+output em 7 portos de contêiner (degenera), `frontier::sfa` BC95 (γ→1).

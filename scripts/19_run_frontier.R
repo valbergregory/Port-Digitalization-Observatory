@@ -17,4 +17,5 @@ cat("\nEficiencia tecnica media (translog, BC):\n")
 print(ef[, .(te_media = round(mean(teBC), 3), n = .N), by = .(tipo_autoridade, psp)])
 fwrite(ef, caminho("outputs","models","sfa_efficiencies.csv"))
 saveRDS(m, caminho("outputs","models","sfa_models.rds"))
+for (nm in c("cd","tl")) { ct <- coef(summary(m[[nm]])); fwrite(data.table(modelo = nm, termo = rownames(ct), ct), caminho("outputs","models", sprintf("sfa_portoano_%s_coefs.csv", nm))) }
 sink(); cat("concluido\n")

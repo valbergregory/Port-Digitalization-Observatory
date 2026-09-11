@@ -617,3 +617,36 @@ tendências paralelas. $T_1$, $T_2$ agregado, comércio e frete: nulos.
 - **DEA VRS** (output): TE média 0,19 → 0,20 pré/pós; correlação 0,68 com
   a SFA translog — as duas abordagens ordenam os portos de modo parecido.
 - Pendente: calado/capacidade (host `web.antaq.gov.br` do SDP fora do ar).
+
+---
+
+# Adendo — 2026-09-11 (tarde): manuscrito no eixo (b), Shiny e pedidos
+
+## A32. Decisões aplicadas
+
+1. **Eixo (b)** — informação no centro: §10.1 abre com a cobertura de $T_4$
+   (tab06); tempos (tab07), heterogeneidade/mecanismo (tab08), horizonte
+   longo (fig08) vêm em seguida como contexto. Robustez (§13) recebe placebo
+   e Honest DiD (tab09); implicações (§15) o comércio e frete (tab10);
+   eficiência (§8) a fronteira (tab11). Título orientado a SI. 32 macros;
+   14 páginas; compila.
+2. **Fronteira sem calado/capacidade** — limitação declarada (§16 e
+   `efficiency_model.md` §4).
+3. **Fala.BR** — texto pronto em `docs/requests/falabr_portarias_psp.md`;
+   envio e protocolo cabem ao pesquisador.
+4. **Observatório (Shiny)** — `app/app.R`, quatro painéis sobre o DuckDB
+   auditado: (1) mapa dos portos públicos por coorte do PSP + tabela das
+   portarias com fontes; (2) séries mensais de T1/T2/T4/TA por porto com o
+   marcador do ato; (3) cobertura de T4 por porto-ano (H11 interativa);
+   (4) exportação CSV das amostras dos estimandos E1/E5, painel porto-mês
+   e registro de coortes. Sobe com `scripts/07_launch_dashboard.R` (porta
+   4200). Vira a figura de arquitetura da §5 e o link de replicação.
+
+## A33. O que falta para submissão
+
+- Prosa do autor sobre os `\PROSA` (todas as seções); abstract.
+- Figura de arquitetura do Observatório (§5) e descrição do artefato.
+- Referências de SI ainda não citadas no texto (OIPT, information quality)
+  e de portos digitais (single window, PCS) — `refs.bib` tem 14 entradas.
+- Resposta do Fala.BR (13 portos) → reestimação automática.
+- Revisão dos periódicos-alvo do eixo (b): GIQ / IS Frontiers / MEL.

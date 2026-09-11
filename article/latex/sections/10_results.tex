@@ -1,15 +1,32 @@
 \section{Results}
 \label{sec:results}
 
-% ROTEIRO (reorientado em 2026-09-10 apos a inferencia robusta com 23 portos):
-% 10.1 tempos operacionais -- nenhum componente com efeito robusto; T2 com
-%      ponto negativo consistente (-11% a -21%) mas p_wcb 0,11-0,31;
-% 10.2 heterogeneidade por tipo de navegacao (longo curso vs cabotagem);
-% 10.3 horizonte longo ate 2026 com TUPs (T2/T4);
-% 10.4 efeitos sobre a INFORMACAO (H11) -- o achado forte.
+% EIXO (b), decisao de 11/09: o achado de informacao (H11) abre a secao; os
+% efeitos sobre tempos, comercio e eficiencia vem como contexto — tres
+% resultados nulos honestos e um efeito documental estreito.
 
-\subsection{Operational times}
+\subsection{What the single window changed first: the information the regulator receives}
+\label{sec:res_info}
+
+Before the single window, the post-operation waiting time ($T_4$) was
+recorded for \CobSantosPre\ of vessel calls in Santos and \CobRioPre\ in Rio
+de Janeiro; after it, for \CobSantosPos\ and \CobRioPos\ respectively
+(\Cref{fig:coverage}). \Cref{tab:covefeito} reports the corresponding
+difference-in-differences estimates.
+
+\input{tables/tab06_cobertura_efeito}
+
+\PROSA
+
+\subsection{Operational times: no aggregate effect}
 \label{sec:res_times}
+
+Across dated public ports, the static effect of the single window on
+documentary waiting times is \TdoisBetaFull\ for $T_2$ (wild-bootstrap
+$p=\TdoisPwcbFull$) and \TquatroBetaFull\ for $T_4$ ($p=\TquatroPwcbFull$);
+the physical queue ($T_1$) shows no movement (\Cref{tab:inferencia}).
+
+\input{tables/tab07_inferencia}
 
 \begin{figure}[htbp]
 \centering
@@ -19,12 +36,19 @@ mark production start dates. Descriptive evidence only.}
 \label{fig:cohorts}
 \end{figure}
 
-\TBG
+\PROSA
 
-\subsection{Heterogeneity by navigation type}
+\subsection{Where a documentary effect survives: recurrent cabotage calls}
 \label{sec:res_nav}
-% Fonte: outputs/tables/heterogeneity_navigation.csv
-\TBG
+
+The only estimate that survives both few-cluster inference and the
+anticipation placebo is the post-operation waiting time of recurrent
+cabotage vessels: \CabRecTquatroBeta\ in logs (about \CabRecTquatroPct\
+shorter, wild-bootstrap $p=\CabRecTquatroPwcb$; \Cref{tab:heterog}).
+
+\input{tables/tab08_heterogeneidade}
+
+\PROSA
 
 \subsection{Long-run dynamics, 2010--2026}
 \label{sec:res_long}
@@ -37,15 +61,6 @@ private terminals as never-treated reference. Exploratory.}
 \label{fig:longrun}
 \end{figure}
 
-\TBG
-
-\subsection{Effects on information completeness}
-\label{sec:res_info}
-
-% H11: o resultado empiricamente mais forte do PSP e sobre a completude da
-% informacao operacional reportada ao regulador, nao sobre os tempos.
-\input{tables/tab06_cobertura_efeito}
-
-\TBG
+\PROSA
 
 \FloatBarrier

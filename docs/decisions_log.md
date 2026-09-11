@@ -174,3 +174,15 @@ Formato: data — decisão — justificativa — alternativas rejeitadas.
     fronteira porto-mês converge (PSP −0,29 na variância da ineficiência,
     sem cluster) e DEA corrobora (ρ=0,68); TEU/contêiner degenera.
     Tabela `port_call_vessel` (IMO) adicionada ao DuckDB.
+33. **11/09 — decisões do pesquisador**: (1) eixo (b): a mudança na
+    informação (H11) abre os resultados; título passa ao orientado a SI
+    ("Digitalizing Port Processes: Design and Causal Evaluation of a Port
+    Transformation Observatory"); (2) tabelas tab07–tab11 e 16 macros
+    geradas (`scripts/24`), manuscrito reestruturado (§8, §10, §12, §13,
+    §15, §16), compila em 14 páginas; (3) fronteira sem calado/capacidade —
+    limitação declarada (efficiency_model §4); (4) pedido Fala.BR redigido
+    em `docs/requests/falabr_portarias_psp.md` — envio pelo pesquisador;
+    (5) Shiny do Observatório com 4 painéis (`app/app.R`: mapa+portarias,
+    tempos por porto, cobertura de T4, exportação de amostras) sobre o
+    DuckDB read-only; tabela `ports` (coordenadas) criada. `tabela_tex`
+    ganhou `escape = FALSE` para células com LaTeX.

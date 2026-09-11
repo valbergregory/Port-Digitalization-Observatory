@@ -68,6 +68,9 @@ macros <- c(
   CobRioPos        = sprintf("%.0f\\%%", cobq("BRRIO", 2014, 2016))
 )
 
+# macros dos resultados (scripts/24_results_tables.R)
+mr <- fread(caminho("outputs","tables","macros_resultados.csv"))
+macros <- c(macros, setNames(mr$valor, mr$macro))
 writeLines(c(
   "% numbers.tex — GERADO AUTOMATICAMENTE por scripts/12_export_overleaf.R.",
   "% Não editar à mão: qualquer alteração é sobrescrita na próxima exportação.",

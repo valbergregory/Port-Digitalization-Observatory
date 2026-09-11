@@ -22,13 +22,14 @@ escapar_tex <- function(x) {
   x
 }
 
-tabela_tex <- function(df, arquivo, caption, label, align = NULL, notas = NULL) {
+tabela_tex <- function(df, arquivo, caption, label, align = NULL, notas = NULL, escape = TRUE) {
   df <- as.data.frame(df)
+  esc <- if (escape) escapar_tex else identity
   if (is.null(align)) {
     align <- paste0("l", paste(rep("r", ncol(df) - 1), collapse = ""))
   }
-  cab <- paste(escapar_tex(names(df)), collapse = " & ")
-  corpo <- apply(df, 1, function(l) paste(escapar_tex(l), collapse = " & "))
+  cab <- paste(esc(names(df)), collapse = " & ")
+  corpo <- apply(df, 1, function(l) paste(esc(l), collapse = " & "))
   linhas <- c(
     "\\begin{table}[htbp]", "\\centering", "\\small",
     sprintf("\\caption{%s}", caption), sprintf("\\label{%s}", label),
@@ -94,7 +95,7 @@ descritivas <- function(raiz = RAIZ) {
   }))
   tabela_tex(est, file.path(DIR_TAB, "tab02_tempos.tex"),
     "Tempos operacionais no painel porto--mês (horas)", "tab:tempos",
-    align = "lrrrrrr",
+    align = "lrrrrrr", escape = FALSE,
     notas = paste("Cada observação é a mediana (ou o intervalo interquartílico)",
                   "das atracações com movimentação de carga do porto no mês.",
                   "Definições oficiais em ANTAQ: $T_A=T_2+T_3+T_4$ e $T_E=T_1+T_A$."))
