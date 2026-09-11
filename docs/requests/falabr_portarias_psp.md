@@ -7,6 +7,9 @@ Nacional de Portos e Transportes Aquaviários (SNPTA)
 **Prazo legal de resposta:** 20 dias, prorrogáveis por 10 (Lei 12.527/2011, art. 11)
 **Preparado em:** 11/09/2026, para envio pelo pesquisador.
 
+> **ENVIADO em 11/09/2026 — protocolo Fala.BR 55001.000806/2026-27 — prazo de resposta 05/10/2026.**
+> Acompanhamento: https://falabr.cgu.gov.br (consultar pelo protocolo). Registrado na decisão 34.
+
 ---
 
 ## Texto do pedido (colar no campo "Descrição")

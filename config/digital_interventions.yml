@@ -34,7 +34,7 @@
     - {porto: "Pelotas, Porto Alegre e Rio Grande", data: "2012-10-19", data_migracao_definitiva: "2012-11-27", confianca: alta,
        fonte: "Portaria SEP nº 240, de 19/10/2012 (DOU 22/10/2012, p. 9)"}
     - {porto: "ainda sem íntegra: Salvador, Aratu, Ilhéus, Itajaí, São Francisco do Sul, Imbituba, Laguna, Niterói, Itaguaí, Angra dos Reis, Forno, Barra do Riacho, Porto Velho",
-       data: "a localizar", confianca: baixa, fonte: "varredura 2011 e jan-mar/2013 em curso; registro estruturado em data/metadata/psp_portarias_dou.csv"}
+       data: "a localizar", confianca: baixa, fonte: "varreduras 2011, 2012 e 2013Q1 do DOU legado sem acerto; pedido LAI Fala.BR 55001.000806/2026-27 (11/09/2026, prazo 05/10/2026)"}
     - {porto: "Belém, Itaqui, Santana (Macapá), Santarém e Vila do Conde",
        data: "2013-04-03", data_migracao_definitiva: "2013-04-23", confianca: alta,
        fonte: "Portaria SEP nº 48, de 02/04/2013 (DOU 03/04/2013, íntegra em data/documents/interventions/PSP/dou/) — uso obrigatório pelos armadores a partir da publicação"}
