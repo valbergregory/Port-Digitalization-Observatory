@@ -442,3 +442,43 @@ O padrão da manhã se mantém com mais poder: **$T_2$ é o outcome que responde
 (−15% a −20%), $T_4$ aponta na mesma direção sem precisão, $T_1$ nada.
 Inferência com poucos clusters (WCB + permutação) rodando; resultado em
 `outputs/models/inference_few_clusters.txt`.
+
+## A22. Inferência robusta com 23 portos e leitura consolidada (2026-09-10, fim do dia)
+
+Wild cluster bootstrap (Webb, nulo imposto, B=4999) e permutação de datas
+(R=999) sobre o DiD estático por atracação, com controles:
+
+| Amostra | Outcome | β | p cluster | **p WCB** | p perm. | G |
+|---|---|---|---|---|---|---|
+| A completa | $T_4$ | −0,04 | 0,68 | 0,70 | 0,68 | 22 |
+| A completa | $T_2$ | −0,11 | 0,25 | 0,31 | 0,19 | 22 |
+| A completa | $T_1$ | −0,04 | 0,83 | 0,86 | 0,87 | 22 |
+| A estável | $T_4$ | −0,13 | 0,26 | 0,34 | 0,22 | 10 |
+| A estável | $T_2$ | −0,21 | 0,14 | 0,11 | 0,12 | 10 |
+| A estável | $T_1$ | +0,04 | 0,86 | 0,90 | 0,86 | 10 |
+
+**Conclusão honesta desta rodada.** Com a coorte 2012 datada por íntegras
+(23 portos, 17 tratados na janela not-yet-treated), **nenhum componente de
+tempo mostra efeito estatisticamente robusto do Porto Sem Papel**. Os pontos
+estimados de $T_2$ são consistentemente negativos (−11% a −21%) em todas as
+amostras e estimadores, com pré-tendências positivas pequenas (+0,1) que
+trabalham *contra* o efeito — mas não se distinguem de zero sob inferência
+adequada a poucos clusters. $T_1$ é um zero limpo. TUPs não replicam.
+
+Isto NÃO fecha a questão; delimita o que o desenho porto-a-porto consegue
+dizer. Três caminhos, em ordem de rendimento esperado:
+
+1. **Heterogeneidade por tipo de navegação e carga** — o DUV importa mais no
+   longo curso (mais anuentes: Receita, ANVISA, PF) do que na cabotagem; o
+   efeito médio pode estar diluído. Testar $T_2$ em longo curso vs cabotagem.
+2. **Horizonte longo (até 2026) com TUPs para $T_2$/$T_4$** — aprendizagem
+   (H6) e as ondas posteriores (VTMIS 2017, DUE 2017-18, DUIMP) como novos
+   experimentos.
+3. **Reformular o papel do PSP no artigo**: a evidência forte é sobre a
+   *informação* (H11: cobertura de $T_4$ 0→93% em Santos), não sobre o
+   tempo — coerente com OIPT: a janela única aumentou a capacidade de
+   processamento de informação do regulador antes de (ou sem) mover a
+   fila. É um achado publicável e distinto da literatura.
+
+Registro: Vitória agora com íntegra (Portaria SEP 135, 13/07/2011);
+varredura jan–mar/2013 em curso para os 13 públicos restantes.

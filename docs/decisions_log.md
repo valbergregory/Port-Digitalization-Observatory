@@ -155,3 +155,10 @@ Formato: data — decisão — justificativa — alternativas rejeitadas.
     Portaria SEP 162 de 14/06/2012 (Recife+Suape — a data inferida ~28/06
     estava errada em 2 semanas), Portaria SEP 202 de 08/08/2012 (Natal,
     Areia Branca, Maceió — 3 portos da coorte "sem data" agora datados).
+30. **Fim da rodada de 10/09**: com 23 portos datados, a inferência robusta
+    não sustenta efeito do PSP em nenhum componente de tempo (T2 −11% a −21%
+    consistente mas p_wcb 0,11–0,31). Registrado como resultado, não como
+    fracasso: reorienta o artigo para heterogeneidade (longo curso), horizonte
+    longo com TUPs e o achado de informação (H11). Vitória datada por íntegra
+    (Portaria SEP 135/2011). Precedência do DOU sobre notícias em
+    `montar_coortes`.

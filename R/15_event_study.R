@@ -42,7 +42,7 @@ montar_coortes <- function(raiz = RAIZ) {
   dou[, cdtup := NOME_CDTUP[porto]]
   if (any(is.na(dou$cdtup))) warning("portos sem cdtup: ", paste(dou[is.na(cdtup), porto], collapse = ", "))
   dou <- dou[!is.na(cdtup), .(cdtup, porto, data = as.IDate(data_ato), confianca = "alta", portaria)]
-  co <- rbind(base2011, dou)[!duplicated(cdtup)]
+  co <- rbind(dou, base2011)[!duplicated(cdtup)]   # DOU (alta) tem precedência sobre notícias
   co[, `:=`(g_ano = as.integer(format(data, "%Y")), g_mes = as.integer(format(data, "%m")))]
   co[]
 }
