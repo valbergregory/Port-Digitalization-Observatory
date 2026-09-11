@@ -4,7 +4,13 @@ setwd(raiz)
 source("R/00_setup.R"); source("R/01_config.R"); source("R/14_did_models.R"); source("R/19_robustness.R")
 con <- dbConnect(duckdb(), caminho("data","processed","observatory.duckdb"), read_only = TRUE)
 on.exit(dbDisconnect(con, shutdown = TRUE), add = TRUE)
-estaveis <- c("BRVIX","BRSUA","BRCE001","BRREC","BRIQI","BRMCP","BRVDC")
+# cobertura estavel = T4 registrado em >= 70% das atracacoes em TODOS os anos 2010-2013
+cobv <- as.data.table(dbGetQuery(con, "
+  SELECT pc.cdtup, pc.ano, AVG(CASE WHEN t.t4 IS NOT NULL THEN 1.0 ELSE 0 END) AS cob
+  FROM port_calls pc JOIN port_call_times t USING (id_atracacao)
+  WHERE pc.flag_mov_carga AND pc.ano BETWEEN 2010 AND 2013 GROUP BY 1,2"))
+estaveis <- cobv[, .(ok = all(cob >= 0.7) & .N == 4), by = cdtup][ok == TRUE, cdtup]
+cat("portos de cobertura estavel:", length(intersect(estaveis, c(COORTES_PSP$cdtup, "BRBEL","BRIQI","BRMCP","BRSTM","BRVDC"))), "\n")
 base <- montar_atracacoes(con, 2010, 2013, incluir_tups = FALSE)[t <= periodo(2013L, 3L)]
 base[g == periodo(2013L, 4L), g := 10000L]
 amostras <- list(`A-completa` = base, `A-estavel` = base[cdtup %in% estaveis])
