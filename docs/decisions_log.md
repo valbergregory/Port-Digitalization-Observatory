@@ -195,3 +195,15 @@ Formato: data — decisão — justificativa — alternativas rejeitadas.
     `python/parse_dou_hits.py` e reestimar (scripts 13–15, 17–22). Se
     "inexistente"/"não localizada": recurso em 10 dias citando as nove
     portarias já obtidas.
+35. **Referências acrescentadas (11/09)**: 20 entradas em `article/references.bib`
+    — OIPT (Galbraith 1973; Tushman & Nadler 1978), qualidade da informação
+    (Wang & Strong 1996), design science (Hevner et al. 2004; Gregor & Hevner
+    2013), complementaridade (Brynjolfsson & Hitt 2000), portos digitais
+    (Heilig & Voß 2017; Heilig et al. 2017; Carlan et al. 2016; Inkinen et
+    al. 2019; UNECE Rec. 33), facilitação de comércio (Wilson et al. 2003),
+    DiD escalonado (Goodman-Bacon 2021; de Chaisemartin & D'Haultfœuille
+    2020; Roth et al. 2023; Roth 2022), poucos clusters (Cameron et al.
+    2008; MacKinnon & Webb 2018), fronteira (Kumbhakar & Lovell 2000;
+    Cullinane et al. 2006). **Lançadas de memória, sem DOI: conferir cada
+    uma no original antes da submissão (regra 19).** Figura de arquitetura
+    (TikZ, `article/latex/tikz/`) na §5; tabelas descritivas em inglês.

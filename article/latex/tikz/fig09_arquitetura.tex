@@ -1,0 +1,54 @@
+% fig09_arquitetura.tex — arquitetura do Brazilian Port Digital Transformation
+% Observatory. TikZ puro: compila no Overleaf sem arquivo externo.
+% Camadas: fontes -> ingestão e validação -> DuckDB -> análise -> saídas;
+% dimensões sociotécnicas (pessoas, processos, organizações, tecnologia) à direita.
+\begin{tikzpicture}[
+  font=\footnotesize, node distance=4mm,
+  box/.style={draw, rounded corners=2pt, align=center, inner sep=4pt, minimum height=9mm, fill=white},
+  src/.style={box, fill=gray!8, minimum width=27mm},
+  db/.style={box, fill=blue!7, minimum width=30mm},
+  ana/.style={box, fill=green!7, minimum width=27mm},
+  outp/.style={box, fill=orange!8, minimum width=27mm},
+  layer/.style={font=\scriptsize\bfseries, anchor=west, text=black!70},
+  arr/.style={-{Latex[length=2mm]}, thick, black!60},
+  dim/.style={font=\scriptsize, align=left, anchor=west, text=black!75}
+]
+% ---- camada 1: fontes ----
+\node[layer] (l1) at (0,0) {1. Sources};
+\node[src, below=2mm of l1.west, anchor=north west] (antaq) {ANTAQ waterway statistics\\ 1.34M vessel calls, $T_1$--$T_4$, cargo};
+\node[src, right=of antaq] (comex) {Comex Stat\\ customs unit $\times$ partner $\times$ month,\\ FOB, weight, freight};
+\node[src, right=of comex] (dou) {Official Gazette (DOU)\\ SEP ordinances: production\\ dates, migration deadlines};
+\node[src, right=of dou] (cad) {Registries\\ facilities, commodities,\\ URF--port crosswalk};
+% ---- camada 2: ingestao ----
+\node[layer, below=9mm of antaq.south west, anchor=north west] (l2) {2. Ingestion and validation (R + Python)};
+\node[box, fill=gray!4, below=2mm of l2.west, anchor=north west, minimum width=118mm, minimum height=10mm] (ing)
+  {checksums against remote size $\cdot$ DOU page scanner + ordinance parser $\cdot$ time identities $T_A{=}T_2{+}T_3{+}T_4$, $T_E{=}T_1{+}T_A$ $\cdot$ coverage audit};
+% ---- camada 3: duckdb ----
+\node[layer, below=6mm of ing.south west, anchor=north west] (l3) {3. Integration layer (DuckDB, read-only for consumers)};
+\node[db, below=2mm of l3.west, anchor=north west] (t1) {port\_calls\\ port\_call\_times\\ cargo\_by\_call};
+\node[db, right=of t1] (t2) {port\_month\_panel\\ 31,917 port--months};
+\node[db, right=of t2] (t3) {trade\_urf\_month\\ trade\_urf\_country};
+\node[db, right=of t3] (t4) {digital\_treatment\\ ports, port\_call\_vessel};
+% ---- camada 4: analise ----
+\node[layer, below=6mm of t1.south west, anchor=north west] (l4) {4. Analysis (targets pipeline)};
+\node[ana, below=2mm of l4.west, anchor=north west] (a1) {Staggered DiD\\ Callaway--Sant'Anna,\\ Sun--Abraham};
+\node[ana, right=of a1] (a2) {Few-cluster inference\\ wild bootstrap,\\ permutation, placebo};
+\node[ana, right=of a2] (a3) {Stochastic frontier\\ translog, DEA check};
+\node[ana, right=of a3] (a4) {Trade (PPML)\\ freight ad valorem};
+% ---- camada 5: saidas ----
+\node[layer, below=6mm of a1.south west, anchor=north west] (l5) {5. Outputs};
+\node[outp, below=2mm of l5.west, anchor=north west] (o1) {Manuscript\\ tables, figures, macros\\ (no hand-typed numbers)};
+\node[outp, right=of o1] (o2) {Observatory dashboard\\ map, times, information\\ quality, exports};
+\node[outp, right=of o2] (o3) {Intervention registry\\ dated ordinances,\\ confidence grades};
+\node[outp, right=of o3] (o4) {Replication package\\ public repository,\\ lockfile, checksums};
+% ---- setas verticais entre camadas ----
+\foreach \a/\b in {antaq/ing, comex/ing, dou/ing, cad/ing} \draw[arr] (\a.south) -- (\a.south |- ing.north);
+\foreach \b in {t1, t2, t3, t4} \draw[arr] (\b.north |- ing.south) -- (\b.north);
+\foreach \b in {a1, a2, a3, a4} \draw[arr] (\b.north |- t1.south) -- (\b.north);
+\foreach \b in {o1, o2, o3, o4} \draw[arr] (\b.north |- a1.south) -- (\b.north);
+% ---- dimensoes sociotecnicas ----
+\node[dim, right=8mm of cad.east, yshift=-2mm] (people) {\textbf{People}\\ agents, port authorities,\\ regulator's statisticians};
+\node[dim, below=9mm of people.south west, anchor=north west] (proc) {\textbf{Processes}\\ berthing authorisation,\\ operation, clearance};
+\node[dim, below=9mm of proc.south west, anchor=north west] (org) {\textbf{Organisations}\\ 6 consenting agencies,\\ ANTAQ, customs};
+\node[dim, below=9mm of org.south west, anchor=north west] (tech) {\textbf{Technology}\\ single window (DUV),\\ DuckDB, R, Python};
+\end{tikzpicture}

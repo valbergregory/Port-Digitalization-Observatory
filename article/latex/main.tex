@@ -26,6 +26,8 @@
 \usepackage{graphicx}
 \graphicspath{{figures/}}
 \usepackage{placeins}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
 \usepackage{caption}
 \captionsetup{font=small,labelfont=bf}
 \usepackage[hidelinks]{hyperref}
@@ -86,6 +88,9 @@ information systems. \\
 \input{sections/17_conclusion}
 
 \clearpage
+% RASCUNHO: lista todas as entradas do .bib para o autor ver o que esta
+% disponivel. REMOVER \nocite{*} na versao de submissao.
+\nocite{*}
 \bibliography{refs}
 
 \clearpage

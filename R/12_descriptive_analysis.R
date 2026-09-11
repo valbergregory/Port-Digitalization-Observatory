@@ -68,37 +68,35 @@ descritivas <- function(raiz = RAIZ) {
 
   # ---- Tabela 1: composição da amostra ----
   comp <- painel[, .(
-    `Portos` = uniqueN(cdtup),
-    `Porto-meses` = .N,
-    `Atracações (mil)` = round(sum(n_atracacoes) / 1e3),
-    `Toneladas (mi)` = round(sum(toneladas, na.rm = TRUE) / 1e6),
-    `Berços ativos (mediana)` = as.numeric(median(n_bercos_ativos))
-  ), by = .(`Tipo` = tipo_autoridade)]
+    Ports = uniqueN(cdtup),
+    `Port--months` = .N,
+    `Calls (000)` = round(sum(n_atracacoes) / 1e3),
+    `Tonnes (M)` = round(sum(toneladas, na.rm = TRUE) / 1e6),
+    `Berths (median)` = as.numeric(median(n_bercos_ativos))
+  ), by = .(Type = fifelse(tipo_autoridade == "Porto Público", "Public port", "Private terminal (TUP)"))]
   tabela_tex(comp, file.path(DIR_TAB, "tab01_amostra.tex"),
-    "Composição do painel porto--mês (ANTAQ, 2010--2026)", "tab:amostra",
-    notas = paste("Fonte: Estatístico Aquaviário da ANTAQ, elaboração própria.",
-                  "``Porto Público'' corresponde a Porto Organizado e",
-                  "``Porto Privado (TUP)'' a Terminal Autorizado no cadastro da Agência."))
+    "Composition of the port--month panel (ANTAQ, 2010--2026)", "tab:amostra", escape = FALSE,
+    notas = paste("Source: ANTAQ waterway statistics, own elaboration. ``Public port'' is Porto Organizado and",
+                  "``Private terminal'' is Terminal Autorizado in the agency's registry."))
 
   # ---- Tabela 2: estatísticas dos tempos operacionais ----
-  vars <- c(t1_mediana_h = "$T_1$ espera para atracação",
-            t3_mediana_h = "$T_3$ operação",
-            ta_mediana_h = "$T_A$ atracado",
-            te_mediana_h = "$T_E$ estadia",
-            t1_iqr_h     = "IIQ de $T_1$ (previsibilidade)")
+  vars <- c(t1_mediana_h = "$T_1$ waiting for berth",
+            t3_mediana_h = "$T_3$ operation",
+            ta_mediana_h = "$T_A$ at berth",
+            te_mediana_h = "$T_E$ total stay",
+            t1_iqr_h     = "IQR of $T_1$ (predictability)")
   est <- rbindlist(lapply(names(vars), function(v) {
     x <- painel[[v]]; x <- x[is.finite(x)]
-    data.table(Variável = vars[[v]], `Obs.` = length(x),
-               Média = round(mean(x), 1), `D.P.` = round(sd(x), 1),
-               P25 = round(quantile(x, .25), 1), Mediana = round(median(x), 1),
+    data.table(Variable = vars[[v]], `Obs.` = length(x),
+               Mean = round(mean(x), 1), `S.D.` = round(sd(x), 1),
+               P25 = round(quantile(x, .25), 1), Median = round(median(x), 1),
                P75 = round(quantile(x, .75), 1))
   }))
   tabela_tex(est, file.path(DIR_TAB, "tab02_tempos.tex"),
-    "Tempos operacionais no painel porto--mês (horas)", "tab:tempos",
+    "Operational times in the port--month panel (hours)", "tab:tempos",
     align = "lrrrrrr", escape = FALSE,
-    notas = paste("Cada observação é a mediana (ou o intervalo interquartílico)",
-                  "das atracações com movimentação de carga do porto no mês.",
-                  "Definições oficiais em ANTAQ: $T_A=T_2+T_3+T_4$ e $T_E=T_1+T_A$."))
+    notas = paste("Each observation is the median (or interquartile range) across the port's cargo-handling",
+                  "vessel calls in the month. Official definitions (ANTAQ): $T_A=T_2+T_3+T_4$ and $T_E=T_1+T_A$."))
 
   # ---- Figura 1: distribuição de T1 por ano (públicos vs TUPs) ----
   p1 <- ggplot(painel[is.finite(t1_mediana_h) & t1_mediana_h < 100],
@@ -170,21 +168,21 @@ descritivas <- function(raiz = RAIZ) {
 
   # ---- Tabela 3: registro de intervenções (coortes datadas) ----
   reg <- data.table(
-    Porto = c("Santos", "Rio de Janeiro", "Vitória", "Pecém e Fortaleza",
+    Port = c("Santos", "Rio de Janeiro", "Vitória", "Pecém e Fortaleza",
               "Recife e Suape", "Belém, Itaqui, Santana, Santarém, Vila do Conde",
               "Manaus"),
-    `Entrada em produção` = c("01/08/2011", "15/08/2011", "10/09/2011", "05/2012",
-                              "07/2012", "03/04/2013", "12/04/2013"),
-    `Ato oficial` = c("Portaria SEP 106/2011", "---", "---", "Portaria SEP (05/2012)",
-                      "Portaria SEP 162/2012", "Portaria SEP 48/2013", "Portaria SEP 52/2013"),
-    Confiança = c("Média", "Média", "Média", "Média", "Média", "Alta", "Alta"))
+    `Production start` = c("2011-08-01", "2011-08-15", "2011-07-13", "2012-04-30",
+                           "2012-06-14", "2013-04-02", "2013-04-11"),
+    `Official act` = c("SEP Ordinance 106/2011", "---", "SEP Ordinance 135/2011", "SEP Ordinance 142/2012",
+                       "SEP Ordinance 162/2012", "SEP Ordinance 48/2013", "SEP Ordinance 52/2013"),
+    Confidence = c("Medium", "Medium", "High", "High", "High", "High", "High"))
   tabela_tex(reg, file.path(DIR_TAB, "tab03_intervencoes.tex"),
-    "Coortes de adoção do Porto Sem Papel", "tab:intervencoes",
+    "Selected adoption cohorts of the Porto Sem Papel single window", "tab:intervencoes",
     align = "llll",
-    notas = paste("Data de tratamento é a entrada em produção, nunca o anúncio.",
-                  "Confiança ``Alta'' exige ato oficial datado com íntegra obtida;",
-                  "``Média'' indica fontes oficiais convergentes sem íntegra localizada.",
-                  "Protocolo completo em \\texttt{docs/intervention\\_registry\\_protocol.md}."))
+    notas = paste("Treatment date is the date of the ordinance disciplining mandatory use (production), never the announcement.",
+                  "``High'' requires a dated official act with full text obtained from the Official Gazette;",
+                  "``Medium'' indicates convergent official sources without the full text. The complete registry",
+                  "(23 dated ports, 9 ordinances) is in \\texttt{data/metadata/psp\\_portarias\\_dou.csv}."))
 
   # ---- Tabela 4: qualidade dos dados ----
   qual <- as.data.table(dbGetQuery(con, "
@@ -199,13 +197,13 @@ descritivas <- function(raiz = RAIZ) {
     LEFT JOIN cargo_by_call  c USING (id_atracacao)
     WHERE pc.flag_mov_carga
     GROUP BY 1 ORDER BY 1"))
-  setnames(qual, c("Ano", "Atracações", "\\% com $T_1$", "\\% com $T_2$--$T_4$", "\\% com carga"))
+  qual[, Atracacoes := format(Atracacoes, big.mark = ",")]
+  setnames(qual, c("Year", "Vessel calls", "\\% with $T_1$", "\\% with $T_2$--$T_4$", "\\% with cargo"))
   tabela_tex(qual, file.path(DIR_TAB, "tab04_qualidade.tex"),
-    "Cobertura das variáveis por ano", "tab:qualidade", align = "lrrrr",
-    notas = paste("A decomposição $T_2$--$T_4$ é menos completa nos primeiros anos;",
-                  "$T_1$, $T_A$ e $T_E$ são praticamente universais.",
-                  "As identidades $T_A=T_2+T_3+T_4$ e $T_E=T_1+T_A$ não apresentam",
-                  "violação real em nenhum ano da série."))
+    "Variable coverage by year", "tab:qualidade", align = "lrrrr", escape = FALSE,
+    notas = paste("The documentary decomposition $T_2$--$T_4$ is less complete in the early years;",
+                  "$T_1$, $T_A$ and $T_E$ are almost universal. The identities $T_A=T_2+T_3+T_4$ and",
+                  "$T_E=T_1+T_A$ show no genuine violation in any year."))
 
   cat("figuras:", length(list.files(DIR_FIG, "\\.pdf$")), "| tabelas:",
       length(list.files(DIR_TAB, "\\.tex$")), "\n")

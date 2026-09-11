@@ -1,8 +1,28 @@
 \section{The Brazilian Port Digital Transformation Observatory}
 \label{sec:observatory}
 
-% ROTEIRO: o artefato (design science) -- camada de integracao em DuckDB,
-% registro curado de intervencoes, auditorias de qualidade, paineis.
-% Dimensoes: pessoas, processos, organizacoes, tecnologia.
+% ROTEIRO (design science; \citet{hevner2004,gregor2013}): o artefato integra
+% fontes operacionais, comerciais e regulatorias num banco auditavel e
+% alimenta tanto a avaliacao causal quanto um painel publico. Dimensoes:
+% pessoas, processos, organizacoes, tecnologia. Descrever os 4 paineis do
+% dashboard (mapa/intervencoes, tempos, qualidade da informacao, exportacao)
+% e a regra "nenhum numero digitado a mao".
 
-\TBG
+\begin{figure}[htbp]
+\centering
+\resizebox{\textwidth}{!}{\input{tikz/fig09_arquitetura}}
+\caption{Architecture of the Observatory: sources, ingestion and validation,
+integration layer, analysis pipeline and outputs, with the socio-technical
+dimensions the artifact is designed to observe.}
+\label{fig:arquitetura}
+\end{figure}
+
+The integration layer holds \Natracacoes\ vessel calls (\Anoinicio--\Anofim),
+\Npainellinhas\ port--month observations and \Nfluxoscomercio\
+customs-unit--partner--month trade flows, alongside a registry of
+digitalisation ordinances with confidence grades. Every number in this
+manuscript is generated from that layer.
+
+\PROSA
+
+\FloatBarrier
