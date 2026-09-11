@@ -168,3 +168,9 @@ Formato: data — decisão — justificativa — alternativas rejeitadas.
     TUPs); H11 integrada como resultado; SFA converge só em portos públicos
     com meio-normal (translog preferida; PSP reduz ineficiência sem
     significância). `frontier::sfa` BC95 degenerado — descartado.
+32. **11/09 — passos 2–5**: PPML/frete = nulos (H7 sem suporte); mecanismo
+    da cabotagem = navios recorrentes; placebo de antecipação DERRUBA T2 na
+    cabotagem (pré-tendência) e preserva T4; Honest DiD inconclusivo;
+    fronteira porto-mês converge (PSP −0,29 na variância da ineficiência,
+    sem cluster) e DEA corrobora (ρ=0,68); TEU/contêiner degenera.
+    Tabela `port_call_vessel` (IMO) adicionada ao DuckDB.

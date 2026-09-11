@@ -546,3 +546,74 @@ artigo tem, portanto, quatro seções empíricas com resultados reais — três
 nulos/frágeis honestos e um positivo — o que é uma contribuição legítima
 sobre "digitalização sem redesenho" (H3) e sobre o que a estatística
 oficial consegue medir.
+
+---
+
+# Adendo — 2026-09-11: passos 2–5 executados
+
+## A28. Comércio: PPML e frete (`R/16`, `scripts/20`, estimando E5)
+
+URF × país × mês, 11 URFs de portos datados, 2010-01..2013-03, FE par
+(URF-país) e país-mês, cluster por porto:
+
+| Outcome | β | e.p. | p |
+|---|---|---|---|
+| FOB exportação (PPML) | −0,03 | 0,05 | 0,61 |
+| kg exportação (PPML) | −0,11 | 0,04 | 0,00 |
+| FOB importação (PPML) | 0,00 | 0,05 | 0,96 |
+| kg importação (PPML) | −0,01 | 0,04 | 0,72 |
+| **frete/FOB importação (log)** | **0,00** | 0,02 | 0,88 |
+| frete importação (PPML, FOB como controle) | −0,01 | 0,03 | 0,71 |
+
+**Nenhum efeito sobre valor comercializado nem sobre o custo de frete
+observado.** O único coeficiente "significativo" (peso exportado −11%) tem 11
+clusters e não deve ser lido como efeito. H7 não encontra suporte.
+
+## A29. Mecanismo da cabotagem (`scripts/21`): navios recorrentes
+
+Tabela `port_call_vessel` criada (IMO; 58% das atracações têm IMO).
+Recorrente = ≥3 escalas do mesmo navio no porto nos 12 meses anteriores
+(65% das escalas de cabotagem; 38% no longo curso).
+
+| Navegação | Recorrente | $T_2$ DiD (p WCB) | $T_4$ DiD (p WCB) |
+|---|---|---|---|
+| Cabotagem | sim | −0,32 (0,02) | **−0,19 (0,02)** |
+| Cabotagem | não | −0,18 (0,29) | −0,12 (0,19) |
+| Longo curso | sim | −0,03 (0,66) | −0,07 (0,36) |
+| Longo curso | não | −0,07 (0,96) | −0,12 (0,58) |
+
+Consistente com reaproveitamento do DUV padronizado em escalas repetitivas.
+
+## A30. Placebo de antecipação e Honest DiD (`scripts/22`)
+
+Placebo: tratamento deslocado 12 meses antes, estimado só no pré-período
+verdadeiro (deve dar zero):
+
+| Amostra | $T_2$ placebo (p WCB) | $T_4$ placebo (p WCB) |
+|---|---|---|
+| A completa | −0,15 (0,23) | −0,08 (0,30) |
+| Cabotagem | **−0,27 (0,009)** | −0,09 (0,37) |
+
+**O resultado de $T_2$ na cabotagem NÃO sobrevive**: a queda já existe no
+ano anterior à adoção — é pré-tendência. **$T_4$ sobrevive** ao placebo.
+Honest DiD (Rambachan–Roth, magnitudes relativas): intervalos cobrem zero
+já em $\bar M = 0{,}5$ para todos os outcomes — o pré-período é ruidoso
+demais para excluir violações moderadas de tendências paralelas.
+
+**Síntese após os passos 3–5:** o único efeito do PSP sobre tempos que
+resiste a WCB *e* placebo é $T_4$ na cabotagem, concentrado em navios
+recorrentes (−17% a −19%); mesmo ele é sensível a violações moderadas de
+tendências paralelas. $T_1$, $T_2$ agregado, comércio e frete: nulos.
+
+## A31. Fronteira, 2ª passagem (`scripts/23`)
+
+- TEU como output em 7 portos de contêiner: **degenera** (e.p. ≈ 0) —
+  amostra pequena demais; descartado por ora.
+- **Painel porto-mês** (34 públicos, 5.741 obs): elasticidades 0,78
+  (horas de berço) e 0,38 (berços), tendência +1,7%/ano; **PSP −0,29
+  (z = −6,2)** e contêiner −2,0 na variância da ineficiência. Ressalva
+  obrigatória: erros não agrupados por porto (i.i.d. entre meses) → z
+  superestimado; leitura como associação condicional, não causal.
+- **DEA VRS** (output): TE média 0,19 → 0,20 pré/pós; correlação 0,68 com
+  a SFA translog — as duas abordagens ordenam os portos de modo parecido.
+- Pendente: calado/capacidade (host `web.antaq.gov.br` do SDP fora do ar).
