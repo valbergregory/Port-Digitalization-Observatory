@@ -482,3 +482,67 @@ dizer. Três caminhos, em ordem de rendimento esperado:
 
 Registro: Vitória agora com íntegra (Portaria SEP 135, 13/07/2011);
 varredura jan–mar/2013 em curso para os 13 públicos restantes.
+
+---
+
+# Adendo — 2026-09-10 (fechamento): os três rumos + início da fronteira
+
+## A23. Heterogeneidade por tipo de navegação (`scripts/17`)
+
+Desenho A, 2010-01..2013-03, Sun-Abraham c/ controles; DiD estático + WCB:
+
+| Navegação | Outcome | sunab ATT | pré | DiD β | p WCB |
+|---|---|---|---|---|---|
+| Longo curso | $T_2$ | −0,28 (0,13) | +0,15 | −0,05 | 0,88 |
+| Longo curso | $T_4$ | −0,32 (0,16) | +0,17 | −0,10 | 0,45 |
+| **Cabotagem** | $T_2$ | −0,30 (0,06) | +0,20 | **−0,26** | **0,10** |
+| **Cabotagem** | $T_4$ | −0,33 (0,03) | +0,07 | **−0,17** | **0,04** |
+| Interior | $T_2$ | +0,29 (0,06) | +0,15 | +0,11 | 0,31 |
+| Interior | $T_4$ | +0,39 (0,14) | −0,30 | +0,68 | 0,19 |
+
+**Contra a predição** (mais anuentes no longo curso → efeito maior), o sinal
+mais nítido está na **cabotagem**: $T_4$ −17% (p_wcb 0,04) e $T_2$ −26%
+(p_wcb 0,10), com pré-tendência de $T_4$ plana (+0,07). Longo curso tem
+pontos negativos no sunab mas o DiD estático é ≈0 e nada passa a WCB.
+Interpretação a testar: escalas de cabotagem são repetitivas (mesmos navios,
+mesmas rotas) — o DUV padronizado é reutilizado; no longo curso o gargalo
+documental pode ser a Receita (fora do fluxo temporal do DUV). $T_1$ nulo em
+todos. Interior piora — atenção: só 10 portos.
+
+## A24. Horizonte longo 2010–2026 (`scripts/18`, TUPs como referência)
+
+$T_2$: ATT ≈ 0 em todos os horizontes (0–11: +0,01; 12–23: 0,00; 24–35:
+−0,01; 36–59: 0,00). $T_4$: −0,02 a −0,04 (e.p. ≈0,10). Idêntico sem
+2020–21. **Sem aprendizagem (H6 rejeitada neste desenho)** e sem efeito
+médio de longo prazo contra TUPs. Fig08.
+
+## A25. H11 integrada como resultado (`scripts/16`, tab06, §10.4)
+
+Efeito médio do PSP sobre Pr($T_4$ registrado): +0,29 (A, p=0,32), +0,14
+(B, p=0,22) — média imprecisa que esconde o salto de Santos (0→93%) e Rio
+(27→71%). Entrou no manuscrito como subseção de resultados + §14.1.
+
+## A26. Fronteira estocástica iniciada (`R/13`, `scripts/19`)
+
+Painel porto-ano 2010–2025. Primeira tentativa (235 portos, truncada-normal
+com determinantes) **não convergiu** (e.p. infinitos) — heterogeneidade
+tecnológica demais. Reespecificação em **34 portos públicos**, meio-normal
+com heterocedasticidade da ineficiência (sfaR): converge. Cobb-Douglas:
+elasticidade horas-de-berço 1,00, berços 0,21, tendência +2,2%/ano,
+γ=0,87. **Translog preferida** (LR=30,6, p<0,001). Determinantes da
+variância da ineficiência: contêiner −1,9 a −2,5 (p<0,001); **PSP −0,15
+(CD, p=0,37) / −0,24 (translog, p=0,14)** — sinal de H2, sem significância.
+TE média 0,44 pré vs 0,41 pós (descritivo). `frontier::sfa` BC95 degenerou
+(γ→1): descartado. Pendências: calado/capacidade (cadastro SDP), TEU como
+segundo output (fronteira separada para contêiner), DEA como robustez.
+
+## A27. Leitura de fechamento
+
+O PSP não reduz tempos de forma robusta no agregado; o efeito documental
+concentra-se na cabotagem (onde a WCB passa a 5–10%), não há dinâmica de
+longo prazo, e a fronteira sugere (sem confirmar) menor ineficiência
+pós-PSP. O achado mais forte segue sendo o de **informação** (H11). O
+artigo tem, portanto, quatro seções empíricas com resultados reais — três
+nulos/frágeis honestos e um positivo — o que é uma contribuição legítima
+sobre "digitalização sem redesenho" (H3) e sobre o que a estatística
+oficial consegue medir.

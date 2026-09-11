@@ -162,3 +162,9 @@ Formato: data — decisão — justificativa — alternativas rejeitadas.
     longo com TUPs e o achado de informação (H11). Vitória datada por íntegra
     (Portaria SEP 135/2011). Precedência do DOU sobre notícias em
     `montar_coortes`.
+31. **Fechamento 10/09 (noite)**: rumos 1–3 executados e fronteira iniciada.
+    Heterogeneidade contraria o mecanismo previsto (cabotagem responde,
+    longo curso não); horizonte longo até 2026 = zero (H6 rejeitada com
+    TUPs); H11 integrada como resultado; SFA converge só em portos públicos
+    com meio-normal (translog preferida; PSP reduz ineficiência sem
+    significância). `frontier::sfa` BC95 degenerado — descartado.

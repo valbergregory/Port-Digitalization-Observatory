@@ -1,8 +1,15 @@
 \section{Results}
 \label{sec:results}
 
-% ROTEIRO: efeito sobre T1 e demais tempos; efeitos por coorte; dinamica.
-% Nada aqui pode ser escrito antes da estimacao.
+% ROTEIRO (reorientado em 2026-09-10 apos a inferencia robusta com 23 portos):
+% 10.1 tempos operacionais -- nenhum componente com efeito robusto; T2 com
+%      ponto negativo consistente (-11% a -21%) mas p_wcb 0,11-0,31;
+% 10.2 heterogeneidade por tipo de navegacao (longo curso vs cabotagem);
+% 10.3 horizonte longo ate 2026 com TUPs (T2/T4);
+% 10.4 efeitos sobre a INFORMACAO (H11) -- o achado forte.
+
+\subsection{Operational times}
+\label{sec:res_times}
 
 \begin{figure}[htbp]
 \centering
@@ -11,6 +18,33 @@
 mark production start dates. Descriptive evidence only.}
 \label{fig:cohorts}
 \end{figure}
+
+\TBG
+
+\subsection{Heterogeneity by navigation type}
+\label{sec:res_nav}
+% Fonte: outputs/tables/heterogeneity_navigation.csv
+\TBG
+
+\subsection{Long-run dynamics, 2010--2026}
+\label{sec:res_long}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig08_horizonte_longo.pdf}
+\caption{Long-horizon event study for documentary waiting times ($T_2$, $T_4$),
+private terminals as never-treated reference. Exploratory.}
+\label{fig:longrun}
+\end{figure}
+
+\TBG
+
+\subsection{Effects on information completeness}
+\label{sec:res_info}
+
+% H11: o resultado empiricamente mais forte do PSP e sobre a completude da
+% informacao operacional reportada ao regulador, nao sobre os tempos.
+\input{tables/tab06_cobertura_efeito}
 
 \TBG
 
