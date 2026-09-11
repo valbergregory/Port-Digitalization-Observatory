@@ -61,6 +61,38 @@
       "Maintainer": "Brantly Callaway <brantly.callaway@uga.edu>",
       "Repository": "CRAN"
     },
+    "Benchmarking": {
+      "Package": "Benchmarking",
+      "Version": "0.33",
+      "Source": "Repository",
+      "Date": "2025-02-18",
+      "Type": "Package",
+      "Title": "Benchmark and Frontier Analysis Using DEA and SFA",
+      "Author": "Peter Bogetoft [aut], Lars Otto [aut, cre]",
+      "Authors@R": "c(person(given = \"Peter\", family = \"Bogetoft\", role = \"aut\"), person(given = \"Lars\", family = \"Otto\", role = c(\"aut\", \"cre\"), email = \"larsot23@gmail.com\"))",
+      "Maintainer": "Lars Otto <larsot23@gmail.com>",
+      "Depends": [
+        "lpSolveAPI",
+        "ucminf",
+        "quadprog"
+      ],
+      "Imports": [
+        "methods",
+        "stats",
+        "graphics",
+        "grDevices",
+        "Rcpp"
+      ],
+      "LinkingTo": [
+        "Rcpp"
+      ],
+      "Encoding": "UTF-8",
+      "Description": "Methods for frontier analysis, Data Envelopment Analysis (DEA), under different technology assumptions (fdh, vrs, drs, crs, irs, add/frh, and fdh+), and using different efficiency measures (input based, output based, hyperbolic graph, additive, super, and directional efficiency). Peers and slacks are available, partial price information can be included, and optimal cost, revenue and profit can be calculated. Evaluation of mergers is also supported.  Methods for graphing the technology sets are also included. There is also support for comparative methods based on Stochastic Frontier Analyses (SFA) and for convex nonparametric  least squares of convex functions (STONED). In general, the methods  can be used to solve not only standard models, but also many other  model variants. It complements the book, Bogetoft and Otto, Benchmarking with DEA, SFA, and R, Springer-Verlag, 2011, but can of course also be used as a stand-alone package.",
+      "License": "GPL (>= 2)",
+      "LazyLoad": "yes",
+      "NeedsCompilation": "yes",
+      "Repository": "CRAN"
+    },
     "CVXR": {
       "Package": "CVXR",
       "Version": "1.9.2",
@@ -4055,6 +4087,23 @@
       ],
       "Enhances": [],
       "License": "GPL-2 | GPL-3",
+      "NeedsCompilation": "yes",
+      "Repository": "CRAN"
+    },
+    "quadprog": {
+      "Package": "quadprog",
+      "Version": "1.5-8",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Functions to Solve Quadratic Programming Problems",
+      "Date": "2019-11-20",
+      "Author": "S original by Berwin A. Turlach <Berwin.Turlach@gmail.com>  R port by Andreas Weingessel <Andreas.Weingessel@ci.tuwien.ac.at> Fortran contributions from Cleve Moler (dposl/LINPACK and (a modified version of) dpodi/LINPACK)",
+      "Maintainer": "Berwin A. Turlach <Berwin.Turlach@gmail.com>",
+      "Description": "This package contains routines and documentation for solving quadratic programming problems.",
+      "Depends": [
+        "R (>= 3.1.0)"
+      ],
+      "License": "GPL (>= 2)",
       "NeedsCompilation": "yes",
       "Repository": "CRAN"
     },
