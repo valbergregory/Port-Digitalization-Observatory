@@ -31,6 +31,7 @@ wild_cluster_boot <- function(fit, B = 4999, seed = 20260903) {
   t_obs <- coeftable(fit$m)["D", "t value"]
   # modelo restrito (D = 0 imposto): mesma formula sem D
   m_r <- feols(fit$f_r, data = d)
+  d <- d[obs(m_r)]                 # feols remove singletons/NA: alinhar linhas
   d[, `:=`(yhat_r = fitted(m_r), u_r = resid(m_r))]
   cl <- d$cdtup; G <- uniqueN(cl); idx <- match(cl, unique(cl))
   y_orig <- all.vars(f)[1]
