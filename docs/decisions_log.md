@@ -186,3 +186,12 @@ Formato: data — decisão — justificativa — alternativas rejeitadas.
     tempos por porto, cobertura de T4, exportação de amostras) sobre o
     DuckDB read-only; tabela `ports` (coordenadas) criada. `tabela_tex`
     ganhou `escape = FALSE` para células com LaTeX.
+34. **Pedido LAI enviado pelo pesquisador em 11/09/2026** — Fala.BR,
+    protocolo **55001.000806/2026-27**, destinatário MPor, prazo de resposta
+    **05/10/2026** (prorrogável por 10 dias). Objeto: portarias SEP do Porto
+    Sem Papel para os 13 portos sem íntegra + Santos/Rio 2011 + planilha de
+    implantação. Ao receber: salvar em
+    `data/documents/interventions/PSP/dou/falabr/`, rodar
+    `python/parse_dou_hits.py` e reestimar (scripts 13–15, 17–22). Se
+    "inexistente"/"não localizada": recurso em 10 dias citando as nove
+    portarias já obtidas.
