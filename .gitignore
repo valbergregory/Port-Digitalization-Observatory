@@ -44,6 +44,9 @@ article/latex/*.log
 article/latex/*.out
 article/latex/*.toc
 article/latex/main.pdf
+article/latex/title_page.pdf
+article/latex/highlights.pdf
+article/latex/*.spl
 # figuras/tabelas são cópias geradas pelo pipeline (fonte: outputs/)
 article/latex/figures/
 article/latex/tables/

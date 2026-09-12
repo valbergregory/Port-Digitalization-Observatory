@@ -249,3 +249,21 @@ Formato: data — decisão — justificativa — alternativas rejeitadas.
     `tests/testthat/test-coortes-psp.R` (precedência DOU > notícia, datas
     de produção, 13 públicos fora), `test-robustez.R` (Webb, WCB e
     permutação em painel simulado, determinismo da semente).
+40. **Periódico-alvo: Government Information Quarterly (12/09, decisão do
+    pesquisador)**. Critérios: métrica e reconhecimento simultâneos em
+    Economia, SI e Engenharia de Pesca — JIF 10,8 / CiteScore 23,9 (página
+    oficial da revista), ABS 3, Qualis A1 por percentil em todas as áreas
+    (nenhum dos três candidatos é da área pesqueira); IS Frontiers (JIF ≈ 6,
+    ABS 3) e Maritime Economics & Logistics (JIF ≈ 4–5, ABS 2) ficam como
+    planos B e C (a MEL como casa natural de um segundo artigo com o eixo
+    econômico). Aderência: o eixo (b) — janela única muda o que o Estado
+    registra — é o núcleo editorial da GIQ. Consequências no esqueleto
+    (Guide for Authors lido em 12/09): `main.tex` na classe `elsarticle`
+    (modo *review*, autor-ano, `elsarticle-harv`), anonimizado; folha de
+    rosto separada (`title_page.tex`) com CRediT, interesses, financiamento,
+    declaração de IA generativa e disponibilidade de dados; `highlights.tex`
+    (3–5 × ≤ 85 caracteres); abstract ≤ 250 palavras; 1–7 keywords;
+    **fronteira estocástica (ex-§8) → Apêndice B e custos de comércio
+    (ex-§15) → Apêndice C**; nova §14 "Implications for digital government".
+    Corpo renumerado (identificação §8, resultados §9, … conclusão §16).
+    Guia de redação com §0 sobre a GIQ. Compila: 24 páginas em modo review.

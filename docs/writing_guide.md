@@ -9,6 +9,42 @@ o que cada peça mostra e sugere uma linha de argumento; a prosa é sua.
 
 ---
 
+## 0. Periódico-alvo: Government Information Quarterly (decisão 40, 12/09)
+
+O que muda na escrita, pelo *Guide for Authors* da GIQ (lido em 12/09/2026):
+
+- **Enquadramento**: governo digital, janela única como serviço público de
+  informação, qualidade da informação estatal. O leitor da GIQ quer saber o
+  que a digitalização fez com o *registro* e com o *processo* administrativo;
+  a econometria portuária é meio, não fim. Por isso a fronteira (Apêndice B)
+  e os custos de comércio (Apêndice C) saíram do corpo do texto.
+- **Abstract ≤ 250 palavras**, sem referências e sem siglas não definidas.
+  A ideia da §2 abaixo (≈ 180 palavras) cabe.
+- **Highlights**: 3–5 itens, **cada um com no máximo 85 caracteres** (com
+  espaços), em arquivo separado — `article/latex/highlights.tex` já traz o
+  que cada item deve dizer e as macros que o sustentam.
+- **1–7 keywords**, sem "and"/"of" (as seis em `main.tex` podem ser trocadas).
+- **Revisão duplamente anônima**: nada que identifique o autor no
+  `main.tex` (nem agradecimentos, nem "our previous work", nem o link do
+  GitHub no corpo). Tudo isso está em `article/latex/title_page.tex`, com as
+  declarações obrigatórias (interesses, financiamento, CRediT, IA
+  generativa, disponibilidade de dados) — **revise a declaração de IA**.
+- **Referências APA 7** (a classe `elsarticle-harv` faz o autor-ano; a
+  produção da Elsevier converte). Cite como `\citep{}` / `\citet{}`.
+- **Seções numeradas** 1, 1.1, 1.1.1; apêndices A, B, C (Eq. (B.1)).
+- Numeração atual do corpo: 1 Introdução · 2 Contexto institucional ·
+  3 Digitalização portuária no Brasil · 4 Teoria · 5 Observatório ·
+  6 Dados · 7 Medindo a digitalização · 8 Identificação · 9 Resultados ·
+  10 Mecanismos · 11 Heterogeneidade · 12 Robustez · 13 Contribuições de
+  SI · 14 Implicações para governo digital · 15 Limitações · 16 Conclusão ·
+  Apêndices A (estimandos/registro), B (fronteira), C (comércio e frete).
+- Sugestão de abertura (um parágrafo, na sua voz): a promessa da janela
+  única é "menos papel, menos tempo, menos custo"; o que os dados mostram
+  primeiro é "mais registro" — e isso muda como qualquer avaliação de
+  governo digital deve ser feita.
+
+---
+
 ## 1. A história em um parágrafo
 
 O Brasil implantou entre 2011 e 2013, porto a porto, uma janela única
@@ -209,23 +245,24 @@ Não existe Tabela 5 no manuscrito (tab05 é um CSV auxiliar de cobertura).
 
 ## 9. Como contar os resultados (ordem do eixo b)
 
-1. **§10.1 Informação.** Abra com a Figura 7 e a Tabela 6: o sistema mudou
+1. **§9.1 Informação.** Abra com a Figura 7 e a Tabela 6: o sistema mudou
    o que é registrado antes de mudar o que é medido. Diga explicitamente
    que o salto de Santos coincide com a entrada do PSP e que os demais
    saltos não — por isso o efeito médio é impreciso e a leitura correta é
    de heterogeneidade na qualidade da informação (Wang & Strong 1996).
    Consequência metodológica: análises de T2/T4 restritas a cobertura
    estável.
-2. **§10.2 Tempos.** Tabela 7: nenhum efeito robusto. Enfatize os três p e
+2. **§9.2 Tempos.** Tabela 7: nenhum efeito robusto. Enfatize os três p e
    que os pontos negativos de T2 (−10% a −21%) não sobrevivem.
-3. **§10.3 Cabotagem recorrente.** Tabela 8 + Tabela 9: o único efeito que
+3. **§9.3 Cabotagem recorrente.** Tabela 8 + Tabela 9: o único efeito que
    passa WCB e placebo; explique o mecanismo (DUV reaproveitado em escalas
    repetitivas; no longo curso o gargalo documental está na Receita, fora
    do fluxo temporal do DUV) e a fragilidade (Honest DiD).
-4. **§10.4 Longo prazo.** Figura 8: zero até 2026; a janela única não gera
+4. **§9.4 Longo prazo.** Figura 8: zero até 2026; a janela única não gera
    aprendizagem mensurável nos tempos.
-5. **§8 e §15.** Fronteira (associação negativa com a ineficiência, sem
-   causalidade) e comércio/frete (nulos).
+5. **Apêndices B e C** (fronteira: associação negativa com a ineficiência,
+   sem causalidade; comércio/frete: nulos). No corpo, a §14 (implicações
+   para governo digital) só os cita como limites da promessa da janela única.
 
 ## 10. Frases de cautela que devem aparecer
 
@@ -240,14 +277,14 @@ Não existe Tabela 5 no manuscrito (tab05 é um CSV auxiliar de cobertura).
   reflects infrastructure differences."
 - "Trade estimates rest on eleven customs units mapped to ports."
 
-## 11. Limitações a listar (§16)
+## 11. Limitações a listar (§15)
 
 Pré-período curto para a coorte de 2011; todos os públicos tratados até
 2013 (longo prazo só contra TUPs); 13 portos sem íntegra; URF ≠ porto;
 reporte de T2/T4 endógeno ao tratamento; sem calado/capacidade; Honest DiD
 inconclusivo; TUPs estruturalmente diferentes.
 
-## 12. Contribuição de SI (§14) — os três argumentos
+## 12. Contribuição de SI (§13) — os três argumentos
 
 1. **Artefato** (Hevner et al. 2004; Gregor & Hevner 2013): observatório
    aberto, reproduzível, que liga fontes heterogêneas a estimandos

@@ -55,7 +55,9 @@ R-first, com SQL/DuckDB como camada de dados e Python como auxiliar:
   cabotagem recorrente (T4, −17 %, *p* WCB 0,02); PPML e frete ad valorem
   nulos; fronteira estocástica = associação; **achado central: a digitalização
   muda o que se registra** (cobertura de T4 em Santos 0 % → 93 %).
-- **Manuscrito**: 17 páginas, 11 tabelas, 9 figuras, 32 macros, 34 referências
+- **Manuscrito**: periódico-alvo **Government Information Quarterly** (classe
+  `elsarticle`, revisão duplamente anônima: `main.tex` + `title_page.tex` +
+  `highlights.tex`); 11 tabelas, 9 figuras, 32 macros, 34 referências
   conferidas no Crossref; prosa a cargo do autor (marcadores `\PROSA`).
 - **Testes**: `pytest tests/python` (parser do DOU) e `testthat` (registro,
   coortes, WCB/permutação) — 99 expectativas.

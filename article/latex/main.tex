@@ -1,24 +1,31 @@
 %==============================================================================
-% Port Digitalization, Efficiency and Trade Costs: Evidence from Brazilian Ports
+% Digitalizing Port Processes: Design and Causal Evaluation of a Port
+% Transformation Observatory
 %
-% Esqueleto do manuscrito. REGRA DO PROJETO: nenhum resultado é digitado à mão.
-% Todo número no texto vem de \input{numbers.tex}, gerado pelo pipeline R
-% (scripts/12_export_overleaf.R) a partir do DuckDB. Resultados ainda não
-% estimados aparecem como [RESULT TO BE GENERATED].
+% Periódico-alvo: Government Information Quarterly (Elsevier) — decisão 40, 12/09/2026.
+% Formato conforme o Guide for Authors da GIQ:
+%   - classe elsarticle (LaTeX aceito), citações autor-ano (APA 7 na produção);
+%   - revisão DUPLAMENTE ANÔNIMA: este arquivo NÃO contém autor/afiliação/
+%     agradecimentos — tudo isso fica em title_page.tex (arquivo separado);
+%   - abstract <= 250 palavras; 1–7 keywords; highlights 3–5 itens <= 85 caracteres
+%     (também em arquivo separado: highlights.tex);
+%   - seções numeradas; apêndices A, B, C com Eq. (A.1) etc.
 %
-% Compilação: pdflatex -> bibtex -> pdflatex x2  (ou apenas "Recompile" no Overleaf)
+% REGRA DO PROJETO: nenhum resultado é digitado à mão. Todo número vem de
+% \input{numbers.tex}, gerado pelo pipeline (targets::tar_make()) a partir do
+% DuckDB. Resultados ainda não estimados aparecem como [RESULT TO BE GENERATED].
+%
+% Compilação: pdflatex -> bibtex -> pdflatex x2 (ou "Recompile" no Overleaf).
+% Opções: [review] = espaço duplo + numeração de linhas (submissão);
+%         trocar por [preprint] para a versão de leitura em coluna única.
 %==============================================================================
-\documentclass[12pt,a4paper]{article}
+\documentclass[review,authoryear,12pt]{elsarticle}
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{lmodern}
 \usepackage{microtype}
-
-\usepackage[margin=1in]{geometry}
-\usepackage{setspace}
-\onehalfspacing
 
 \usepackage{amsmath,amssymb}
 \usepackage{booktabs}
@@ -32,42 +39,51 @@
 \captionsetup{font=small,labelfont=bf}
 \usepackage[hidelinks]{hyperref}
 \usepackage[capitalise,noabbrev]{cleveref}
-\usepackage{natbib}
-\bibliographystyle{apalike}
+\crefname{appendix}{Appendix}{Appendices}
+
+\journal{Government Information Quarterly}
+\bibliographystyle{elsarticle-harv}
 
 % Macros com números do pipeline (NUNCA editar à mão: é gerado)
 \input{numbers.tex}
 
-% Marcador visível para o que ainda não foi estimado
+% Marcadores visíveis
 \newcommand{\TBG}{\textbf{[RESULT TO BE GENERATED]}}
 \newcommand{\PROSA}{\textit{[prose to be written by the author from the numbers above]}}
 
-% Titulo orientado a SI (decisao do pesquisador, 11/09: eixo b — informacao no centro).
-% Alternativa original: "Port Digitalization, Efficiency and Trade Costs: Evidence from Brazilian Ports"
-\title{\textbf{Digitalizing Port Processes: Design and Causal Evaluation\\
-of a Port Transformation Observatory}}
-\author{Valber Gregory\thanks{Contact: valber.gregory@gmail.com. Replication
-materials: \url{https://github.com/valbergregory/Port-Digitalization-Observatory}.}}
-\date{This version: \today}
-
 \begin{document}
-\maketitle
+
+\begin{frontmatter}
+
+% Título orientado a governo digital / SI (decisão do pesquisador, 11/09: eixo b).
+\title{Digitalizing Port Processes: Design and Causal Evaluation\\
+of a Port Transformation Observatory}
+
+% Revisão duplamente anônima: SEM \author, \affiliation ou agradecimentos aqui.
+% Ver title_page.tex.
 
 \begin{abstract}
-\noindent
-% ATENÇÃO: abstract a ser escrito pelo autor após os resultados.
+% GIQ: máximo de 250 palavras; sem referências; sem abreviaturas não definidas.
+% Ideia de abstract em docs/writing_guide.md §2 (usa as macros de numbers.tex).
 \TBG
-\medskip
-
-\noindent \textbf{Keywords:} port digitalization; maritime single window;
-trade costs; staggered difference-in-differences; stochastic frontier;
-information systems. \\
-\textbf{JEL:} L92, F14, D24, O33.
 \end{abstract}
 
-\clearpage
-\tableofcontents
-\clearpage
+% GIQ: 3 a 5 itens, cada um com no máximo 85 caracteres (com espaços).
+% Cópia editável em highlights.tex (arquivo separado exigido na submissão).
+\begin{highlights}
+\item \TBG
+\item \TBG
+\item \TBG
+\end{highlights}
+
+% GIQ: 1 a 7 keywords, em inglês; evitar "and"/"of".
+\begin{keyword}
+digital government \sep maritime single window \sep information quality \sep
+port digitalization \sep staggered difference-in-differences \sep
+design science
+\end{keyword}
+
+\end{frontmatter}
 
 \input{sections/01_introduction}
 \input{sections/02_institutional_background}
@@ -76,7 +92,6 @@ information systems. \\
 \input{sections/05_observatory}
 \input{sections/06_data}
 \input{sections/07_measuring_digitalization}
-\input{sections/08_efficiency_model}
 \input{sections/09_identification}
 \input{sections/10_results}
 \input{sections/11_mechanisms}
@@ -87,14 +102,19 @@ information systems. \\
 \input{sections/16_limitations}
 \input{sections/17_conclusion}
 
+% Declarações exigidas pela GIQ ficam na folha de rosto (title_page.tex):
+% competing interests, funding, CRediT, generative AI, data availability.
+
 \clearpage
-% RASCUNHO: lista todas as entradas do .bib para o autor ver o que esta
-% disponivel. REMOVER \nocite{*} na versao de submissao.
+% RASCUNHO: lista todas as entradas do .bib para o autor ver o que está
+% disponível. REMOVER \nocite{*} na versão de submissão.
 \nocite{*}
 \bibliography{refs}
 
 \clearpage
 \appendix
 \input{sections/A1_appendix}
+\input{sections/B_efficiency_frontier}
+\input{sections/C_trade_costs}
 
 \end{document}

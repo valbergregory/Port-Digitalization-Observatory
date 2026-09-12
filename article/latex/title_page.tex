@@ -1,0 +1,82 @@
+%==============================================================================
+% TITLE PAGE — arquivo SEPARADO exigido pela revisão duplamente anônima da GIQ.
+% Contém tudo o que NÃO pode aparecer em main.tex: autor, afiliação, endereço
+% do autor correspondente, agradecimentos e as declarações obrigatórias.
+% Compilar isoladamente: pdflatex title_page.tex
+%==============================================================================
+\documentclass[12pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\begin{center}
+{\Large\bfseries Digitalizing Port Processes: Design and Causal Evaluation\\
+of a Port Transformation Observatory}
+
+\vspace{1em}
+Valber Gregory\textsuperscript{a,*}
+
+\vspace{0.5em}
+\textsuperscript{a}\,% AFILIAÇÃO COMPLETA (departamento, instituição, endereço postal, país)
+{[Department, Institution, Postal address, City, Country]}
+
+\textsuperscript{*}\,Corresponding author. E-mail: valber.gregory@gmail.com.\\
+% GIQ exige o endereço postal completo do autor correspondente.
+{[Full postal address]}
+\end{center}
+
+\section*{Acknowledgements}
+% GIQ: agradecimentos SOMENTE aqui (nunca no manuscrito anônimo).
+[To be completed by the author.]
+
+\section*{Funding}
+This research did not receive any specific grant from funding agencies in the
+public, commercial, or not-for-profit sectors.
+% Ajustar se houver bolsa/auxílio (agência, número do processo).
+
+\section*{Declaration of competing interests}
+The author declares that he has no known competing financial interests or
+personal relationships that could have appeared to influence the work reported
+in this paper.
+
+\section*{CRediT authorship contribution statement}
+\textbf{Valber Gregory:} Conceptualization, Methodology, Software, Validation,
+Formal analysis, Investigation, Data curation, Writing -- original draft,
+Writing -- review \& editing, Visualization, Project administration.
+
+\section*{Declaration of generative AI and AI-assisted technologies in the writing process}
+% Exigida pela GIQ/Elsevier. Texto conforme a política de IA do projeto
+% (docs/ e política-mestra da trilha de pesquisa): a IA foi usada como
+% assistente de programação e de organização do pipeline; toda a prosa,
+% a interpretação e as decisões científicas são do autor. REVISAR antes de
+% submeter (nome/versão da ferramenta).
+During the preparation of this work the author used Claude (Anthropic) as a
+coding assistant to write and document the data pipeline, the estimation
+scripts and the reproducibility tooling, and to check bibliographic metadata
+against Crossref. The tool was not used to write the text of the manuscript
+or to interpret the results. After using this tool, the author reviewed and
+edited all code and content and takes full responsibility for the content of
+the publication.
+
+\section*{Data availability}
+All data used are public: ANTAQ \emph{Estat\'istico Aquavi\'ario} (vessel
+calls and operational times), Comex Stat (customs-unit trade flows with
+declared freight) and the \emph{Di\'ario Oficial da Uni\~ao} (ordinances dating
+the entry into production of the single window). The complete pipeline
+(DuckDB build, estimation, tables, figures and numeric macros), the
+intervention registry with document sources, the tests and the Observatory
+application are available at
+\url{https://github.com/valbergregory/Port-Digitalization-Observatory}
+(\texttt{targets::tar\_make()} regenerates every number in the manuscript).
+% Na submissão anônima, o link ao GitHub deve ficar SÓ nesta folha de rosto,
+% ou ser substituído por um repositório anonimizado (p. ex. Zenodo/OSF
+% anonymous view) se os editores pedirem.
+
+\end{document}

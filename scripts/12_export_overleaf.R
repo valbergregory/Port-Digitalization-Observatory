@@ -98,7 +98,7 @@ if (file.exists(destino)) file.remove(destino)
 # só os fontes: auxiliares de compilação (aux, log, bbl, fls...) ficam de fora
 arquivos <- list.files(DIR_TEX, recursive = TRUE)
 arquivos <- grep("\\.(tex|bib|pdf|png|cls|sty)$", arquivos, value = TRUE)
-arquivos <- arquivos[!grepl("^main\\.pdf$", arquivos)]
+arquivos <- arquivos[!grepl("^(main|title_page|highlights)\\.pdf$", arquivos)]  # PDFs compilados ficam fora
 antigo <- getwd(); setwd(DIR_TEX)
 utils::zip(destino, arquivos, flags = "-r9Xq")
 setwd(antigo)
