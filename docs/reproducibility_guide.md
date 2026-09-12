@@ -22,7 +22,7 @@ shiny/leaflet/DT (observatório).
 ```powershell
 # a partir de um clone limpo, na raiz do projeto
 & "C:\Program Files\R\R-4.4.3\bin\Rscript.exe" -e "renv::restore()"
-python -m venv .venv; .venv\Scripts\python.exe -m pip install -e .[dev]
+python -m venv .venv; .venv\Scripts\python.exe -m pip install "pypdf>=5" "pytest>=8"   # ver pyproject.toml (não é pacote instalável)
 & "C:\Program Files\R\R-4.4.3\bin\Rscript.exe" scripts\00_check_environment.R
 ```
 
