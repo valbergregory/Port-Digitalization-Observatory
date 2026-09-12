@@ -3,12 +3,14 @@ name = "port-digitalization-observatory"
 version = "0.0.1"
 description = "Auxiliar Python: extração de documentos oficiais, datação de intervenções digitais e (se houver event logs) process mining"
 requires-python = ">=3.13"
-# Instalar somente quando a etapa correspondente for ativada:
-#   uv add pymupdf pypdf          -> extração de PDFs (atos oficiais, DOU)
-#   uv add duckdb polars pyarrow  -> processamento massivo de eventos
-#   uv add pm4py                  -> process mining (SOMENTE com event logs reais)
-#   uv add pytest                 -> testes
-dependencies = []
+# Usado de fato (2026-09-12): pypdf (texto das páginas do DOU) e pytest.
+# Só acrescentar quando a etapa for ativada:
+#   duckdb polars pyarrow  -> processamento massivo de eventos
+#   pm4py                  -> process mining (SOMENTE com event logs reais)
+dependencies = ["pypdf>=5"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests/python"]

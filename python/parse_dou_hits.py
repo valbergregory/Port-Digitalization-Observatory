@@ -21,26 +21,50 @@ RE_PORT = re.compile(
     r".*?(?:nos?\s+(?:portos?\s*organizados?)\s*d[eoa]s?\s*)(.+?)\.\s*O MINISTRO", re.I | re.S)
 RE_MIGR = re.compile(r"migração\s*definitiva\s*dos\s*procedimentos\s*até\s*(\d{1,2})\s*de\s*([a-zç]+)\s*de\s*(\d{4})", re.I)
 
+def norm(s: str) -> str:
+    return "".join(c for c in unicodedata.normalize("NFD", s.lower()) if unicodedata.category(c) != "Mn")
+
+def prazo_migracao(trecho: str, portos: str):
+    """Primeira sentença de migração definitiva que cite um dos portos da portaria
+    (as colunas do DOU se intercalam na extração; 231/2012 tem o art. 3º a ~2.900
+    caracteres do cabeçalho). Sem citação de porto, aceita a primeira até 2.500 chars."""
+    primeiro = norm(re.split(r",| e ", portos)[0].strip())
+    cands = list(RE_MIGR.finditer(trecho))
+    for mg in cands:
+        if primeiro and primeiro[:8] in norm(trecho[mg.end(): mg.end() + 250]):
+            return mg
+    return next((mg for mg in cands if mg.start() <= 2500), None)
+
+def publicacao_ingovbr():
+    """Data de publicação das portarias baixadas do in.gov.br (sem pasta datada):
+    registrada à mão em data/metadata/psp_portarias_ingovbr.csv com a URL-fonte."""
+    f = RAIZ/"data/metadata/psp_portarias_ingovbr.csv"
+    if not f.exists(): return {}
+    with f.open(encoding="utf-8") as fh:
+        return {r["arquivo"]: r["publicado_em"] for r in csv.DictReader(fh, delimiter=";")}
+
 def main():
     pastas = [RAIZ/"data/documents/interventions/PSP/dou/legacy_scan", RAIZ/"data/documents/interventions/PSP/dou"]
+    pub_ingovbr = publicacao_ingovbr()
     linhas = {}
     for base in pastas:
         for f in sorted(base.rglob("*.txt")):
             t = flat(f.read_text(encoding="utf-8", errors="replace"))
             for m in RE_PORT.finditer(t):
                 num, d, mes, a, portos = m.groups()
-                trecho = t[m.end(): m.end() + 2500]
-                mg = RE_MIGR.search(trecho)
+                trecho = t[m.end(): m.end() + 6000]
+                mg = prazo_migracao(trecho, portos)
                 if not mg:  # a portaria pode continuar na página seguinte
                     prox = re.sub(r"pg(\d{3})", lambda x: f"pg{int(x.group(1))+1:03d}", f.name)
                     fp = f.with_name(prox)
                     if fp.exists():
                         mg = RE_MIGR.search(flat(fp.read_text(encoding="utf-8", errors="replace"))[:3000])
                 pub = re.search(r"(\d{4}-\d{2}-\d{2})", f.parent.name)
+                pub_data = pub.group(1) if pub else pub_ingovbr.get(f.name, "")
                 chave = f"SEP-{num}/{a}"
                 linhas[chave] = {
                     "portaria": chave, "data_ato": data_iso(d, mes, a),
-                    "publicado_em": pub.group(1) if pub else "",
+                    "publicado_em": pub_data,
                     "portos": re.sub(r"\s+", " ", portos).strip(" ,"),
                     "migracao_definitiva_ate": data_iso(*mg.groups()) if mg else "",
                     "fonte": str(f.relative_to(RAIZ)),

@@ -1,0 +1,12 @@
+{
+  "tabelas": {
+    "port_calls": 1340891,
+    "port_call_times": 1340891,
+    "port_call_vessel": 1340891,
+    "cargo_by_call": 1101688,
+    "port_month_panel": 31917,
+    "ports": 219,
+    "digital_treatment_raw": 23
+  },
+  "gerado_em": "2026-09-12 12:20:51"
+}
