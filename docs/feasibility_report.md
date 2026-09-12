@@ -650,3 +650,43 @@ tendências paralelas. $T_1$, $T_2$ agregado, comércio e frete: nulos.
   e de portos digitais (single window, PCS) — `refs.bib` tem 14 entradas.
 - Resposta do Fala.BR (13 portos) → reestimação automática.
 - Revisão dos periódicos-alvo do eixo (b): GIQ / IS Frontiers / MEL.
+
+## A34. Auditoria de reprodutibilidade — pipeline `targets` de ponta a ponta (12/09)
+
+**Motivo.** O guia, o README e a figura de arquitetura (§5) afirmavam que o
+`targets` orquestrava tudo, mas `_targets.R` só cobria a viabilidade de
+03/09; os scripts 09–24 rodavam à mão. Para um artefato de SI a afirmação
+precisa ser verdadeira e testável.
+
+**O que foi feito.** `_targets.R` reescrito com 38 alvos (insumos rastreados:
+zip da ANTAQ, CSVs do Comex, registro das portarias, código de `R/`, fontes
+`.tex`; scripts 09→24→12 como alvos-arquivo via `callr`; DuckDB representado
+por manifestos JSON). `renv.lock` ressincronizado. Executado duas vezes:
+
+| Execução | Duração | Alvos | Resultado |
+|---|---|---|---|
+| 1ª (12:20–13:03) | 41,5 min | 15 rodados, 23 pulados (09/10 incrementais: 3 s e 10 s) | `numbers.tex` (32 macros) e as 11 tabelas `.tex` **idênticos** à versão de 11/09 |
+| 2ª (13:04–13:45), após alterar o CSV das portarias | 41,2 min | 17 rodados | `numbers.tex` idêntico à 1ª (só o carimbo de hora); `tar_outdated()` = 0 |
+
+**Diferenças encontradas (nenhuma afeta o manuscrito).**
+1. Ruído de ponto flutuante: curvas do horizonte longo (1e‑13), coeficientes
+   SFA porto‑ano (1e‑11) e porto‑mês (1e‑8; o otimizador convergiu em 122 vs.
+   124 iterações), eficiências SFA (≤ 2,5e‑6). CSVs de eficiência com linhas
+   em outra ordem (consulta paralela do DuckDB) — iguais após ordenação.
+2. **Event study exploratório (script 13) estava defasado**: a coorte de
+   Vitória constava em 2011‑09 (notícia SERPRO) e não em 2011‑07 (Portaria
+   SEP 135/2011, localizada em 11/09). O pipeline regenerou
+   `event_study_exploratorio.txt` e fig05–06 (ATT simples A: 0,147 → 0,136,
+   ambos não significativos). As figuras 5–6 não entram no manuscrito; todos
+   os scripts que alimentam macros e tabelas já estavam atualizados.
+3. `outputs/interventions/registry_preliminar.csv` (exportação do YAML)
+   estava anterior à datação pelo DOU — atualizado.
+
+**Tempos por alvo** na tabela do `docs/reproducibility_guide.md` §3. Os
+`.rds` do Sun–Abraham por atracação somam 5 GB (fora do git; regeneráveis
+em 4 min).
+
+**Conclusão.** Com o DuckDB ingerido, `targets::tar_make()` reconstrói o
+manuscrito inteiro em ≈ 42 min de forma determinística (semente única). A
+resposta do Fala.BR (05/10) entra por `python/parse_dou_hits.py` →
+`data/metadata/psp_portarias_dou.csv` → `tar_make()`; nada mais é manual.

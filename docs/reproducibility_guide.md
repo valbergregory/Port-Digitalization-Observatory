@@ -52,20 +52,20 @@ insumos rastreados: alterar um deles invalida só o que depende dele.
 | Etapa | Alvo(s) | Script | Produz | Tempo nesta máquina |
 |---|---|---|---|---|
 | Ingestão ANTAQ → DuckDB | `duckdb_calls` | 09 | `port_calls`, `port_call_times`, `port_call_vessel`, `cargo_by_call`, `port_month_panel`, `ports`, `digital_treatment_raw` | 10–40 min na 1ª vez; **incremental** (ingere só anos ausentes) |
-| Painel de comércio | `duckdb_trade` | 10 | `trade_urf_month`, `trade_urf_country`, `trade_urf_sh2`, `crosswalk_urf_cdtup` | ≈ 10 min na 1ª vez |
-| Descritivas | `descritivas` | 11 | tab01–04, fig01–04 | 2 min |
-| Event study exploratório | `event_study` | 13 | fig05–06, `es_psp_t1_*.rds` | 3 min |
-| DiD por atracação (Sun–Abraham) | `did_atracacao` | 14 | `sunab_call_*.rds` | 5 min |
-| Inferência com poucos clusters | `inferencia` | 15 | `inference_few_clusters.csv` (WCB B=4999, permutação R=999) | ≈ 35 min |
-| Medição / cobertura de T4 | `medicao_cobertura` | 16 | tab06, fig07 | 3 min |
-| Heterogeneidade por navegação | `heterogeneidade` | 17 | `heterogeneity_navigation.csv` | ≈ 10 min |
-| Horizonte longo 2010–2026 | `horizonte_longo` | 18 | fig08, `long_horizon_curves.csv` | ≈ 7 min |
-| Fronteira estocástica | `fronteira`, `fronteira_segunda_passada` | 19, 23 | `sfa_*.csv`, `dea_efficiencies.csv` | 5 min |
-| PPML e frete observado | `ppml` | 20 | `ppml_trade.csv` | 5 min |
-| Mecanismo (cabotagem recorrente) | `mecanismo_cabotagem` | 21 | `cabotage_mechanism.csv` | ≈ 15 min |
-| Placebo de antecipação + HonestDiD | `placebo_honest` | 22 | `placebo_honest.txt` | ≈ 30 min |
-| Tabelas de resultados + macros | `tabelas_resultados` | 24 | tab07–11, `macros_resultados.csv` | 1 min |
-| Manuscrito | `overleaf` | 12 | `article/latex/numbers.tex`, `outputs/overleaf.zip` | 1 min |
+| Painel de comércio | `duckdb_trade` | 10 | `trade_urf_month`, `trade_urf_country`, `trade_urf_sh2`, `crosswalk_urf_cdtup` | ≈ 10 min na 1ª vez; 10 s depois |
+| Descritivas | `descritivas` | 11 | tab01–04, fig01–04 | 6 s |
+| Event study exploratório | `event_study` | 13 | fig05–06, `es_psp_t1_*.rds` | 6 s |
+| DiD por atracação (Sun–Abraham) | `did_atracacao` | 14 | `sunab_call_*.rds` (5 GB, fora do git) | 3,8 min |
+| Inferência com poucos clusters | `inferencia` | 15 | `inference_few_clusters.csv` (WCB B=4999, permutação R=999) | 17,7 min |
+| Medição / cobertura de T4 | `medicao_cobertura` | 16 | tab06, fig07 | 1 min |
+| Heterogeneidade por navegação | `heterogeneidade` | 17 | `heterogeneity_navigation.csv` | 4,8 min |
+| Horizonte longo 2010–2026 | `horizonte_longo` | 18 | fig08, `long_horizon_curves.csv` | 4,9 min |
+| Fronteira estocástica | `fronteira`, `fronteira_segunda_passada` | 19, 23 | `sfa_*.csv`, `dea_efficiencies.csv` | 10 s |
+| PPML e frete observado | `ppml` | 20 | `ppml_trade.csv` | 5 s |
+| Mecanismo (cabotagem recorrente) | `mecanismo_cabotagem` | 21 | `cabotage_mechanism.csv` | 1,9 min |
+| Placebo de antecipação + HonestDiD | `placebo_honest` | 22 | `placebo_honest.txt` | 6,6 min |
+| Tabelas de resultados + macros | `tabelas_resultados` | 24 | tab07–11, `macros_resultados.csv` | 3 s |
+| Manuscrito | `overleaf` | 12 | `article/latex/numbers.tex`, `outputs/overleaf.zip` | 4 s |
 
 O DuckDB não é alvo-arquivo (09 e 10 escrevem no mesmo arquivo, o que criaria
 um ciclo); cada um devolve um manifesto JSON com a contagem das tabelas em
@@ -73,7 +73,7 @@ um ciclo); cada um devolve um manifesto JSON com a contagem das tabelas em
 
 ```r
 # na raiz do projeto (o .Rprofile ativa o renv)
-targets::tar_make()                    # tudo — ≈ 2–3 h nesta máquina
+targets::tar_make()                    # tudo — 42 min nesta máquina com o DuckDB já ingerido (+ ingestão na 1ª vez)
 targets::tar_make(tabelas_resultados)  # até um alvo
 targets::tar_outdated()                # o que está desatualizado
 targets::tar_visnetwork()              # grafo
