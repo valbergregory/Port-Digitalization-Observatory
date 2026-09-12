@@ -19,6 +19,19 @@ Conceitos das variáveis: `variable_concepts.md`.
 |---|---|
 | `metadados_movimentacao/*.txt` | 12 dicionários oficiais (Atracacao, TemposAtracacao, Carga, CargaConteinerizada, TaxaOcupacao, cadastros...) — UTF-8-BOM, `;` |
 | `modelo_dados_antaq.png` | diagrama oficial do modelo de dados do EA |
+| `interventions/PSP/dou/legacy_scan/AAAA-MM-DD/pgNNN.{pdf,txt}` | páginas da Seção 1 do DOU (visualizador legado, PDF nativo) com acerto de "Porto Sem Papel" — íntegras das portarias SEP de 2011–2012 |
+| `interventions/PSP/dou/portaria-n-*.{txt,html}` | portarias de 2013+ obtidas do in.gov.br (texto e página HTML com "Publicado em") |
+
+## data/metadata/ (versionado)
+
+| Arquivo | Conteúdo |
+|---|---|
+| `download_log.csv` | URL, data, bytes e SHA-256 de cada download bruto |
+| `psp_portarias_dou.csv` | **saída do parser** `python/parse_dou_hits.py`: portaria; data do ato (= data de tratamento); publicação; portos; prazo de migração definitiva; arquivo-fonte |
+| `psp_portarias_ingovbr.csv` | data de publicação das portarias baixadas do in.gov.br (sem pasta datada), com URL-fonte e data de obtenção — lida pelo parser |
+| `dou_scan_2012_hits.csv` | páginas do DOU com acerto na varredura de 2012 |
+| `crosswalk_urf_cdtup.csv` | URF (Receita Federal) → porto ANTAQ (`cdtup`), com origem (auto/manual/proposto/EXCLUIDA) |
+| `references_check.csv` | veredito do Crossref para cada entrada do `.bib` |
 
 ## data/interim/
 

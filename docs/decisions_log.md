@@ -222,3 +222,30 @@ Formato: data — decisão — justificativa — alternativas rejeitadas.
     dos resultados no eixo (b), frases de cautela, limitações e os três
     argumentos de SI. Guia para o pesquisador escrever com a própria
     linguagem — não é prosa do artigo.
+38. **Pipeline `targets` ligado de ponta a ponta (12/09)**: `_targets.R`
+    passa a orquestrar os scripts 09→24→12 (38 alvos, saídas como alvos-
+    arquivo, DuckDB representado por manifestos JSON para evitar o ciclo
+    09/10 no mesmo arquivo; `R/23_pipeline_helpers.R`). Motivo: o guia, o
+    README e a figura de arquitetura afirmavam "targets orquestra tudo",
+    mas o DAG só cobria a viabilidade de 03/09 — a afirmação era falsa e o
+    artefato de SI (§5) não podia sustentá-la. `renv.lock` ressincronizado
+    (estava out-of-sync desde a instalação de leaflet/DT/sf). Pipeline
+    executado inteiro como auditoria de reprodutibilidade (adendo A34).
+39. **Parser das portarias corrigido e datas de publicação completadas
+    (12/09)**: `python/parse_dou_hits.py` procurava o prazo de migração
+    definitiva só nos 2.500 caracteres após o cabeçalho; na Portaria
+    231/2012 (Antonina, Paranaguá, São Sebastião) o art. 3º está noutra
+    coluna da mesma página (~2.900 caracteres). Agora a janela é de 6.000
+    caracteres e a sentença precisa citar um porto da própria portaria
+    (evita capturar o prazo de outra portaria vizinha); sem citação, vale a
+    regra antiga. Resultado: 231/2012 → migração até 30/10/2012; as demais
+    oito linhas ficaram idênticas. Datas de publicação das Portarias
+    48/2013 (03/04/2013) e 52/2013 (12/04/2013) obtidas das páginas
+    oficiais do in.gov.br (HTML guardado em `data/documents/.../dou/`,
+    URL-fonte em `data/metadata/psp_portarias_ingovbr.csv`). **Nenhuma data
+    de tratamento (`data_ato`) mudou** — resultados inalterados; o campo só
+    aparece no painel do Observatório. Testes novos: `tests/python/
+    test_parse_dou_hits.py` (regex, hifenização, consistência do CSV),
+    `tests/testthat/test-coortes-psp.R` (precedência DOU > notícia, datas
+    de produção, 13 públicos fora), `test-robustez.R` (Webb, WCB e
+    permutação em painel simulado, determinismo da semente).

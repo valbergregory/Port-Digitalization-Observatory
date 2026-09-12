@@ -33,16 +33,32 @@ R-first, com SQL/DuckDB como camada de dados e Python como auxiliar:
 - `docs/variable_concepts.md` — dicionário conceitual dos tempos operacionais
   (T1–T4, TA, TE), extraído dos metadados oficiais da ANTAQ.
 - `docs/decisions_log.md` — decisões não óbvias, datadas.
-- `_targets.R` — esqueleto do pipeline (ainda não totalmente ligado).
-- `scripts/` — scripts autônomos para RStudio Background Jobs / terminal.
+- `docs/writing_guide.md` — guia de redação: dados, método passo a passo,
+  equações e a leitura de cada tabela e figura.
+- `docs/reproducibility_guide.md` — ambiente, dados brutos, pipeline, testes.
+- `_targets.R` — pipeline completo (38 alvos: DuckDB → estimações → tabelas →
+  `numbers.tex`/Overleaf); `targets::tar_make()` reconstrói tudo.
+- `scripts/` — os mesmos passos como scripts autônomos (Background Jobs / terminal).
 
-## Estado dos dados (2026-09-03)
+## Estado (2026-09-12)
 
-- **Comex Stat**: API e CSVs em bloco acessíveis e atualizados (até 2026-07).
-- **ANTAQ Estatístico Aquaviário**: painel **fora do ar** (manutenção); host
-  antigo `web3.antaq.gov.br` desativado. Dicionário oficial e cadastros
-  recuperados via Internet Archive. Microdados de atracação aguardam o retorno
-  do painel — `R/03_download_antaq.R` já codifica o padrão de URLs para retomada.
+- **Dados**: ANTAQ Estatístico Aquaviário consolidado (1 340 891 atracações,
+  2010–2026, 257 instalações) e Comex Stat NCM (487 419 fluxos URF × país ×
+  mês, com frete e seguro observados nas importações) em
+  `data/processed/observatory.duckdb`; hashes em `data/metadata/download_log.csv`.
+- **Tratamento**: Porto Sem Papel datado pela **entrada em produção** — nove
+  portarias SEP localizadas nas íntegras do DOU (23 portos; 21 com confiança
+  alta). Treze portos públicos sem portaria estão fora da amostra até a
+  resposta do pedido LAI (Fala.BR 55001.000806/2026-27, prazo 05/10/2026).
+- **Resultados** (todos gerados pelo pipeline; ver `docs/writing_guide.md`):
+  nenhum efeito robusto do PSP sobre os tempos agregados; efeito só na
+  cabotagem recorrente (T4, −17 %, *p* WCB 0,02); PPML e frete ad valorem
+  nulos; fronteira estocástica = associação; **achado central: a digitalização
+  muda o que se registra** (cobertura de T4 em Santos 0 % → 93 %).
+- **Manuscrito**: 17 páginas, 11 tabelas, 9 figuras, 32 macros, 34 referências
+  conferidas no Crossref; prosa a cargo do autor (marcadores `\PROSA`).
+- **Testes**: `pytest tests/python` (parser do DOU) e `testthat` (registro,
+  coortes, WCB/permutação) — 99 expectativas.
 
 ## Manuscrito (LaTeX / Overleaf)
 
