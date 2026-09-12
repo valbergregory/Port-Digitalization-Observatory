@@ -207,3 +207,18 @@ Formato: data — decisão — justificativa — alternativas rejeitadas.
     Cullinane et al. 2006). **Lançadas de memória, sem DOI: conferir cada
     uma no original antes da submissão (regra 19).** Figura de arquitetura
     (TikZ, `article/latex/tikz/`) na §5; tabelas descritivas em inglês.
+36. **Referências conferidas no Crossref (11/09)**: `python/verify_references.py`
+    — 30 entradas com DOI gravado (17 por busca bibliográfica, 13 pela
+    versão de periódico resolvida por DOI porque a busca devolvia o
+    working paper SSRN/NBER), 4 sem DOI por natureza (Galbraith 1973 e
+    Tornatzky & Fleischer 1990, livros; Milgrom & Roberts 1990, AER pré-DOI,
+    JSTOR 2006681; UNECE Rec. 33, relatório), anotadas em `note`. Veredito
+    em `data/metadata/references_check.csv`. Heilig & Voß: Crossref dá 2016
+    (online first), mantido 2017 (vol. 18, n. 3). Hevner et al.: Crossref
+    75–106, MISQ lista 75–105 — mantido.
+37. **Guia de redação** criado em `docs/writing_guide.md`: história, ideia
+    de abstract e de introdução, o que dizer de cada fonte, método passo a
+    passo, equações, leitura de cada tabela (1–11) e figura (1–9), ordem
+    dos resultados no eixo (b), frases de cautela, limitações e os três
+    argumentos de SI. Guia para o pesquisador escrever com a própria
+    linguagem — não é prosa do artigo.
