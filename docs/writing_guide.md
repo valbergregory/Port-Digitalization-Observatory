@@ -63,29 +63,34 @@ informação organizacional, a janela única aumentou primeiro a capacidade de
 o artefato que a produziu — um observatório reproduzível, público e
 auditável.
 
-## 2. Ideia de abstract (≈180 palavras)
+## 2. Ideia de abstract (218 palavras; atualizado em 23/09 após as decisões 41–42)
 
-> Maritime single windows are the flagship of port digitalisation, yet
-> evidence on what they change is thin. We exploit the staggered, port-by-port
-> mandate of Brazil's Porto Sem Papel (2011–2013), dated from the full text
-> of the ordinances published in the Official Gazette, to estimate its
-> effects on vessel times, trade flows, freight costs and technical
-> efficiency, using \Natracacoes\ vessel calls, customs-unit trade records and
-> a purpose-built, open observatory that integrates them. Heterogeneity-robust
-> difference-in-differences with few-cluster inference finds no aggregate
-> effect on waiting, documentary or berth times; the only estimate that
-> survives placebo and wild-bootstrap tests is a \CabRecTquatroPct\ reduction
-> in post-operation waiting for recurrent cabotage calls. Trade values and
-> observed freight rates are unaffected. What changed first was information:
-> in the country's largest port the share of calls with a recorded
-> documentary time decomposition rose from \CobSantosPre\ to \CobSantosPos\
-> when the single window entered production. We interpret this through
-> organisational information-processing theory and discuss the consequences
-> for using official statistics to evaluate the systems that generate them.
+> Maritime single windows promise faster clearance and lower trade costs, but causal evidence
+> on what they deliver is scarce. We evaluate Brazil's \textit{Porto Sem Papel}, made
+> mandatory port by port between 2011 and 2013, using \Natracacoes\ vessel calls, customs
+> records with declared freight, and adoption dates for 23 ports read from official
+> ordinances. Staggered difference-in-differences with wild-bootstrap inference finds no
+> effect on vessel times: the documentary wait before unberthing changed by
+> \TquatroBetaFull\ log points ($p=\TquatroPwcbFull$), ruling out reductions above 20\%;
+> the wait after berthing by \TdoisBetaFull\ ($p=\TdoisPwcbFull$); and the queue before
+> berthing by $-0.04$ ($p=0.87$). No effect emerges up to five years after adoption. The
+> freight-to-value ratio moved by \FreteBeta\ ($p=\FreteP$), excluding cost reductions above
+> 3\%. What changed was the record: in Santos, the largest port, the share of calls with a
+> recorded documentary time rose from \CobSantosPre\ to \CobSantosPos; Natal gained 23
+> points, but most ports did not change, and the average effect on recording ($0.20$,
+> $p=0.38$) vanishes once port-specific trends are modelled. This shift in the data
+> manufactures effects: recurrent cabotage vessels show an apparently robust
+> \CabRecTquatroPct\ fall in documentary time ($p=\CabRecTquatroPwcb$) that continues a
+> pre-adoption trend, shrinking to $-0.04$ ($p=0.06$) with port-specific trends, while robust
+> HonestDiD intervals include zero. Evaluations of digital government must treat the
+> data-generating process as an outcome of the reform.
 
-Pontos a manter: (i) fonte de datação (íntegras do DOU) como diferencial;
-(ii) três nulos honestos + um positivo estreito; (iii) o achado de
-informação como contribuição; (iv) o artefato.
+**Regra (Valber, 23/09): o abstract explora os achados com números**, não só
+objetivo e método. Estrutura: contexto (1 frase) → dados e desenho (1–2
+frases) → cada achado com estimativa, p ou intervalo e magnitude → implicação
+(1 frase). Limite da GIQ: 250 palavras. O abstract antigo (≈180 palavras)
+vendia o efeito da cabotagem, que não sobreviveu ao teste de pré-tendências
+(decisão 42), e foi substituído.
 
 ## 3. Ideia de introdução (esqueleto em 6 movimentos)
 
