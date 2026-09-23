@@ -24,7 +24,9 @@ fmt_mil <- function(x) formatC(x, format = "d", big.mark = ",")
 resumo <- dbGetQuery(con, "
   SELECT COUNT(*) AS atracacoes, MIN(ano) AS ano_ini, MAX(ano) AS ano_fim,
          COUNT(DISTINCT cdtup) AS portos
-  FROM port_calls WHERE flag_mov_carga")
+  FROM port_calls WHERE flag_mov_carga
+    AND tipo_navegacao IN ('Longo Curso','Cabotagem','Interior')  -- decisão 41
+")
 painel <- dbGetQuery(con, "
   SELECT COUNT(*) AS linhas,
          COUNT(DISTINCT CASE WHEN tipo_autoridade = 'Porto Público' THEN cdtup END) AS publicos,
@@ -94,7 +96,7 @@ cat("copiados:", length(figs), "figuras,", length(tabs), "tabelas\n")
 
 # galeria versionada para o README (PNG das figuras principais)
 galeria <- c("fig11_map", "fig10_rollout", "fig07_cobertura_t4", "fig13_es_coverage",
-             "fig12_es_cabotage", "fig14_estimates", "fig01_distribuicao_t1")
+             "fig12_es_cabotage", "fig14_estimates", "fig15_honestdid", "fig01_distribuicao_t1")
 dir.create(caminho("docs", "gallery"), showWarnings = FALSE)
 file.copy(caminho("outputs", "figures", paste0(galeria, ".png")), caminho("docs", "gallery"), overwrite = TRUE)
 

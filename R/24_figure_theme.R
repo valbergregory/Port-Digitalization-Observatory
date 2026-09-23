@@ -35,14 +35,15 @@ salvar_fig_artigo <- function(p, nome, w = 6.5, h = 3.8, dir = Sys.getenv("FIGDI
 # O vcov de um modelo sunab vem DESAGREGADO (período × coorte); a agregação
 # por período é refeita aqui com os pesos do fixest (nº de observações de cada
 # coorte no período relativo), conferida contra coef(m) e se(m).
-vcov_sunab_periodo <- function(m, d) {
-  b <- m$coefficients; nm <- grep("^t::-?\\d+:cohort::", names(b), value = TRUE)
-  e <- as.integer(sub("^t::(-?\\d+):.*", "\\1", nm)); coh <- as.integer(sub(".*cohort::", "", nm))
-  dd <- as.data.table(d)[obs(m)][, .N, by = .(rel = t - g, g)]
+vcov_sunab_periodo <- function(m, d, tvar = "t", gvar = "g") {
+  b <- m$coefficients; pre <- paste0("^", tvar, "::")
+  nm <- grep(paste0(pre, "-?\\d+:cohort::"), names(b), value = TRUE)
+  e <- as.integer(sub(paste0(pre, "(-?\\d+):.*"), "\\1", nm)); coh <- as.integer(sub(".*cohort::", "", nm))
+  dd <- as.data.table(d)[obs(m)][, .(rel = get(tvar) - get(gvar), g = get(gvar))][, .N, by = .(rel, g)]
   w <- dd[match(paste(e, coh), paste(rel, g)), N]
   ks <- sort(unique(e))
   W <- sapply(ks, function(k) ifelse(e == k, w / sum(w[e == k]), 0))
-  colnames(W) <- paste0("t::", ks)
+  colnames(W) <- paste0(tvar, "::", ks)
   b_agg <- drop(crossprod(W, b[nm])); V <- crossprod(W, vcov(m)[nm, nm]) %*% W
   stopifnot(isTRUE(all.equal(unname(b_agg), unname(coef(m)[names(b_agg)]), tolerance = 1e-8)),
             isTRUE(all.equal(unname(sqrt(diag(V))), unname(se(m)[names(b_agg)]), tolerance = 1e-6)))
