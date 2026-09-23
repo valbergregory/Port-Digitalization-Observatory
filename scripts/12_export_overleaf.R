@@ -47,7 +47,7 @@ pico <- frete[which.max(frete$taxa), ]
 cobq <- function(cd, a1, a2) dbGetQuery(con, sprintf("
   SELECT 100.0*AVG(CASE WHEN t.t4 IS NOT NULL THEN 1 ELSE 0 END) AS c
   FROM port_calls pc JOIN port_call_times t USING (id_atracacao)
-  WHERE pc.flag_mov_carga AND pc.cdtup = '%s' AND pc.ano BETWEEN %d AND %d", cd, a1, a2))$c
+  WHERE pc.flag_mov_carga AND pc.tipo_navegacao IN ('Longo Curso','Cabotagem','Interior') AND pc.cdtup = '%s' AND pc.ano BETWEEN %d AND %d", cd, a1, a2))$c
 
 macros <- c(
   Natracacoes      = fmt_mil(resumo$atracacoes),
@@ -91,6 +91,12 @@ file.copy(tabs, file.path(DIR_TEX, "tables"), overwrite = TRUE)
 file.copy(caminho("article", "references.bib"), file.path(DIR_TEX, "refs.bib"),
           overwrite = TRUE)
 cat("copiados:", length(figs), "figuras,", length(tabs), "tabelas\n")
+
+# galeria versionada para o README (PNG das figuras principais)
+galeria <- c("fig11_map", "fig10_rollout", "fig07_cobertura_t4", "fig13_es_coverage",
+             "fig12_es_cabotage", "fig14_estimates", "fig01_distribuicao_t1")
+dir.create(caminho("docs", "gallery"), showWarnings = FALSE)
+file.copy(caminho("outputs", "figures", paste0(galeria, ".png")), caminho("docs", "gallery"), overwrite = TRUE)
 
 # ---- 3. ZIP ----------------------------------------------------------------
 destino <- caminho("outputs", "overleaf.zip")

@@ -130,6 +130,7 @@ FROM port_calls pc
 LEFT JOIN port_call_times t USING (id_atracacao)
 LEFT JOIN cargo_by_call  c USING (id_atracacao)
 WHERE pc.flag_mov_carga AND pc.mes IS NOT NULL
+  AND pc.tipo_navegacao IN ('Longo Curso','Cabotagem','Interior')  -- decisao 41
 GROUP BY pc.cdtup, pc.ano, pc.mes")
 
 # Tratamento digital a partir do YAML

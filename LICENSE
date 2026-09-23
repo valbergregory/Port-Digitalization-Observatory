@@ -1,21 +1,59 @@
-MIT License
+Copyright (c) 2026 Valber Gregory Barbosa Costa Bezerra Santos.
+All rights reserved. / Todos os direitos reservados.
 
-Copyright (c) 2026 Valber Gregory
+WORK IN PROGRESS. This repository is a research compendium under active
+development. Results, figures, tables and text are preliminary, have not been
+peer reviewed and may change without notice.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+English
+-------
+This repository (source code, SQL, configuration, documentation, figures,
+tables, manuscript sources and curated metadata) is made publicly visible for
+transparency, scholarly evaluation and reproducibility review only. Viewing it
+and running it locally to verify the reported results are permitted. No other
+licence is granted. Without the prior, express and written authorisation of the
+copyright holder, you may not copy, redistribute, publish, modify, adapt,
+translate, create derivative works from, sublicense or use for commercial
+purposes any part of this repository.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Citing the work is permitted and encouraged, following CITATION.cff. Short
+quotations for criticism, review or scholarly discussion remain allowed within
+the limits of applicable law.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Third-party material keeps its own terms: raw data come from Brazilian
+government open-data sources (ANTAQ, Comex Stat/MDIC, IBGE, Official Gazette)
+and are not redistributed here; R and Python packages are licensed by their
+authors.
+
+Previous commits of this repository were published under the MIT License. That
+licence continues to apply to copies obtained from those commits; this notice
+governs the repository from this commit onwards.
+
+Português
+---------
+Este repositório (código-fonte, SQL, configuração, documentação, figuras,
+tabelas, fontes do manuscrito e metadados curados) está publicamente visível
+apenas para fins de transparência, avaliação acadêmica e verificação de
+reprodutibilidade. É permitido consultá-lo e executá-lo localmente para
+conferir os resultados. Nenhuma outra licença é concedida. Salvo autorização
+prévia, expressa e escrita do titular, é vedado copiar, redistribuir, publicar,
+modificar, adaptar, traduzir, criar obras derivadas, sublicenciar ou usar para
+fins comerciais qualquer parte deste repositório.
+
+A citação do trabalho é permitida e bem-vinda, conforme CITATION.cff. Citações
+curtas para crítica, resenha ou discussão acadêmica permanecem permitidas nos
+limites da lei (Lei 9.610/1998, art. 46).
+
+Materiais de terceiros mantêm seus próprios termos: os dados brutos vêm de
+fontes públicas de dados abertos (ANTAQ, Comex Stat/MDIC, IBGE, Diário Oficial
+da União) e não são redistribuídos aqui; pacotes R e Python são licenciados
+por seus autores.
+
+Commits anteriores deste repositório foram publicados sob a licença MIT, que
+continua valendo para cópias obtidas daqueles commits; este aviso rege o
+repositório a partir deste commit.
+
+THE MATERIAL IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
+O MATERIAL É FORNECIDO "NO ESTADO EM QUE SE ENCONTRA", SEM GARANTIAS.
+
+Contact / Contato: valber.gregory@gmail.com

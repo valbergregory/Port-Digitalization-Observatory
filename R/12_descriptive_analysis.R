@@ -5,12 +5,7 @@
 suppressPackageStartupMessages({
   library(DBI); library(duckdb); library(data.table); library(ggplot2)
 })
-
-TEMA <- theme_minimal(base_size = 10) +
-  theme(panel.grid.minor = element_blank(),
-        plot.title = element_text(face = "bold", size = 11),
-        plot.caption = element_text(size = 7, colour = "grey40", hjust = 0),
-        legend.position = "bottom")
+source(file.path(RAIZ, "R", "24_figure_theme.R"))   # padrão visual do manuscrito
 
 # ---- utilitários de tabela LaTeX (booktabs, sem dependência extra) ----------
 escapar_tex <- function(x) {
@@ -38,18 +33,13 @@ tabela_tex <- function(df, arquivo, caption, label, align = NULL, notas = NULL, 
     paste0(corpo, " \\\\"), "\\bottomrule", "\\end{tabular}"
   )
   if (!is.null(notas)) {
-    linhas <- c(linhas, "\\begin{minipage}{\\textwidth}\\vspace{2mm}\\footnotesize",
+    # \par: a nota começa em parágrafo próprio (senão a largura soma à da tabela -> overfull)
+    linhas <- c(linhas, "\\par\\vspace{2mm}", "\\begin{minipage}{\\textwidth}\\footnotesize",
                 notas, "\\end{minipage}")
   }
   linhas <- c(linhas, "\\end{table}")
   writeLines(linhas, arquivo)
   invisible(arquivo)
-}
-
-salvar_fig <- function(p, nome, w = 6.5, h = 4) {
-  ggsave(file.path(DIR_FIG, paste0(nome, ".pdf")), p, width = w, height = h, device = cairo_pdf)
-  ggsave(file.path(DIR_FIG, paste0(nome, ".png")), p, width = w, height = h, dpi = 200)
-  invisible(nome)
 }
 
 # ---- execução ---------------------------------------------------------------
@@ -98,40 +88,56 @@ descritivas <- function(raiz = RAIZ) {
     notas = paste("Each observation is the median (or interquartile range) across the port's cargo-handling",
                   "vessel calls in the month. Official definitions (ANTAQ): $T_A=T_2+T_3+T_4$ and $T_E=T_1+T_A$."))
 
-  # ---- Figura 1: distribuição de T1 por ano (públicos vs TUPs) ----
-  p1 <- ggplot(painel[is.finite(t1_mediana_h) & t1_mediana_h < 100],
-               aes(factor(ano), t1_mediana_h, fill = tipo_autoridade)) +
-    geom_boxplot(outlier.size = .3, outlier.alpha = .3, linewidth = .3) +
-    scale_fill_manual(values = c("Porto Público" = "#2c6fbb", "Porto Privado (TUP)" = "#c9a227")) +
-    labs(title = "Tempo de espera para atracação por ano",
-         subtitle = "Mediana mensal do porto (T1), atracações com movimentação de carga",
-         x = NULL, y = "Horas", fill = NULL,
-         caption = "Fonte: ANTAQ, Estatístico Aquaviário. Observações acima de 100 h omitidas do gráfico.") +
-    TEMA
-  salvar_fig(p1, "fig01_distribuicao_t1", h = 4.2)
+  # ---- Figura 1: componentes do tempo de estadia por ano (públicos vs TUPs) ----
+  comp_t <- as.data.table(dbGetQuery(con, "
+    SELECT pc.ano, pc.tipo_autoridade,
+           median(t.t1) AS T1, median(t.t2) AS T2, median(t.t3) AS T3, median(t.t4) AS T4
+    FROM port_calls pc JOIN port_call_times t USING (id_atracacao)
+    WHERE pc.flag_mov_carga AND pc.tipo_navegacao IN ('Longo Curso','Cabotagem','Interior')
+      AND pc.ano BETWEEN 2010 AND 2025
+    GROUP BY 1, 2"))
+  comp_t <- melt(comp_t, id.vars = c("ano", "tipo_autoridade"), variable.name = "comp", value.name = "h")
+  comp_t[, comp := factor(comp, levels = c("T1", "T2", "T3", "T4"),
+                          labels = c("T1: waiting for berth", "T2: berthing to start of operation",
+                                     "T3: cargo operation", "T4: end of operation to unberthing"))]
+  comp_t[, autoridade := rotulo_autoridade(tipo_autoridade)]
+  p1 <- ggplot(comp_t, aes(ano, h, colour = autoridade)) +
+    annotate("rect", xmin = 2011.5, xmax = 2013.3, ymin = -Inf, ymax = Inf, fill = "#f3f2ee") +
+    geom_line(linewidth = .5) + geom_point(size = .9) +
+    facet_wrap(~ comp, scales = "free_y", ncol = 2) +
+    scale_colour_manual(values = COR_AUTORIDADE) +
+    scale_y_continuous(limits = c(0, NA), expand = expansion(mult = c(0, .08))) +
+    labs(x = NULL, y = "Median hours per vessel call") + TEMA_ARTIGO
+  salvar_fig_artigo(p1, "fig01_distribuicao_t1", h = 4.2)
 
-  # ---- Figura 2: séries por coorte do Porto Sem Papel ----
-  coortes <- data.table(
-    porto = c("Santos", "Rio de Janeiro", "Vitória", "Fortaleza", "Pecém",
-              "Recife", "Suape", "Itaqui", "Belém", "Vila do Conde", "Manaus"),
-    coorte = c(rep("2011 (Santos, Rio, Vitória)", 3), rep("2012 (Pecém/Fortaleza, Recife/Suape)", 4),
-               rep("2013 (Norte: Belém, Itaqui, Manaus...)", 4)))
-  ser <- merge(painel[tipo_autoridade == "Porto Público" & ano <= 2015],
-               coortes, by = "porto")
-  ser <- ser[, .(t1 = median(t1_mediana_h, na.rm = TRUE)), by = .(coorte, data)]
-  p2 <- ggplot(ser, aes(data, t1, colour = coorte)) +
-    geom_line(alpha = .35, linewidth = .3) +
-    geom_smooth(se = FALSE, span = .3, linewidth = .8) +
-    geom_vline(xintercept = as.Date(c("2011-08-01", "2012-05-01", "2013-04-03")),
-               linetype = "dashed", colour = "grey35", linewidth = .3) +
-    scale_colour_manual(values = c("#2c6fbb", "#c9a227", "#3f8f5a")) +
-    labs(title = "Tempo de espera por coorte de adoção do Porto Sem Papel",
-         subtitle = "Mediana das medianas mensais; linhas tracejadas marcam as datas de entrada em produção",
-         x = NULL, y = "T1 mediano (horas)", colour = NULL,
-         caption = paste("Fonte: ANTAQ. Datas de tratamento em config/digital_interventions.yml.",
-                         "Descritivo: não constitui estimativa causal.")) +
-    guides(colour = guide_legend(nrow = 3)) + TEMA
-  salvar_fig(p2, "fig02_coortes_psp", h = 4.6)
+  # ---- Figura 2: T2 e T4 por coorte de adoção (descritivo) ----
+  source(file.path(raiz, "R", "15_event_study.R"))   # COORTES_PSP
+  coorte_t <- as.data.table(dbGetQuery(con, "
+    SELECT pc.cdtup, pc.tipo_autoridade, pc.ano, (pc.mes - 1) // 3 + 1 AS tri, t.t2, t.t4
+    FROM port_calls pc JOIN port_call_times t USING (id_atracacao)
+    WHERE pc.flag_mov_carga AND pc.tipo_navegacao IN ('Longo Curso','Cabotagem','Interior')
+      AND pc.ano BETWEEN 2010 AND 2015"))
+  coorte_t <- merge(coorte_t, COORTES_PSP[, .(cdtup, g_ano)], by = "cdtup", all.x = TRUE)
+  coorte_t[, grupo := fifelse(!is.na(g_ano), paste("Cohort", g_ano),
+                              fifelse(tipo_autoridade == "Porto Público", NA_character_, "Private terminals (TUPs)"))]
+  coorte_t <- coorte_t[!is.na(grupo)]
+  coorte_t <- melt(coorte_t, id.vars = c("grupo", "ano", "tri"), measure.vars = c("t2", "t4"),
+                   variable.name = "comp", value.name = "h")[is.finite(h)]
+  ser <- coorte_t[, .(h = median(h)), by = .(grupo, comp, data = as.Date(sprintf("%d-%02d-15", ano, 3 * tri - 1)))]
+  ser[, comp := factor(comp, levels = c("t4", "t2"),
+                       labels = c("T4: end of operation to unberthing", "T2: berthing to start of operation"))]
+  cores_coorte <- c("Cohort 2011" = unname(COR["publico"]), "Cohort 2012" = unname(COR["aqua"]),
+                    "Cohort 2013" = unname(COR["amarelo"]), "Private terminals (TUPs)" = unname(COR["tup"]))
+  marcos <- COORTES_PSP[, .(data = min(as.Date(data))), by = .(grupo = paste("Cohort", g_ano))]
+  p2 <- ggplot(ser, aes(data, h, colour = grupo)) +
+    geom_vline(data = marcos, aes(xintercept = data, colour = grupo), linetype = "dashed", linewidth = .3,
+               show.legend = FALSE) +
+    geom_line(linewidth = .5) +
+    facet_wrap(~ comp, scales = "free_y") +
+    scale_colour_manual(values = cores_coorte) +
+    scale_y_continuous(limits = c(0, NA), expand = expansion(mult = c(0, .08))) +
+    labs(x = NULL, y = "Median hours (quarterly)") + TEMA_ARTIGO
+  salvar_fig_artigo(p2, "fig02_coortes_psp", h = 3.3)
 
   # ---- Figura 3: taxa de frete ad valorem (custo de comércio observado) ----
   frete <- as.data.table(dbGetQuery(con, "
@@ -142,29 +148,22 @@ descritivas <- function(raiz = RAIZ) {
   frete[, `:=`(data = as.Date(sprintf("%d-%02d-01", ano, mes)),
                taxa = 100 * frete / fob)]
   p3 <- ggplot(frete[is.finite(taxa)], aes(data, taxa)) +
-    geom_line(colour = "#2c6fbb", linewidth = .4) +
-    geom_smooth(se = FALSE, span = .2, colour = "#c0392b", linewidth = .7) +
-    labs(title = "Custo de frete das importações marítimas brasileiras",
-         subtitle = "Frete declarado como proporção do valor FOB, mensal",
-         x = NULL, y = "Frete / FOB (%)",
-         caption = paste("Fonte: Comex Stat (MDIC), importações via marítima.",
-                         "Medida na tradição de Clark, Dollar e Micco (2004).")) +
-    TEMA
-  salvar_fig(p3, "fig03_frete_advalorem", h = 3.6)
+    geom_line(colour = COR[["publico"]], linewidth = .35, alpha = .6) +
+    geom_smooth(se = FALSE, span = .2, colour = COR[["publico"]], linewidth = .8) +
+    labs(x = NULL, y = "Freight / FOB value (%)") + TEMA_ARTIGO
+  salvar_fig_artigo(p3, "fig03_frete_advalorem", h = 3)
 
   # ---- Figura 4: cobertura e movimentação do painel ----
   cob <- painel[, .(portos = uniqueN(cdtup),
                     ton = sum(toneladas, na.rm = TRUE) / 1e6),
                 by = .(ano, tipo_autoridade)][ano < 2026]
-  p4 <- ggplot(cob, aes(ano, ton, fill = tipo_autoridade)) +
-    geom_col() +
-    scale_fill_manual(values = c("Porto Público" = "#2c6fbb", "Porto Privado (TUP)" = "#c9a227")) +
-    labs(title = "Movimentação anual registrada no painel",
-         subtitle = "Milhões de toneladas em atracações com movimentação de carga",
-         x = NULL, y = "Milhões de toneladas", fill = NULL,
-         caption = "Fonte: ANTAQ. 2026 omitido por ser ano parcial na base.") +
-    TEMA
-  salvar_fig(p4, "fig04_movimentacao", h = 3.6)
+  cob[, autoridade := factor(rotulo_autoridade(tipo_autoridade), levels = names(COR_AUTORIDADE))]
+  p4 <- ggplot(cob, aes(ano, ton, fill = autoridade)) +
+    geom_col(width = .8, colour = "white", linewidth = .3) +
+    scale_fill_manual(values = COR_AUTORIDADE) +
+    scale_y_continuous(expand = expansion(mult = c(0, .05))) +
+    labs(x = NULL, y = "Million tonnes") + TEMA_ARTIGO
+  salvar_fig_artigo(p4, "fig04_movimentacao", h = 3)
 
   # ---- Tabela 3: registro de intervenções (coortes datadas) ----
   reg <- data.table(
@@ -195,7 +194,7 @@ descritivas <- function(raiz = RAIZ) {
     FROM port_calls pc
     LEFT JOIN port_call_times t USING (id_atracacao)
     LEFT JOIN cargo_by_call  c USING (id_atracacao)
-    WHERE pc.flag_mov_carga
+    WHERE pc.flag_mov_carga AND pc.tipo_navegacao IN ('Longo Curso','Cabotagem','Interior')
     GROUP BY 1 ORDER BY 1"))
   qual[, Atracacoes := format(Atracacoes, big.mark = ",")]
   setnames(qual, c("Year", "Vessel calls", "\\% with $T_1$", "\\% with $T_2$--$T_4$", "\\% with cargo"))
