@@ -1,6 +1,6 @@
 # Guia de reprodutibilidade
 
-Atualizado em 2026-09-12. Objetivo: qualquer pessoa com este repositório, os
+Atualizado em 2026-09-22. Objetivo: qualquer pessoa com este repositório, os
 dados brutos públicos e R 4.4 reconstrói **todas** as tabelas, figuras e
 macros do manuscrito com um único `targets::tar_make()`.
 
@@ -35,13 +35,15 @@ Nada é instalado globalmente; `renv` isola a biblioteca dentro do projeto.
 | ANTAQ Estatístico Aquaviário (consolidado 2010–2026) | `data/raw/antaq/estatistico.zip` (909 MB) | `R/03_download_antaq.R` (URL em `config/data_sources.yml`) | `data/metadata/download_log.csv` (SHA-256) |
 | Comex Stat (NCM, exportação e importação, 2010–2026) | `data/raw/comex/*.csv` | `R/04_download_comex.R` e `python/validate_downloads.py` (confere `Content-Range`; reenvia truncados) | idem |
 | Portarias SEP do Porto Sem Papel (DOU) | `data/documents/interventions/PSP/dou/**` (não versionado) | `python/scan_dou_legacy.py` (visualizador legado do DOU) + páginas do in.gov.br | **versionado**: `data/metadata/psp_portarias_dou.csv`, `psp_portarias_ingovbr.csv`, `dou_scan_2012_hits.csv` |
+| Malha das UFs (IBGE 2024) | `data/raw/ibge/BR_UF_2024.zip` (14,7 MB) | geoftp.ibge.gov.br (URL no log) | idem; usada só no mapa (fig11) |
+| Apagões de registro (curado) | — | diagnóstico por porto-mês (decisão 41) | **versionado**: `data/metadata/lacunas_registro.csv` |
 | Crosswalk URF → porto | — | `python/build_urf_crosswalk.py` + revisão manual | `data/metadata/crosswalk_urf_cdtup.csv` |
 
 Regra: brutos imutáveis; reproduzir = rebaixar e conferir o hash.
 
 ## 3. Pipeline (`_targets.R`)
 
-O DAG tem 38 alvos e encadeia os scripts de `scripts/` na ordem de dependência
+O DAG tem 42 alvos e encadeia os scripts de `scripts/` na ordem de dependência
 real. Cada script continua executável sozinho; no pipeline ele roda num
 subprocesso (`R/23_pipeline_helpers.R::rodar_script`) com log em
 `outputs/logs/pipeline/NN_*.log`, e o alvo devolve os arquivos que o script
@@ -64,6 +66,8 @@ insumos rastreados: alterar um deles invalida só o que depende dele.
 | PPML e frete observado | `ppml` | 20 | `ppml_trade.csv` | 5 s |
 | Mecanismo (cabotagem recorrente) | `mecanismo_cabotagem` | 21 | `cabotage_mechanism.csv` | 1,9 min |
 | Placebo de antecipação + HonestDiD | `placebo_honest` | 22 | `placebo_honest.txt` | 6,6 min |
+| Limites de Lee (T2/T4) | `limites_lee` | 26 | tab12, `lee_bounds.csv` | ver log |
+| Figuras de submissão | `figuras_submissao` | 25 | fig10–14 (calendário, mapa, event studies, estimativas) | ver log |
 | Tabelas de resultados + macros | `tabelas_resultados` | 24 | tab07–11, `macros_resultados.csv` | 3 s |
 | Manuscrito | `overleaf` | 12 | `article/latex/numbers.tex`, `outputs/overleaf.zip` | 4 s |
 

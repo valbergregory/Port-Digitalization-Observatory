@@ -23,7 +23,7 @@ for (nav in c("Longo Curso", "Cabotagem", "Interior")) {
     pre <- coeftable(m); pre <- mean(pre[grepl("^t::-([2-9]|1[0-2])(:|$)", rownames(pre)), "Estimate"])
     linha <- data.table(navegacao = nav, outcome = y, n = nobs(fit$m), portos = w$G,
                         sunab_att = round(ag["Estimate"],3), sunab_se = round(ag["Std. Error"],3), pre_tend = round(pre,3),
-                        did_beta = round(ct["Estimate"],3), p_cl = round(ct["Pr(>|t|)"],3), p_wcb = round(w$p_wcb,3))
+                        did_beta = round(ct["Estimate"],3), did_se = round(ct["Std. Error"],3), p_cl = round(ct["Pr(>|t|)"],3), p_wcb = round(w$p_wcb,3))
     res[[length(res)+1]] <- linha
     cat(sprintf("%-12s %-5s N=%6d G=%2d | sunab ATT=%7.3f (se %.3f) pre=%6.3f | DiD beta=%7.3f p_cl=%.3f p_wcb=%.3f\n",
                 nav, y, linha$n, linha$portos, linha$sunab_att, linha$sunab_se, linha$pre_tend, linha$did_beta, linha$p_cl, linha$p_wcb))

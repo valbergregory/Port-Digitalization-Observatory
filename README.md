@@ -1,119 +1,150 @@
-# Port Digitalization, Efficiency and Trade Costs: Evidence from Brazilian Ports
+# Brazilian Port Digital Transformation Observatory
 
-Projeto de pesquisa: efeitos causais da digitalização portuária sobre tempos
-operacionais, eficiência técnica e custos de comércio nos portos brasileiros,
-combinado com a construção de um Sistema de Informação — o **Brazilian Port
-Digital Transformation Observatory**.
+**Port digitalization, information quality and operational times: evidence from Brazil's *Porto Sem Papel* single window**
 
-Títulos de trabalho:
+> [!WARNING]
+> **Work in progress.** This is a research compendium under active development.
+> Results, figures and text are **preliminary, not peer reviewed and may change
+> without notice**. Please do not cite the numbers as final findings.
+>
+> **© 2026 Valber Gregory. All rights reserved.** The repository is public for
+> transparency and reproducibility review only; see [LICENSE](LICENSE) and
+> [LICENSING.md](LICENSING.md). Citation is welcome ([how to cite](#how-to-cite)).
+>
+> **Trabalho em andamento — todos os direitos reservados.** Resultados
+> preliminares, sem revisão por pares; sujeitos a mudança. Veja [LICENSE](LICENSE).
 
-1. *Port Digitalization, Efficiency and Trade Costs: Evidence from Brazilian Ports*
-2. *Does Port Digitalization Reduce Vessel Delays and Trade Costs? Evidence from Brazil*
-3. *Digitalizing Port Processes: Design and Causal Evaluation of a Port
-   Transformation Observatory* (orientação Sistemas de Informação)
+<p align="center">
+  <img src="docs/gallery/fig11_map.png" width="780" alt="Map of Brazilian port facilities by single-window treatment status">
+</p>
 
-## Arquitetura
+## What this is
 
-R-first, com SQL/DuckDB como camada de dados e Python como auxiliar:
+Between July 2011 and April 2013, Brazil made the *Porto Sem Papel* (PSP)
+maritime single window mandatory, port by port. This project combines
 
-| Camada | Ferramenta | Papel |
+- **1.34 million vessel calls** (ANTAQ waterway statistics, 2010–2026),
+- **foreign-trade flows with observed freight costs** (Comex Stat, 2010–2026), and
+- a **curated registry of the adoption dates**, read from the full text of the
+  ordinances in the Official Gazette (DOU): 23 ports dated, 21 with high confidence,
+
+into a reproducible information system (DuckDB + R) and a staggered
+difference-in-differences evaluation of what the single window changed.
+
+**Preliminary reading (subject to change):** the clearest change is in *what
+the state records*, not in how long ships wait. After adoption, the share of
+vessel calls with the post-operation waiting time recorded jumps (Santos: 0 % → 93 %),
+while aggregate waiting times do not move. A documentary effect appears only
+for recurrent cabotage vessels, and its event study shows a pre-existing
+downward trend, so it is not yet interpretable as causal.
+
+## Gallery
+
+| Staggered adoption, dated from official acts | Recording of $T_4$ by port and year |
+|---|---|
+| <img src="docs/gallery/fig10_rollout.png" width="420"> | <img src="docs/gallery/fig07_cobertura_t4.png" width="420"> |
+| **Event study: probability that $T_4$ is recorded** | **Event study: recurrent cabotage vessels** |
+| <img src="docs/gallery/fig13_es_coverage.png" width="420"> | <img src="docs/gallery/fig12_es_cabotage.png" width="420"> |
+| **Estimates by sample, with Lee bounds** | **Components of the stay in port** |
+| <img src="docs/gallery/fig14_estimates.png" width="420"> | <img src="docs/gallery/fig01_distribuicao_t1.png" width="420"> |
+
+Event studies: Sun–Abraham estimator, port and month fixed effects, standard
+errors clustered by port; shaded bands are 95 % uniform (sup-*t*) bands, thin
+lines pointwise 95 % intervals.
+
+## Reproducing the results (R)
+
+Everything in the manuscript — every table, figure and every number quoted in
+the text (`article/latex/numbers.tex`) — is produced by one `targets` pipeline.
+No number is typed by hand.
+
+**1. Environment** (R 4.4.3; packages pinned in `renv.lock`)
+
+```r
+# from the project root
+renv::restore()                          # recreates the exact package library
+source("scripts/00_check_environment.R") # checks R, packages, DuckDB, LaTeX
+```
+
+**2. Raw data** (public sources, not redistributed; each download is logged with
+URL, date and SHA-256 in `data/metadata/download_log.csv`)
+
+| Source | File | How |
 |---|---|---|
-| Armazenamento / consulta | **DuckDB + Parquet** | atracações, painel porto–mês, tratamento digital, amostras congeladas |
-| Econometria / pipeline / artigo | **R 4.4.3** (targets, fixest, did, data.table, quarto) | fronteira estocástica, DiD Callaway–Sant'Anna, event study, PPML, figuras, tabelas, manuscrito |
-| Extração documental | **Python 3.13** | OCR e mineração de atos oficiais para datar intervenções digitais; process mining (se houver event logs) |
+| ANTAQ waterway statistics 2010–2026 | `data/raw/antaq/estatistico.zip` (909 MB) | `R/03_download_antaq.R` |
+| Comex Stat (NCM, imports and exports) | `data/raw/comex/*.csv` | `R/04_download_comex.R` + `python/validate_downloads.py` |
+| IBGE state boundaries 2024 | `data/raw/ibge/BR_UF_2024.zip` (14.7 MB) | URL in `download_log.csv` |
+| PSP ordinances (DOU) | versioned registry `data/metadata/psp_portarias_dou.csv` | `python/scan_dou_legacy.py` |
 
-## Ponto de partida
+**3. Pipeline**
 
-- `docs/feasibility_report.md` — **comece aqui**: o que foi testado em
-  2026-09-03, o que funciona, o que está bloqueado e a recomendação.
-- `docs/research_protocol.md` — protocolo científico completo.
-- `docs/data_inventory.md` + `config/data_sources.yml` — auditoria das fontes.
-- `docs/intervention_registry_protocol.md` + `config/digital_interventions.yml`
-  — registro das intervenções digitais candidatas e regras de datação.
-- `docs/variable_concepts.md` — dicionário conceitual dos tempos operacionais
-  (T1–T4, TA, TE), extraído dos metadados oficiais da ANTAQ.
-- `docs/decisions_log.md` — decisões não óbvias, datadas.
-- `docs/writing_guide.md` — guia de redação: dados, método passo a passo,
-  equações e a leitura de cada tabela e figura.
-- `docs/reproducibility_guide.md` — ambiente, dados brutos, pipeline, testes.
-- `_targets.R` — pipeline completo (38 alvos: DuckDB → estimações → tabelas →
-  `numbers.tex`/Overleaf); `targets::tar_make()` reconstrói tudo.
-- `scripts/` — os mesmos passos como scripts autônomos (Background Jobs / terminal).
-
-## Estado (2026-09-12)
-
-- **Dados**: ANTAQ Estatístico Aquaviário consolidado (1 340 891 atracações,
-  2010–2026, 257 instalações) e Comex Stat NCM (487 419 fluxos URF × país ×
-  mês, com frete e seguro observados nas importações) em
-  `data/processed/observatory.duckdb`; hashes em `data/metadata/download_log.csv`.
-- **Tratamento**: Porto Sem Papel datado pela **entrada em produção** — nove
-  portarias SEP localizadas nas íntegras do DOU (23 portos; 21 com confiança
-  alta). Treze portos públicos sem portaria estão fora da amostra até a
-  resposta do pedido LAI (Fala.BR 55001.000806/2026-27, prazo 05/10/2026).
-- **Resultados** (todos gerados pelo pipeline; ver `docs/writing_guide.md`):
-  nenhum efeito robusto do PSP sobre os tempos agregados; efeito só na
-  cabotagem recorrente (T4, −17 %, *p* WCB 0,02); PPML e frete ad valorem
-  nulos; fronteira estocástica = associação; **achado central: a digitalização
-  muda o que se registra** (cobertura de T4 em Santos 0 % → 93 %).
-- **Manuscrito**: periódico-alvo **Government Information Quarterly** (classe
-  `elsarticle`, revisão duplamente anônima: `main.tex` + `title_page.tex` +
-  `highlights.tex`); 11 tabelas, 9 figuras, 32 macros, 34 referências
-  conferidas no Crossref; prosa a cargo do autor (marcadores `\PROSA`).
-- **Testes**: `pytest tests/python` (parser do DOU) e `testthat` (registro,
-  coortes, WCB/permutação) — 99 expectativas.
-
-## Manuscrito (LaTeX / Overleaf)
-
-O manuscrito vive em `article/latex/` e é montado pelo pipeline:
-
-```powershell
-# gera figuras e tabelas a partir do DuckDB
-Rscript scripts/11_run_descriptives.R
-# gera numbers.tex (macros com os números reais) e empacota outputs/overleaf.zip
-Rscript scripts/12_export_overleaf.R
+```r
+targets::tar_make()        # full rebuild (~50 min on a laptop once DuckDB is built)
+targets::tar_outdated()    # what is out of date
+targets::tar_visnetwork()  # dependency graph
 ```
 
-No Overleaf: **New Project → Upload Project → `outputs/overleaf.zip`**.
+The DAG (`_targets.R`) runs `scripts/09` → `26` in dependency order: DuckDB
+ingestion → descriptives → event studies and DiD at the vessel-call level →
+few-cluster inference (wild cluster bootstrap, permutation) → coverage
+(information-quality) results → heterogeneity, placebo and HonestDiD → Lee
+bounds → figures → tables and macros → `outputs/overleaf.zip`. Each script also
+runs on its own (`Rscript scripts/NN_*.R`).
 
-Regra do projeto: **nenhum número é digitado à mão no texto**. Todos os
-valores citados vêm de `numbers.tex`, gerado do banco; resultados ainda não
-estimados aparecem como `[RESULT TO BE GENERATED]`.
+**4. Tests**
 
-## Observatório (Shiny)
-
-```powershell
-Rscript scripts/07_launch_dashboard.R   # http://localhost:4200
+```r
+testthat::test_dir("tests/testthat")   # registry, cohorts, sample rules, WCB/permutation
+```
+```bash
+python -m pytest tests/python          # DOU ordinance parser
 ```
 
-Quatro painéis sobre o DuckDB auditado: intervenções (mapa + portarias do
-DOU), tempos operacionais por porto, qualidade da informação (cobertura de
-T4) e exportação das amostras dos estimandos.
+Full details, timings and known pitfalls: [`docs/reproducibility_guide.md`](docs/reproducibility_guide.md).
+Non-obvious choices are dated in [`docs/decisions_log.md`](docs/decisions_log.md).
 
-## Execução rápida (Windows, esta máquina)
+## Repository map
 
-```powershell
-# RStudio (Console ou Background Job) — checagem do ambiente
-source("scripts/00_check_environment.R")
+| Path | Content |
+|---|---|
+| `R/` | functions: data building, DiD models, inference, figure theme |
+| `scripts/` | numbered, runnable steps orchestrated by `_targets.R` |
+| `sql/` | DuckDB schema |
+| `python/` | DOU mining and download validation |
+| `data/metadata/` | versioned curated metadata (ordinances, crosswalk, reporting-gap registry, download log) |
+| `article/latex/` | manuscript sources (Elsevier `elsarticle`, anonymised for review) |
+| `app/` | Shiny observatory (`Rscript scripts/07_launch_dashboard.R`, port 4200) |
+| `docs/` | protocol, data inventory, identification strategy, writing guide, gallery |
 
-# Teste de acesso às fontes
-source("scripts/01_test_data_access.R")
+## How to cite
+
+The work has not been published yet. If you need to refer to it, cite the
+repository with its version and access date (metadata in [`CITATION.cff`](CITATION.cff);
+GitHub's *Cite this repository* button produces APA and BibTeX):
+
+> Gregory, V. (2026). *Brazilian Port Digital Transformation Observatory: Port
+> Digitalization, Information Quality and Operational Times* (Version 0.2.0,
+> work in progress) [Research compendium]. GitHub.
+> https://github.com/valbergregory/Port-Digitalization-Observatory
+
+```bibtex
+@misc{gregory2026observatory,
+  author       = {Gregory, Valber},
+  title        = {Brazilian Port Digital Transformation Observatory: Port Digitalization,
+                  Information Quality and Operational Times},
+  year         = {2026},
+  note         = {Version 0.2.0, work in progress. All rights reserved},
+  howpublished = {\url{https://github.com/valbergregory/Port-Digitalization-Observatory}}
+}
 ```
 
-R está em `C:\Program Files\R\R-4.4.3` (fora do PATH; o RStudio o encontra).
+Once a paper or an archived release with a DOI exists, this section will point
+to it.
 
-## Repositório e licença
+## Em português
 
-Code: MIT ([LICENSE](LICENSE)). Text, documentation and data: see [LICENSING.md](LICENSING.md).
-
-- GitHub: <https://github.com/valbergregory/Port-Digitalization-Observatory>
-- Código sob licença MIT (ver `LICENSE`). Dados brutos não são distribuídos:
-  provêm de fontes públicas (ANTAQ, Comex Stat) e são reconstruíveis pelo
-  pipeline com os checksums de `data/metadata/download_log.csv`.
-
-## Política de dados
-
-- `data/raw/` **nunca** é commitado; cada download é registrado em
-  `data/metadata/download_log.csv` com URL, data e SHA-256.
-- Datas de tratamento vêm da **entrada em produção** dos sistemas, nunca do
-  anúncio; intervenções de baixa confiança ficam fora do modelo principal.
-- Nenhum resultado é inventado: o manuscrito usa `[RESULT TO BE GENERATED]`.
+Compêndio de pesquisa sobre o *Porto Sem Papel*: 1,34 milhão de atracações da
+ANTAQ, comércio exterior do Comex Stat com frete observado e datas de adoção
+lidas nas íntegras das portarias do DOU. Tudo é reproduzível em R com
+`renv::restore()` e `targets::tar_make()`. **Trabalho em andamento; resultados
+preliminares; todos os direitos reservados.** Contato: valber.gregory@gmail.com

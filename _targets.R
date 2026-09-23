@@ -19,6 +19,7 @@
 # Pré-requisitos fora do pipeline (downloads grandes, feitos uma vez):
 #   data/raw/antaq/estatistico.zip     (R/03_download_antaq.R, 909 MB)
 #   data/raw/comex/*.csv               (R/04_download_comex.R + python/validate_downloads.py)
+#   data/raw/ibge/BR_UF_2024.zip       (malha das UFs, IBGE geoftp, 14,7 MB; ver download_log)
 # A fase de viabilidade (scripts/02_run_feasibility.R) foi substituída por este DAG.
 
 library(targets)
@@ -39,8 +40,10 @@ list(
   tar_target(raw_comex, sort(list.files("data/raw/comex", pattern = "\\.csv$", full.names = TRUE)),
              format = "file"),
   tar_target(registro_psp, c("config/digital_interventions.yml",
-                             "data/metadata/psp_portarias_dou.csv"), format = "file"),
+                             "data/metadata/psp_portarias_dou.csv",
+                             "data/metadata/lacunas_registro.csv"), format = "file"),
   tar_target(crosswalk_urf, "data/metadata/crosswalk_urf_cdtup.csv", format = "file"),
+  tar_target(malha_uf, "data/raw/ibge/BR_UF_2024.zip", format = "file"),
   tar_target(fontes_tex, c("article/references.bib", "article/latex/main.tex",
                            sort(list.files("article/latex/sections", full.names = TRUE)),
                            sort(list.files("article/latex/tikz", full.names = TRUE))),
@@ -63,6 +66,8 @@ list(
   tar_target(s22, "scripts/22_placebo_honest.R",        format = "file"),
   tar_target(s23, "scripts/23_frontier_second_pass.R",  format = "file"),
   tar_target(s24, "scripts/24_results_tables.R",        format = "file"),
+  tar_target(s25, "scripts/25_submission_figures.R",    format = "file"),
+  tar_target(s26, "scripts/26_lee_bounds.R",            format = "file"),
 
   # ---- 1. dados -----------------------------------------------------------
   tar_target(duckdb_calls, {
@@ -136,6 +141,18 @@ list(
     "outputs/models/sfa_second_pass.txt"),
     deps = list(codigo_R, duckdb_calls, fronteira)), format = "file"),
 
+  tar_target(limites_lee, rodar_script(s26, c(
+    "outputs/tables/lee_bounds.csv", "outputs/tables/tab12_lee_bounds.tex", "outputs/models/lee_bounds.txt"),
+    deps = list(codigo_R, duckdb_calls)), format = "file"),
+
+  # figuras de submissão (fig10–14): calendário, mapa, event studies, estimativas
+  tar_target(figuras_submissao, rodar_script(s25, c(
+    paste0("outputs/figures/", c("fig10_rollout", "fig11_map", "fig12_es_cabotage",
+                                 "fig13_es_coverage", "fig14_estimates"), ".pdf"),
+    "outputs/tables/event_study_curves.csv", "outputs/models/submission_figures.txt"),
+    deps = list(codigo_R, duckdb_calls, malha_uf, inferencia, heterogeneidade,
+                mecanismo_cabotagem, limites_lee)), format = "file"),
+
   # ---- 4. tabelas de resultados + macros ----------------------------------
   tar_target(tabelas_resultados, rodar_script(s24, c(
     paste0("outputs/tables/tab", sprintf("%02d", 7:11), c("_inferencia", "_heterogeneidade", "_placebo", "_comercio", "_fronteira"), ".tex"),
@@ -146,6 +163,7 @@ list(
   # ---- 5. manuscrito: numbers.tex + zip do Overleaf ------------------------
   tar_target(overleaf, rodar_script(s12, c("article/latex/numbers.tex", "outputs/overleaf.zip"),
     deps = list(codigo_R, fontes_tex, duckdb_calls, duckdb_trade, descritivas, event_study,
-                did_atracacao, medicao_cobertura, horizonte_longo, tabelas_resultados)),
+                did_atracacao, medicao_cobertura, horizonte_longo, tabelas_resultados,
+                limites_lee, figuras_submissao)),
     format = "file")
 )

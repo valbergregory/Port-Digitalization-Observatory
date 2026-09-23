@@ -1,6 +1,9 @@
 cff-version: 1.2.0
-message: "If you use this repository, please cite it as below."
-title: "Brazilian Port Digital Transformation Observatory: Port Digitalization, Efficiency and Trade Costs"
+message: >
+  This is a work in progress; results are preliminary and not peer reviewed.
+  If you refer to it, please cite it as below and mention the version and the
+  access date. All rights reserved (see LICENSE).
+title: "Brazilian Port Digital Transformation Observatory: Port Digitalization, Information Quality and Operational Times"
 type: software
 authors:
   - family-names: "Gregory"
@@ -8,16 +11,19 @@ authors:
     email: "valber.gregory@gmail.com"
 abstract: >
   Research compendium and information system integrating Brazilian port
-  operations (ANTAQ), foreign trade (Comex Stat) and a curated registry of
-  port digitalization interventions, used to estimate the causal effects of
-  digitalization on vessel waiting times, technical efficiency and trade.
+  operations (ANTAQ), foreign trade (Comex Stat) and a curated registry of the
+  Porto Sem Papel single window dated from official ordinances, used to
+  estimate how port digitalization changed vessel times, the information the
+  regulator records, technical efficiency and trade costs. Work in progress.
 keywords:
   - port digitalization
-  - maritime economics
-  - trade costs
-  - stochastic frontier
+  - maritime single window
+  - information quality
+  - digital government
   - difference-in-differences
-  - information systems
-license: MIT
-version: "0.0.1"
-date-released: "2026-09-03"
+  - Brazil
+repository-code: "https://github.com/valbergregory/Port-Digitalization-Observatory"
+url: "https://github.com/valbergregory/Port-Digitalization-Observatory"
+license-url: "https://github.com/valbergregory/Port-Digitalization-Observatory/blob/main/LICENSE"
+version: "0.2.0"
+date-released: "2026-09-22"

@@ -44,3 +44,4 @@ data/raw/comex/IMP_2023.csv;9b33eb6151390d50516e490b2b02d639f75af90c37baac15fa2f
 data/raw/comex/IMP_2024.csv;d0e7cce0b93d2a6d80f8bf7cf898264dba8144f25679ff0a5fa669a3cdc505e0;166729221;https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/IMP_2024.csv;2026-09-07;Comex bulk NCM
 data/raw/comex/IMP_2025.csv;b2bca7c775bf361ddb9fb3f3807e05504e9d5f7dd163e0c7a3b93e59aa81628c;175549886;https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/IMP_2025.csv;2026-09-07;Comex bulk NCM
 data/raw/comex/IMP_2026.csv;2caa195ab4d85ee14a6da1827f50d87dc20ee75c7f9224d6eaa295170a670449;120181098;https://balanca.economia.gov.br/balanca/bd/comexstat-bd/ncm/IMP_2026.csv;2026-09-07;Comex bulk NCM
+data/raw/ibge/BR_UF_2024.zip;be61a1e11bf86b265098b5a0b02eb836237421ad73354b1f0892fb6be4598866;14674008;https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2024/Brasil/BR_UF_2024.zip;2026-09-22;malha das UFs 2024 (IBGE) para o mapa da fig11

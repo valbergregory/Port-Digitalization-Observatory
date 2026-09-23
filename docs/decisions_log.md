@@ -267,3 +267,34 @@ Formato: data — decisão — justificativa — alternativas rejeitadas.
     (ex-§15) → Apêndice C**; nova §14 "Implications for digital government".
     Corpo renumerado (identificação §8, resultados §9, … conclusão §16).
     Guia de redação com §0 sobre a GIQ. Compila: 24 páginas em modo review.
+41. **Amostra restrita à navegação comercial e registro curado de apagões
+    (22/09, decisão do pesquisador)**. Diagnóstico das anomalias da fig07:
+    (a) **Porto Alegre** — a queda de cobertura de T4 (83% → 19% em 2013) é
+    de composição: a partir de 2013 entram ~400 escalas/ano de *Apoio
+    Portuário* com 0% de T4, enquanto longo curso e cabotagem seguem ~100%;
+    (b) **Fortaleza** — apagão de registro de T2/T4 de nov/2013 a ago/2018
+    (cobertura 0% em Cais Comercial e Píer Petroleiro; volta a ~90% em
+    set/2018), alheio ao PSP (30/04/2012); (c) **Manaus** — ~23 escalas/ano
+    no porto público, já fora por falta de pré-período. A base de estimação
+    trazia 143 mil escalas de Apoio Portuário/Marítimo (6,5 mil na amostra
+    A). Regras: (1) `NAVEGACAO_COMERCIAL` = longo curso, cabotagem e
+    interior em `montar_atracacoes()`, no painel porto-mês
+    (`scripts/09`), na tab04 e na recorrência de navios (`scripts/21`);
+    (2) `data/metadata/lacunas_registro.csv` (curado, com evidência): nos
+    meses listados as variáveis viram NA e a atracação é marcada
+    (`lacuna_registro`), saindo dos modelos de cobertura (H11). Os terminais
+    privados que só passam a informar T4 em 2012 NÃO entram no registro:
+    é início de registro, não apagão — e é o mesmo fenômeno de H11.
+    Testes: `tests/testthat/test-amostra-atracacoes.R`. Pipeline completo
+    reexecutado (log `outputs/logs/tar_make_2026-09-22_decisao41.log`).
+    **Efeito da decisão 41 nos resultados (1ª rodada, 22/09, 47 min)**:
+    tempos praticamente inalterados — T2 completo −0,094 (p_wcb 0,38; antes
+    −0,105/0,30), T4 −0,027 (0,80), cabotagem recorrente T4 −0,188
+    (p_wcb 0,019; antes −0,185/0,020); cobertura (tab06, desenho B)
+    0,160 (p 0,09; antes 0,115/0,18). **A fronteira estocástica INVERTEU
+    o sinal**: PSP na variância da ineficiência passou de −0,241 (p 0,14)
+    para +0,498 (p 0,02) no translog porto-ano e de −0,290 para +0,206 no
+    porto-mês — as escalas de apoio entravam no insumo horas-berço. Leitura:
+    a fronteira é frágil à definição do insumo e não sustenta conclusão em
+    nenhuma direção (Apêndice B segue como associação; o texto já é neutro).
+    Painel porto-mês: 31.917 → 29.461 linhas (251 instalações).

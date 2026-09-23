@@ -16,6 +16,17 @@ difference-in-differences estimates.
 
 \input{tables/tab06_cobertura_efeito}
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig13_es_coverage.pdf}
+\caption{Event study of the probability that $T_4$ is recorded, dated public ports against
+never-treated private terminals, 2010--2015. Sun--Abraham estimator with port and
+month fixed effects; month $-1$ is the reference. Shaded band: 95\% uniform
+(sup-$t$) band \citep{montielolea2019}; vertical lines: pointwise 95\% intervals; standard errors
+clustered by port. Source: ANTAQ waterway statistics, own elaboration.}
+\label{fig:escoverage}
+\end{figure}
+
 \PROSA
 
 \subsection{Operational times: no aggregate effect}
@@ -31,8 +42,10 @@ the physical queue ($T_1$) shows no movement (\Cref{tab:inferencia}).
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{fig02_coortes_psp.pdf}
-\caption{Median waiting time by Porto Sem Papel adoption cohort. Dashed lines
-mark production start dates. Descriptive evidence only.}
+\caption{Documentary waiting times by adoption cohort, quarterly medians,
+2010--2015. Dashed lines mark the first production date of each cohort.
+Raw medians mix changes in times with changes in which calls are recorded
+(\Cref{sec:res_info}); descriptive evidence only. Source: ANTAQ waterway statistics, own elaboration.}
 \label{fig:cohorts}
 \end{figure}
 
@@ -48,6 +61,18 @@ shorter, wild-bootstrap $p=\CabRecTquatroPwcb$; \Cref{tab:heterog}).
 
 \input{tables/tab08_heterogeneidade}
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig12_es_cabotage.pdf}
+\caption{Event study of documentary waiting times for recurrent cabotage vessels (three or
+more calls at the same port in the previous twelve months), design A
+(not-yet-treated public ports, 2010--2013). Sun--Abraham estimator with port,
+month and navigation fixed effects and cargo controls; month $-1$ is the
+reference. Shaded band: 95\% uniform (sup-$t$) band \citep{montielolea2019}; vertical lines: pointwise
+95\% intervals; standard errors clustered by port. Source: ANTAQ waterway statistics, own elaboration.}
+\label{fig:escabotage}
+\end{figure}
+
 \PROSA
 
 \subsection{Long-run dynamics, 2010--2026}
@@ -56,8 +81,11 @@ shorter, wild-bootstrap $p=\CabRecTquatroPwcb$; \Cref{tab:heterog}).
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{fig08_horizonte_longo.pdf}
-\caption{Long-horizon event study for documentary waiting times ($T_2$, $T_4$),
-private terminals as never-treated reference. Exploratory.}
+\caption{Long-horizon event study for documentary waiting times, dated public
+ports against never-treated private terminals, 2010--2026. Sun--Abraham
+estimator with port, month and navigation fixed effects and cargo controls.
+Shaded band: 95\% uniform (sup-$t$) band \citep{montielolea2019}; vertical lines: pointwise 95\%
+intervals; standard errors clustered by port. Source: ANTAQ waterway statistics, own elaboration.}
 \label{fig:longrun}
 \end{figure}
 
