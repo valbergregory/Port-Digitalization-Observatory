@@ -43,7 +43,7 @@ Regra: brutos imutáveis; reproduzir = rebaixar e conferir o hash.
 
 ## 3. Pipeline (`_targets.R`)
 
-O DAG tem 42 alvos e encadeia os scripts de `scripts/` na ordem de dependência
+O DAG tem 44 alvos e encadeia os scripts de `scripts/` na ordem de dependência
 real. Cada script continua executável sozinho; no pipeline ele roda num
 subprocesso (`R/23_pipeline_helpers.R::rodar_script`) com log em
 `outputs/logs/pipeline/NN_*.log`, e o alvo devolve os arquivos que o script
@@ -67,6 +67,7 @@ insumos rastreados: alterar um deles invalida só o que depende dele.
 | Mecanismo (cabotagem recorrente) | `mecanismo_cabotagem` | 21 | `cabotage_mechanism.csv` | 1,9 min |
 | Placebo de antecipação + HonestDiD | `placebo_honest` | 22 | `placebo_honest.txt` | 6,6 min |
 | Limites de Lee (T2/T4) | `limites_lee` | 26 | tab12, `lee_bounds.csv` | ver log |
+| Sensibilidade a pré-tendências (tendência por porto, HonestDiD em trimestres) | `sensibilidade_pretendencia` | 27 | tab13, fig15, `coverage_jump_by_port.csv` | ver log |
 | Figuras de submissão | `figuras_submissao` | 25 | fig10–14 (calendário, mapa, event studies, estimativas) | ver log |
 | Tabelas de resultados + macros | `tabelas_resultados` | 24 | tab07–11, `macros_resultados.csv` | 3 s |
 | Manuscrito | `overleaf` | 12 | `article/latex/numbers.tex`, `outputs/overleaf.zip` | 4 s |

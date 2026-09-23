@@ -68,6 +68,7 @@ list(
   tar_target(s24, "scripts/24_results_tables.R",        format = "file"),
   tar_target(s25, "scripts/25_submission_figures.R",    format = "file"),
   tar_target(s26, "scripts/26_lee_bounds.R",            format = "file"),
+  tar_target(s27, "scripts/27_pretrend_sensitivity.R",  format = "file"),
 
   # ---- 1. dados -----------------------------------------------------------
   tar_target(duckdb_calls, {
@@ -145,6 +146,12 @@ list(
     "outputs/tables/lee_bounds.csv", "outputs/tables/tab12_lee_bounds.tex", "outputs/models/lee_bounds.txt"),
     deps = list(codigo_R, duckdb_calls)), format = "file"),
 
+  tar_target(sensibilidade_pretendencia, rodar_script(s27, c(
+    "outputs/tables/pretrend_sensitivity.csv", "outputs/tables/honestdid_smoothness.csv",
+    "outputs/tables/coverage_jump_by_port.csv", "outputs/tables/tab13_pretrend.tex",
+    "outputs/figures/fig15_honestdid.pdf", "outputs/models/pretrend_sensitivity.txt"),
+    deps = list(codigo_R, duckdb_calls)), format = "file"),
+
   # figuras de submissão (fig10–14): calendário, mapa, event studies, estimativas
   tar_target(figuras_submissao, rodar_script(s25, c(
     paste0("outputs/figures/", c("fig10_rollout", "fig11_map", "fig12_es_cabotage",
@@ -164,6 +171,6 @@ list(
   tar_target(overleaf, rodar_script(s12, c("article/latex/numbers.tex", "outputs/overleaf.zip"),
     deps = list(codigo_R, fontes_tex, duckdb_calls, duckdb_trade, descritivas, event_study,
                 did_atracacao, medicao_cobertura, horizonte_longo, tabelas_resultados,
-                limites_lee, figuras_submissao)),
+                limites_lee, figuras_submissao, sensibilidade_pretendencia)),
     format = "file")
 )

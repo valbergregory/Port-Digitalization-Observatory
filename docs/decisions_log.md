@@ -298,3 +298,23 @@ Formato: data — decisão — justificativa — alternativas rejeitadas.
     a fronteira é frágil à definição do insumo e não sustenta conclusão em
     nenhuma direção (Apêndice B segue como associação; o texto já é neutro).
     Painel porto-mês: 31.917 → 29.461 linhas (251 instalações).
+42. **Teste de pré-tendências (23/09) — a narrativa depende de decisão do
+    autor**. A fig12 mostrou queda de T2/T4 na cabotagem ANTES da adoção.
+    `scripts/27_pretrend_sensitivity.R` (tab13, fig15) testa por dois
+    caminhos. (a) DiD com tendência linear própria de cada porto
+    (`cdtup[t]`, WCB 999): cabotagem T4 −0,172 → −0,028 (p_wcb 0,47);
+    recorrentes T4 −0,188 → −0,040 (p_wcb 0,06); recorrentes T2 −0,317 →
+    −0,113 (p_wcb 0,06). (b) HonestDiD, restrição de suavidade, event study
+    em TRIMESTRES (a versão mensal deu intervalos não monotônicos em M —
+    instabilidade numérica com 24 coeficientes ruidosos; descartada): com
+    M = 0 (tendência pré extrapolada linearmente) T4 cabotagem [−0,02;
+    0,18], recorrentes [−0,28; 0,02]; T2 vira positivo. **Leitura: o efeito
+    documental da cabotagem é, em grande parte, continuação de tendência
+    pré-existente; não sustenta afirmação causal.** O mesmo teste na
+    cobertura de T4 (H11): DiD desenho A +0,197 (p_wcb 0,38) → +0,002 com
+    tendência por porto; desenho B +0,029/+0,042. O salto é essencialmente
+    SANTOS (0 → 67 % na janela até 2013-03; 93 % depois) e, em menor grau,
+    Natal (+23 pp); Rio salta em 2014, fora da data de adoção. **H11 é
+    defensável como estudo de caso (Santos), não como efeito médio do
+    programa.** Comentários `% ATENCAO` inseridos no 10_results.tex e nos
+    highlights; texto NÃO reescrito (prosa é do autor).

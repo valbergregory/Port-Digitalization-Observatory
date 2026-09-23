@@ -23,7 +23,7 @@
 Between July 2011 and April 2013, Brazil made the *Porto Sem Papel* (PSP)
 maritime single window mandatory, port by port. This project combines
 
-- **1.34 million vessel calls** (ANTAQ waterway statistics, 2010–2026),
+- **1.18 million commercial vessel calls with cargo** (ANTAQ waterway statistics, 2010–2026),
 - **foreign-trade flows with observed freight costs** (Comex Stat, 2010–2026), and
 - a **curated registry of the adoption dates**, read from the full text of the
   ordinances in the Official Gazette (DOU): 23 ports dated, 21 with high confidence,
@@ -32,11 +32,13 @@ into a reproducible information system (DuckDB + R) and a staggered
 difference-in-differences evaluation of what the single window changed.
 
 **Preliminary reading (subject to change):** the clearest change is in *what
-the state records*, not in how long ships wait. After adoption, the share of
-vessel calls with the post-operation waiting time recorded jumps (Santos: 0 % → 93 %),
-while aggregate waiting times do not move. A documentary effect appears only
-for recurrent cabotage vessels, and its event study shows a pre-existing
-downward trend, so it is not yet interpretable as causal.
+the state records*, not in how long ships wait. In Santos, the share of vessel
+calls with the post-operation waiting time recorded jumps from 0 % to 93 % with
+the single window; across all adopting ports, however, the average change in
+recording is not robust, so this is a case rather than a programme-wide effect.
+Aggregate waiting times do not move. The apparent documentary effect for
+cabotage vessels continues a pre-existing downward trend and disappears once
+port-specific trends are allowed (HonestDiD and trend-adjusted DiD).
 
 ## Gallery
 
@@ -45,8 +47,8 @@ downward trend, so it is not yet interpretable as causal.
 | <img src="docs/gallery/fig10_rollout.png" width="420"> | <img src="docs/gallery/fig07_cobertura_t4.png" width="420"> |
 | **Event study: probability that $T_4$ is recorded** | **Event study: recurrent cabotage vessels** |
 | <img src="docs/gallery/fig13_es_coverage.png" width="420"> | <img src="docs/gallery/fig12_es_cabotage.png" width="420"> |
-| **Estimates by sample, with Lee bounds** | **Components of the stay in port** |
-| <img src="docs/gallery/fig14_estimates.png" width="420"> | <img src="docs/gallery/fig01_distribuicao_t1.png" width="420"> |
+| **Estimates by sample, with Lee bounds** | **Sensitivity to pre-adoption trends (HonestDiD)** |
+| <img src="docs/gallery/fig14_estimates.png" width="420"> | <img src="docs/gallery/fig15_honestdid.png" width="420"> |
 
 Event studies: Sun–Abraham estimator, port and month fixed effects, standard
 errors clustered by port; shaded bands are 95 % uniform (sup-*t*) bands, thin
@@ -84,11 +86,11 @@ targets::tar_outdated()    # what is out of date
 targets::tar_visnetwork()  # dependency graph
 ```
 
-The DAG (`_targets.R`) runs `scripts/09` → `26` in dependency order: DuckDB
+The DAG (`_targets.R`) runs `scripts/09` → `27` in dependency order: DuckDB
 ingestion → descriptives → event studies and DiD at the vessel-call level →
 few-cluster inference (wild cluster bootstrap, permutation) → coverage
 (information-quality) results → heterogeneity, placebo and HonestDiD → Lee
-bounds → figures → tables and macros → `outputs/overleaf.zip`. Each script also
+bounds → pre-trend sensitivity → figures → tables and macros → `outputs/overleaf.zip`. Each script also
 runs on its own (`Rscript scripts/NN_*.R`).
 
 **4. Tests**
@@ -143,7 +145,7 @@ to it.
 
 ## Em português
 
-Compêndio de pesquisa sobre o *Porto Sem Papel*: 1,34 milhão de atracações da
+Compêndio de pesquisa sobre o *Porto Sem Papel*: 1,18 milhão de atracações comerciais da
 ANTAQ, comércio exterior do Comex Stat com frete observado e datas de adoção
 lidas nas íntegras das portarias do DOU. Tudo é reproduzível em R com
 `renv::restore()` e `targets::tar_make()`. **Trabalho em andamento; resultados
