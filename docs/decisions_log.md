@@ -338,3 +338,20 @@ Formato: data — decisão — justificativa — alternativas rejeitadas.
     confiança alta) e os 13 portos públicos sem portaria fora da amostra,
     como limitação declarada (§15). A planilha SEI 11844881 pode entrar
     depois como robustez, se for incorporada, sem bloquear a redação.
+45. **Resultados reescritos: Santos como estudo de caso, cabotagem como
+    pré-tendência (09/10, decisão do pesquisador)** — resolve a pendência da
+    decisão 42. §9.1 ("What the single window changed: the record in
+    Santos"): o salto de registro de T4 em Santos é o achado; os demais
+    portos entram **no mesmo artigo** como contraste (nova tab14,
+    `tab:covjump`, salto porto a porto na janela do desenho A), junto com o
+    DiD médio de cobertura com e sem tendência por porto — não há efeito
+    médio do programa. §9.3 ("An apparent documentary effect in cabotage
+    that predates adoption"): a estimativa da cabotagem recorrente é
+    reportada como armadilha de avaliação, não como efeito. Pipeline:
+    `scripts/24` ganhou 20 macros (tab13 e salto por porto) e a tab14; o
+    alvo `tabelas_resultados` passou a depender de
+    `sensibilidade_pretendencia`. Até o próximo `tar_make()` as macros novas
+    rejeitada: tirar os outros portos e a cabotagem para um segundo artigo —
+    sem o contraste, Santos deixa de ser "um caso" e vira anedota; e o
+    resultado nulo da cabotagem é parte do argumento metodológico do eixo
+    (b).

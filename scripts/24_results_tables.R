@@ -1,4 +1,4 @@
-# 24_results_tables.R — tabelas LaTeX dos resultados de 10-11/09 (tab07-tab11)
+# 24_results_tables.R — tabelas LaTeX dos resultados de 10-11/09 (tab07-tab11, tab14)
 # + CSV de macros p/ numbers.tex. Le apenas saidas do pipeline (csv/txt).
 raiz <- if (file.exists("project.Rproj")) getwd() else dirname(getwd()); setwd(raiz)
 source("R/00_setup.R"); source("R/01_config.R"); source("R/12_descriptive_analysis.R")
@@ -89,5 +89,37 @@ tabela_tex(t11, file.path(DIR_TAB, "tab11_fronteira.tex"),
 macros$SfaPspTl <- f3(tl[termo=="Zu_psp", est]); macros$SfaPspTlP <- f2(tl[termo=="Zu_psp", p]); macros$SfaPspPm <- f3(pm[termo=="Zu_psp", est])
 macros$SfaLR <- "30.6"
 
+# ---- decisao 45: pre-tendencias (tab13, script 27) e salto de cobertura por porto (tab14) ----
+pt <- fread(file.path(DIR_TAB, "pretrend_sensitivity.csv"))
+lin <- function(a, y) pt[amostra == a & outcome == y]
+cA <- lin("Coverage, design A", "tem_t4"); cB <- lin("Coverage, design B (TUPs)", "tem_t4")
+macros$CobDidABase <- f3(cA$beta_base); macros$CobDidATrend <- f3(cA$beta_trend); macros$CobDidATrendPwcb <- f2(cA$p_wcb_trend)
+macros$CobDidBBase <- f3(cB$beta_base); macros$CobDidBTrend <- f3(cB$beta_trend)
+for (s in list(c("Cabotage", "Cab"), c("Cabotage, recurrent vessels", "CabRec"))) {
+  r <- lin(s[1], "y_t4")
+  macros[[paste0(s[2], "TquatroTrend")]]     <- f3(r$beta_trend)
+  macros[[paste0(s[2], "TquatroTrendPwcb")]] <- f2(r$p_wcb_trend)
+  macros[[paste0(s[2], "TquatroHonLb")]]     <- f3(r$hon_m0_lb)
+  macros[[paste0(s[2], "TquatroHonUb")]]     <- f3(r$hon_m0_ub)
+}
+# salto de cobertura de T4 por porto tratado na janela do desenho A (2010-01..2013-03)
+source("R/15_event_study.R")   # COORTES_PSP: nome do porto e data do ato
+sj <- fread(file.path(DIR_TAB, "coverage_jump_by_port.csv"))[is.finite(salto)]
+sj <- merge(sj, COORTES_PSP[, .(cdtup, porto, adocao = format(data, "%Y-%m"))], by = "cdtup", all.x = TRUE)[order(-salto)]
+pp <- function(x) sprintf("%.0f", 100 * x); pc <- function(x) sprintf("%.0f\\%%", 100 * x)
+macros$CobSantosPreA <- pc(sj[cdtup == "BRSSZ", pre]); macros$CobSantosPosA <- pc(sj[cdtup == "BRSSZ", pos])
+macros$CobSaltoSantos <- pp(sj[cdtup == "BRSSZ", salto]); macros$CobSaltoNatal <- pp(sj[cdtup == "BRNAT", salto])
+macros$NportosSaltoA <- nrow(sj); macros$NportosSaltoDez <- sj[salto >= 0.10, .N]
+macros$CobSaltoMedianaOutros <- pp(median(sj[!cdtup %in% c("BRSSZ", "BRNAT"), salto]))
+t14 <- sj[, .(Port = fifelse(is.na(porto), cdtup, porto), Adoption = adocao,
+              `Before` = pc(pre), `After` = pc(pos), `Change (p.p.)` = sprintf("%+.0f", 100 * salto))]
+tabela_tex(t14, file.path(DIR_TAB, "tab14_salto_cobertura.tex"),
+  "Share of vessel calls with a recorded $T_4$ before and after adoption, by dated public port", "tab:covjump",
+  align = "llrrr", escape = FALSE,
+  notas = paste("Design A window (2010-01 to 2013-03), ports adopting within the window; commercial navigation",
+                "(long-haul, cabotage, inland); documented reporting blackouts excluded. Adoption: month of the",
+                "ordinance (or of the official production notice for the 2011 cohort). Before/after: share of calls",
+                "with $T_4$ recorded in the months before and from the adoption month on, within the window."))
+
 fwrite(data.table(macro = names(macros), valor = unlist(macros)), file.path(DIR_TAB, "macros_resultados.csv"))
-cat("tab07-tab11 +", length(macros), "macros\n")
+cat("tab07-tab11, tab14 +", length(macros), "macros\n")
