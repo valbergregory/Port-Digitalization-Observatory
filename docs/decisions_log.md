@@ -332,3 +332,9 @@ Formato: data — decisão — justificativa — alternativas rejeitadas.
     usou a data do ato; (d) recurso até **15/10/2026** se a página não
     trouxer o ato de algum dos 13 portos ou de Santos/Rio 2011 (o pedido
     principal pedia, na falta, a indicação do ato aplicável).
+44. **Sem recurso ao Fala.BR (09/10, decisão do pesquisador)** — a resposta
+    de 05/10 é aceita como está; não haverá recurso (prazo de 15/10 fica
+    sem uso). O artigo segue com o registro atual: 23 portos datados (21 em
+    confiança alta) e os 13 portos públicos sem portaria fora da amostra,
+    como limitação declarada (§15). A planilha SEI 11844881 pode entrar
+    depois como robustez, se for incorporada, sem bloquear a redação.

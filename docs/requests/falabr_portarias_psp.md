@@ -12,8 +12,9 @@ Nacional de Portos e Transportes Aquaviários (SNPTA)
 >
 > **RESPONDIDO em 05/10/2026 — "Acesso Concedido" (resposta conclusiva).** O MPOR não
 > anexou as portarias: remeteu à página pública do PSP (Normas → Portarias) e enviou a
-> planilha "Datas de Ativação Portos – PSP" (SEI 11844881). Recurso possível até
-> **15/10/2026**. Detalhes na decisão 43 e em `data/metadata/psp_falabr_resposta.csv`.
+> planilha "Datas de Ativação Portos – PSP" (SEI 11844881). **Sem recurso** (decisão 44:
+> o artigo segue com o registro atual). Detalhes nas decisões 43–44 e em
+> `data/metadata/psp_falabr_resposta.csv`.
 
 ---
 
