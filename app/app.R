@@ -47,7 +47,7 @@ ui <- navbarPage("Brazilian Port Digital Transformation Observatory",
         helpText("Linha tracejada: data do ato que disciplinou o uso do Porto Sem Papel no porto. Descritivo — não é estimativa causal.")))),
   tabPanel("3. Qualidade da informação",
     plotOutput("cobertura", height = 640),
-    helpText("Share de atracações com T4 registrado. A decomposição documental passa a ser reportada junto com a janela única nos maiores portos (H11).")),
+    helpText("Share de atracações com T4 registrado. Em Santos, a decomposição documental passa a ser reportada junto com a janela única; na maioria dos portos o registro não muda na adoção (H11, decisão 45).")),
   tabPanel("4. Exportar evidências",
     sidebarLayout(
       sidebarPanel(selectInput("amostra", "Amostra",
