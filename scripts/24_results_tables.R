@@ -107,6 +107,8 @@ source("R/15_event_study.R")   # COORTES_PSP: nome do porto e data do ato
 sj <- fread(file.path(DIR_TAB, "coverage_jump_by_port.csv"))[is.finite(salto)]
 sj <- merge(sj, COORTES_PSP[, .(cdtup, porto, adocao = format(data, "%Y-%m"))], by = "cdtup", all.x = TRUE)[order(-salto)]
 pp <- function(x) sprintf("%.0f", 100 * x); pc <- function(x) sprintf("%.0f\\%%", 100 * x)
+macros$Nportosdatados <- nrow(COORTES_PSP)                     # portos com data de adocao
+macros$Nportarias <- nrow(fread("data/metadata/psp_portarias_dou.csv", sep = ";", encoding = "UTF-8"))
 macros$CobSantosPreA <- pc(sj[cdtup == "BRSSZ", pre]); macros$CobSantosPosA <- pc(sj[cdtup == "BRSSZ", pos])
 macros$CobSaltoSantos <- pp(sj[cdtup == "BRSSZ", salto]); macros$CobSaltoNatal <- pp(sj[cdtup == "BRNAT", salto])
 macros$NportosSaltoA <- nrow(sj); macros$NportosSaltoDez <- sj[salto >= 0.10, .N]
