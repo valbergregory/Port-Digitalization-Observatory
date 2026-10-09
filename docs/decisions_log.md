@@ -308,3 +308,27 @@ Formato: data — decisão — justificativa — alternativas rejeitadas.
     Natal (+23 pp); Rio salta em 2014, fora da data de adoção. **H11 é
     defensável como estudo de caso (Santos), não como efeito médio do
     programa.** Comentários `% ATENCAO` inseridos no 10_results.tex e nos
+43. **Resposta do Fala.BR 55001.000806/2026-27 (05/10/2026; registrada em
+    09/10)** — Ouvidoria do MPOR, resposta conclusiva, decisão "Acesso
+    Concedido", sem prorrogação. Conteúdo: (1) Despacho nº 190/2026/CGIT
+    (SEI 11839236, 23/09) e Despacho nº 438/2026/DGMP (SEI 11853845, 24/09)
+    **não anexam as portarias**: remetem à página pública do PSP
+    (`concentrador.portosempapel.gov.br/PSP-CDP/public/pages/normas/portarias/portarias.xhtml`);
+    o anexo "Portarias_PSP.pdf" é só uma captura de tela do portal;
+    (2) o pedido subsidiário foi atendido: planilha "Datas de Ativação
+    Portos – PSP" (SEI 11844881, anexo `Cadastro_Unidade_Local__1_.xlsx`)
+    com a data de entrada em produção do Concentrador por porto,
+    extraída do sistema. Proveniência em
+    `data/metadata/psp_falabr_resposta.csv` (códigos verificadores SEI).
+    O extrato do Fala.BR e o e-mail de aviso trazem dados pessoais do
+    pesquisador e **não são versionados**. **Nenhuma data de tratamento
+    mudou ainda.** Pendências: (a) incorporar a planilha (nova fonte
+    `planilha_mpor` no registro); (b) baixar as portarias da página do PSP
+    (o host é bloqueado no ambiente de nuvem; baixar localmente para
+    `data/documents/interventions/PSP/dou/falabr/`) e rodar
+    `python/parse_dou_hits.py`; (c) decidir a regra de precedência entre
+    data do ato (DOU) e data de produção do sistema (planilha), que podem
+    divergir — regra 11 diz "entrada em produção", a prática até aqui
+    usou a data do ato; (d) recurso até **15/10/2026** se a página não
+    trouxer o ato de algum dos 13 portos ou de Santos/Rio 2011 (o pedido
+    principal pedia, na falta, a indicação do ato aplicável).

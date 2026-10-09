@@ -29,6 +29,7 @@ Conceitos das variáveis: `variable_concepts.md`.
 | `download_log.csv` | URL, data, bytes e SHA-256 de cada download bruto |
 | `psp_portarias_dou.csv` | **saída do parser** `python/parse_dou_hits.py`: portaria; data do ato (= data de tratamento); publicação; portos; prazo de migração definitiva; arquivo-fonte |
 | `psp_portarias_ingovbr.csv` | data de publicação das portarias baixadas do in.gov.br (sem pasta datada), com URL-fonte e data de obtenção — lida pelo parser |
+| `psp_falabr_resposta.csv` | proveniência da resposta ao pedido LAI Fala.BR 55001.000806/2026-27 (05/10/2026): documento; número SEI; data; emissor; conteúdo; observação (código verificador, pendências) — decisão 43 |
 | `dou_scan_2012_hits.csv` | páginas do DOU com acerto na varredura de 2012 |
 | `crosswalk_urf_cdtup.csv` | URF (Receita Federal) → porto ANTAQ (`cdtup`), com origem (auto/manual/proposto/EXCLUIDA) |
 | `references_check.csv` | veredito do Crossref para cada entrada do `.bib` |

@@ -9,6 +9,11 @@ Nacional de Portos e Transportes Aquaviários (SNPTA)
 
 > **ENVIADO em 11/09/2026 — protocolo Fala.BR 55001.000806/2026-27 — prazo de resposta 05/10/2026.**
 > Acompanhamento: https://falabr.cgu.gov.br (consultar pelo protocolo). Registrado na decisão 34.
+>
+> **RESPONDIDO em 05/10/2026 — "Acesso Concedido" (resposta conclusiva).** O MPOR não
+> anexou as portarias: remeteu à página pública do PSP (Normas → Portarias) e enviou a
+> planilha "Datas de Ativação Portos – PSP" (SEI 11844881). Recurso possível até
+> **15/10/2026**. Detalhes na decisão 43 e em `data/metadata/psp_falabr_resposta.csv`.
 
 ---
 
