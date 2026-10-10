@@ -355,3 +355,17 @@ Formato: data — decisão — justificativa — alternativas rejeitadas.
     sem o contraste, Santos deixa de ser "um caso" e vira anedota; e o
     resultado nulo da cabotagem é parte do argumento metodológico do eixo
     (b).
+46. **Lista de portos públicos corrigida (10/10)** — `TODOS_PUBLICOS`
+    (`R/15_event_study.R`) misturava 34 portos com o código `"BR"`, que
+    não é porto (registros sem CDTUP válido); `PUBLICOS_SEM_DATA` tinha 13
+    entradas, uma delas `"BR"`. Agora: `PORTOS_PUBLICOS` (34),
+    `CODIGOS_NAO_CLASSIFICADOS` (`"BR"`), `PUBLICOS_SEM_DATA` (12 portos
+    reais) e `FORA_DA_AMOSTRA` (os dois juntos), usado nos filtros de
+    `R/14` e `R/15` — **a amostra de estimação não muda**. A tab15 e a
+    fig10 deixam de precisar excluir `"BR"` à mão. Pendências que dependem
+    do DuckDB, cobertas pelo novo `tests/testthat/test-portos-publicos.R`:
+    (a) a lista coincide com os portos públicos com carga na base?; (b) qual
+    porto é `BRETL` (sem nome em `NOME_CDTUP`); (c) Laguna e Barra do
+    Riacho, pedidos no Fala.BR, não constam como porto público com carga —
+    o teste mostra como estão classificados no cadastro. Não acrescentei
+    códigos sem conferir: incluir um TUP na lista o tiraria do desenho B.

@@ -47,12 +47,21 @@ montar_coortes <- function(raiz = RAIZ) {
   co[]
 }
 COORTES_PSP <- montar_coortes()
-# Públicos ainda sem data verificada: fora da amostra (nem tratados nem controle)
-TODOS_PUBLICOS <- c("BRADR","BRANT","BRARB","BRARE","BRBEL","BRCDO","BRETL","BRFNO","BRFOR",
-                    "BRIOS","BRIBB","BRIGI","BRITJ","BRIQI","BRMCZ","BRMAO","BRNAT","BRNTR",
-                    "BRPNG","BRPET","BRPOA","BRPVH","BRREC","BRRIG","BRRIO","BRSSA","BRMCP",
-                    "BRSTM","BRSSZ","BRSUA","BRSFS","BRSSO","BRVDC","BRVIX","BR")
-PUBLICOS_SEM_DATA <- setdiff(TODOS_PUBLICOS, COORTES_PSP$cdtup)
+# Portos públicos: CDTUP com tipo_autoridade = "Porto Público" e carga movimentada na
+# base da ANTAQ (decisão 46; conferido contra o DuckDB em tests/testthat/test-portos-publicos.R).
+# BRETL é porto público na ANTAQ, ainda sem nome no mapa NOME_CDTUP (conferir no cadastro).
+# Laguna (BRLAG) e Barra do Riacho (BRES006) foram pedidos no Fala.BR, mas não aparecem como
+# porto público com carga na base; o teste informa como estão classificados.
+PORTOS_PUBLICOS <- c("BRADR","BRANT","BRARB","BRARE","BRBEL","BRCDO","BRETL","BRFNO","BRFOR",
+                     "BRIOS","BRIBB","BRIGI","BRITJ","BRIQI","BRMCZ","BRMAO","BRNAT","BRNTR",
+                     "BRPNG","BRPET","BRPOA","BRPVH","BRREC","BRRIG","BRRIO","BRSSA","BRMCP",
+                     "BRSTM","BRSSZ","BRSUA","BRSFS","BRSSO","BRVDC","BRVIX")
+# "BR": registros sem CDTUP válido, que constavam da lista antiga. Não é porto.
+CODIGOS_NAO_CLASSIFICADOS <- "BR"
+# Públicos sem data verificada: fora da amostra (nem tratados nem controle)
+PUBLICOS_SEM_DATA <- setdiff(PORTOS_PUBLICOS, COORTES_PSP$cdtup)
+# Tudo o que sai da amostra por falta de data ou de código (a amostra é a mesma de antes da decisão 46)
+FORA_DA_AMOSTRA <- c(PUBLICOS_SEM_DATA, CODIGOS_NAO_CLASSIFICADOS)
 periodo <- function(ano, mes) (ano - 2010L) * 12L + mes
 
 montar_amostra_es <- function(con, ano_ini = 2010, ano_fim = 2015,
@@ -62,7 +71,7 @@ montar_amostra_es <- function(con, ano_ini = 2010, ano_fim = 2015,
            t1_mediana_h, ta_mediana_h, te_mediana_h, t1_iqr_h, toneladas
     FROM port_month_panel
     WHERE ano BETWEEN %d AND %d", ano_ini, ano_fim)))
-  p <- p[!cdtup %in% PUBLICOS_SEM_DATA]
+  p <- p[!cdtup %in% FORA_DA_AMOSTRA]
   if (!incluir_tups) p <- p[tipo_autoridade == "Porto Público" | cdtup == "BRCE001"]
   p <- merge(p, COORTES_PSP[, .(cdtup, g_ano, g_mes)], by = "cdtup", all.x = TRUE)
   p[, t := periodo(ano, mes)]

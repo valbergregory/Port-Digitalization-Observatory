@@ -35,7 +35,10 @@ test_that("coortes e períodos são consistentes", {
 })
 
 test_that("públicos sem portaria localizada ficam fora da amostra", {
-  expect_length(PUBLICOS_SEM_DATA, 13)
+  expect_length(PUBLICOS_SEM_DATA, 12)                     # decisão 46: "BR" não é porto
+  expect_false("BR" %in% PUBLICOS_SEM_DATA)
+  expect_true(all(PUBLICOS_SEM_DATA %in% FORA_DA_AMOSTRA))
+  expect_true("BR" %in% FORA_DA_AMOSTRA)                   # continua fora da amostra
   expect_false(any(PUBLICOS_SEM_DATA %in% COORTES_PSP$cdtup))
   expect_true("BRSSA" %in% PUBLICOS_SEM_DATA)   # Salvador: aguarda a planilha SEI 11844881 (Fala.BR 55001.000806/2026-27)
 })

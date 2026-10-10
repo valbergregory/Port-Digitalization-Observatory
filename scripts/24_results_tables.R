@@ -136,8 +136,7 @@ t15 <- reg[order(data, porto), .(Port = porto, Act, `Date of act` = format(data,
                                           as.character(migracao_definitiva_ate)),
            Confidence = fifelse(confianca == "alta", "High", "Medium"))]
 nome_de <- setNames(names(NOME_CDTUP), NOME_CDTUP); nome_de <- nome_de[!duplicated(names(nome_de))]
-sd <- setdiff(PUBLICOS_SEM_DATA, "BR")                         # "BR" = registro nao classificado (como no script 25)
-sem_data <- sort(unname(fifelse(is.na(nome_de[sd]), sd, nome_de[sd])))
+sem_data <- sort(unname(fifelse(is.na(nome_de[PUBLICOS_SEM_DATA]), PUBLICOS_SEM_DATA, nome_de[PUBLICOS_SEM_DATA])))
 tabela_tex(t15, file.path(DIR_TAB, "tab15_registro.tex"),
   "Registry of adoption dates of the Porto Sem Papel single window", "tab:registry",
   align = "p{3.2cm}p{4.2cm}llll", escape = TRUE,

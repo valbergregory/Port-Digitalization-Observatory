@@ -18,7 +18,7 @@ portos <- as.data.table(dbGetQuery(con, "SELECT cdtup, porto, tipo_autoridade FR
 datados <- COORTES_PSP[, .(cdtup, porto, data = as.Date(data),
                            status = fifelse(confianca == "alta", "Dated by full-text ordinance",
                                             "Dated by official news (ordinance text pending)"))]
-sem_data <- portos[cdtup %in% PUBLICOS_SEM_DATA & tipo_autoridade == "Porto Público" & cdtup != "BR",   # "BR" = registro nao classificado
+sem_data <- portos[cdtup %in% PUBLICOS_SEM_DATA & tipo_autoridade == "Porto Público",
                    .(cdtup, porto, data = as.Date(NA), status = "Public port, date not yet documented")]
 cal <- rbind(datados, sem_data)
 cal[, rotulo := fifelse(cdtup == "BRCE001", "Pecém (TUP)", porto)]

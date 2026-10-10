@@ -48,7 +48,7 @@ montar_atracacoes <- function(con, ano_ini, ano_fim, incluir_tups) {
     LEFT JOIN cargo_by_call c USING (id_atracacao)
     WHERE pc.flag_mov_carga AND pc.mes IS NOT NULL
       AND pc.ano BETWEEN %d AND %d", ano_ini, ano_fim)))
-  d <- d[!cdtup %in% PUBLICOS_SEM_DATA & tipo_navegacao %in% NAVEGACAO_COMERCIAL]
+  d <- d[!cdtup %in% FORA_DA_AMOSTRA & tipo_navegacao %in% NAVEGACAO_COMERCIAL]
   if (!incluir_tups) d <- d[tipo_autoridade == "Porto Público" | cdtup == "BRCE001"]
   d <- merge(d, COORTES_PSP[, .(cdtup, g_ano, g_mes)], by = "cdtup", all.x = TRUE)
   d[, t := periodo(ano, mes)]
