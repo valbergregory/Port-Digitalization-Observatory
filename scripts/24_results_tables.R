@@ -1,4 +1,4 @@
-# 24_results_tables.R — tabelas LaTeX dos resultados de 10-11/09 (tab07-tab11, tab14)
+# 24_results_tables.R — tabelas LaTeX dos resultados de 10-11/09 (tab07-tab11, tab14, tab15)
 # + CSV de macros p/ numbers.tex. Le apenas saidas do pipeline (csv/txt).
 raiz <- if (file.exists("project.Rproj")) getwd() else dirname(getwd()); setwd(raiz)
 source("R/00_setup.R"); source("R/01_config.R"); source("R/12_descriptive_analysis.R")
@@ -123,5 +123,29 @@ tabela_tex(t14, file.path(DIR_TAB, "tab14_salto_cobertura.tex"),
                 "ordinance (or of the official production notice for the 2011 cohort). Before/after: share of calls",
                 "with $T_4$ recorded in the months before and from the adoption month on, within the window."))
 
+# ---- tab15: registro completo de adocao (Apendice A), gerado de COORTES_PSP + portarias do DOU ----
+dou <- fread("data/metadata/psp_portarias_dou.csv", sep = ";", encoding = "UTF-8")
+reg <- merge(COORTES_PSP[, .(cdtup, porto, data, confianca, portaria)],
+             dou[, .(portaria, publicado_em, migracao_definitiva_ate)], by = "portaria", all.x = TRUE)
+reg[, Act := fifelse(grepl("^SEP-", portaria), sub("^SEP-", "SEP Ordinance ", portaria),
+                     fifelse(cdtup == "BRSSZ", "Official production notice (SEP Ordinance 106/2011 not retrieved)",
+                             "Official production notice"))]
+t15 <- reg[order(data, porto), .(Port = porto, Act, `Date of act` = format(data, "%Y-%m-%d"),
+           Published = fifelse(is.na(publicado_em) | publicado_em == "", "---", as.character(publicado_em)),
+           `Migration deadline` = fifelse(is.na(migracao_definitiva_ate) | migracao_definitiva_ate == "", "---",
+                                          as.character(migracao_definitiva_ate)),
+           Confidence = fifelse(confianca == "alta", "High", "Medium"))]
+nome_de <- setNames(names(NOME_CDTUP), NOME_CDTUP); nome_de <- nome_de[!duplicated(names(nome_de))]
+sd <- setdiff(PUBLICOS_SEM_DATA, "BR")                         # "BR" = registro nao classificado (como no script 25)
+sem_data <- sort(unname(fifelse(is.na(nome_de[sd]), sd, nome_de[sd])))
+tabela_tex(t15, file.path(DIR_TAB, "tab15_registro.tex"),
+  "Registry of adoption dates of the Porto Sem Papel single window", "tab:registry",
+  align = "p{3.2cm}p{4.2cm}llll", escape = TRUE,
+  notas = paste0("Treatment date is the date of the act that made the use of the system mandatory, never the announcement. ",
+                 "High: full text of the ordinance retrieved from the Official Gazette; Medium: official notice of entry into ",
+                 "production without the full text of the act. Migration deadline: date set by the ordinance for the definitive ",
+                 "migration of procedures to the system. Public ports without a dated act, excluded from estimation: ",
+                 paste(sem_data, collapse = ", "), ". Source: \\texttt{data/metadata/psp\\_portarias\\_dou.csv}."))
+
 fwrite(data.table(macro = names(macros), valor = unlist(macros)), file.path(DIR_TAB, "macros_resultados.csv"))
-cat("tab07-tab11, tab14 +", length(macros), "macros\n")
+cat("tab07-tab11, tab14, tab15 +", length(macros), "macros\n")

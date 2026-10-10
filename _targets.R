@@ -163,7 +163,8 @@ list(
   # ---- 4. tabelas de resultados + macros ----------------------------------
   tar_target(tabelas_resultados, rodar_script(s24, c(
     paste0("outputs/tables/tab", sprintf("%02d", 7:11), c("_inferencia", "_heterogeneidade", "_placebo", "_comercio", "_fronteira"), ".tex"),
-    "outputs/tables/tab14_salto_cobertura.tex", "outputs/tables/macros_resultados.csv"),
+    "outputs/tables/tab14_salto_cobertura.tex", "outputs/tables/tab15_registro.tex",
+    "outputs/tables/macros_resultados.csv"),
     deps = list(codigo_R, inferencia, heterogeneidade, placebo_honest, ppml,
                 mecanismo_cabotagem, fronteira, fronteira_segunda_passada,
                 sensibilidade_pretendencia)), format = "file"),
