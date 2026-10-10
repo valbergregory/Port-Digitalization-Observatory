@@ -1,11 +1,14 @@
 """Compila o manuscrito LaTeX (elsarticle, modo review) sem rodar o pipeline R.
 
-Uso:  python python/build_submission_preview.py
+Uso:  python python/build_submission_preview.py [--overleaf outputs/overleaf.zip]
 
 Gera em article/submission/:
-  manuscript.pdf   manuscrito anonimo (main.tex), formato de submissao da GIQ
-  title_page.pdf   folha de rosto (autor, declaracoes)
-  highlights.pdf   highlights
+  manuscript.pdf, title_page.pdf, highlights.pdf          versao GIQ (main.tex)
+  publicchoice/manuscript.pdf, publicchoice/title_page.pdf versao Public Choice (main_pc.tex)
+
+Com --overleaf (o zip que scripts/12_export_overleaf.R gera depois de
+targets::tar_make()), usa as tabelas, figuras e o numbers.tex reais do pipeline;
+so o que faltar no zip vira quadro.
 
 O que NAO vem do pipeline nesta compilacao (e o PDF diz isso em cada caso):
   - tabelas que dependem do DuckDB: entram como quadro com legenda e rotulo
@@ -17,7 +20,9 @@ As tabelas 3 e 15 (registro de adocao) nao dependem do DuckDB e sao montadas
 aqui a partir do mesmo CSV que o pipeline usa.
 Depois de targets::tar_make(), compile article/latex/main.tex diretamente.
 """
+import argparse
 import csv
+import zipfile
 import re
 import shutil
 import subprocess
@@ -160,45 +165,84 @@ def compilar(dirb: Path, arquivo: str, bib: bool):
         subprocess.run(cmd, cwd=dirb, check=True, stdout=subprocess.DEVNULL)
 
 
+def preparar(dirb: Path, tmp: Path, real: Path | None):
+    (dirb / "tables").mkdir(exist_ok=True)
+    (dirb / "figures").mkdir(exist_ok=True)
+    usados = {"tabelas_reais": 0, "figuras_reais": 0}
+    if real is not None and (real / "numbers.tex").exists():
+        shutil.copy(real / "numbers.tex", dirb / "numbers.tex")
+    for tab, (cap, lab) in TABELAS.items():
+        r = real / "tables" / f"{tab}.tex" if real else None
+        if r is not None and r.exists():
+            shutil.copy(r, dirb / "tables" / f"{tab}.tex"); usados["tabelas_reais"] += 1
+        else:
+            (dirb / "tables" / f"{tab}.tex").write_text(quadro_tabela(cap, lab), encoding="utf-8")
+    linhas, sem = coortes_e_registro()
+    for tab, conteudo in (("tab03_intervencoes", tab03()), ("tab15_registro", tab15(linhas, sem))):
+        r = real / "tables" / f"{tab}.tex" if real else None
+        if r is not None and r.exists():
+            shutil.copy(r, dirb / "tables" / f"{tab}.tex"); usados["tabelas_reais"] += 1
+        else:
+            (dirb / "tables" / f"{tab}.tex").write_text(conteudo, encoding="utf-8")
+    # macros que nao dependem do DuckDB: mesma regra de scripts/24 (COORTES_PSP e CSV das portarias)
+    with open(RAIZ / "data" / "metadata" / "psp_portarias_dou.csv", encoding="utf-8") as f:
+        n_portarias = sum(1 for _ in csv.DictReader(f, delimiter=";"))
+    num = dirb / "numbers.tex"
+    extra = "".join(f"\\providecommand{{\\{m}}}{{{v}}}\n" for m, v in
+                    (("Nportosdatados", len(linhas)), ("Nportarias", n_portarias)))
+    num.write_text(num.read_text(encoding="utf-8") + "\n% previa: macros do registro (sem DuckDB)\n" + extra,
+                   encoding="utf-8")
+    figs = set()
+    for sec in (dirb / "sections").glob("*.tex"):
+        figs |= set(re.findall(r"\\includegraphics(?:\[[^]]*\])?\{([^}]+)\.pdf\}", sec.read_text(encoding="utf-8")))
+    for nome in sorted(figs):
+        r = real / "figures" / f"{nome}.pdf" if real else None
+        if r is not None and r.exists():
+            shutil.copy(r, dirb / "figures" / f"{nome}.pdf"); usados["figuras_reais"] += 1
+        else:
+            figura_pdf(dirb / "figures", nome, tmp)
+    return usados, len(figs)
+
+
+def avisos(dirb: Path, base: str):
+    log = (dirb / f"{base}.log").read_text(encoding="latin-1")
+    return [l for l in log.splitlines() if "undefined" in l.lower()]
+
+
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--overleaf", type=Path, help="outputs/overleaf.zip gerado pelo pipeline")
+    args = ap.parse_args()
     SAIDA.mkdir(parents=True, exist_ok=True)
+    (SAIDA / "publicchoice").mkdir(exist_ok=True)
     with tempfile.TemporaryDirectory() as t:
+        real = None
+        if args.overleaf:
+            real = Path(t) / "overleaf"
+            with zipfile.ZipFile(args.overleaf) as z:
+                z.extractall(real)
         dirb = Path(t) / "latex"
         shutil.copytree(LATEX, dirb)
-        (dirb / "tables").mkdir(exist_ok=True)
-        (dirb / "figures").mkdir(exist_ok=True)
         tmp = Path(t) / "fig"
         tmp.mkdir()
-        for tab, (cap, lab) in TABELAS.items():
-            (dirb / "tables" / f"{tab}.tex").write_text(quadro_tabela(cap, lab), encoding="utf-8")
-        linhas, sem = coortes_e_registro()
-        # macros que nao dependem do DuckDB: mesma regra de scripts/24 (COORTES_PSP e CSV das portarias)
-        with open(RAIZ / "data" / "metadata" / "psp_portarias_dou.csv", encoding="utf-8") as f:
-            n_portarias = sum(1 for _ in csv.DictReader(f, delimiter=";"))
-        num = dirb / "numbers.tex"
-        extra = "".join(f"\\providecommand{{\\{m}}}{{{v}}}\n" for m, v in
-                        (("Nportosdatados", len(linhas)), ("Nportarias", n_portarias)))
-        num.write_text(num.read_text(encoding="utf-8") + "\n% previa: macros do registro (sem DuckDB)\n" + extra,
-                       encoding="utf-8")
-        (dirb / "tables" / "tab03_intervencoes.tex").write_text(tab03(), encoding="utf-8")
-        (dirb / "tables" / "tab15_registro.tex").write_text(tab15(linhas, sem), encoding="utf-8")
-        figs = set()
-        for sec in (dirb / "sections").glob("*.tex"):
-            figs |= set(re.findall(r"\\includegraphics(?:\[[^]]*\])?\{([^}]+)\.pdf\}", sec.read_text(encoding="utf-8")))
-        for nome in sorted(figs):
-            figura_pdf(dirb / "figures", nome, tmp)
-        compilar(dirb, "main.tex", bib=True)
-        compilar(dirb, "title_page.tex", bib=False)
-        compilar(dirb, "highlights.tex", bib=False)
-        shutil.copy(dirb / "main.pdf", SAIDA / "manuscript.pdf")
-        shutil.copy(dirb / "title_page.pdf", SAIDA / "title_page.pdf")
-        shutil.copy(dirb / "highlights.pdf", SAIDA / "highlights.pdf")
-        log = (dirb / "main.log").read_text(encoding="latin-1")
-        avisos = [l for l in log.splitlines() if "undefined" in l.lower() or "Citation" in l and "undefined" in l]
-        print(f"manuscript.pdf, title_page.pdf, highlights.pdf em {SAIDA}")
-        print(f"avisos de referencia/citacao indefinida: {len(avisos)}")
-        for a in avisos[:20]:
-            print("  ", a)
+        usados, nfig = preparar(dirb, tmp, real)
+        for base, bib in (("main", True), ("title_page", False), ("highlights", False),
+                          ("main_pc", True), ("title_page_pc", False)):
+            compilar(dirb, f"{base}.tex", bib=bib)
+        copias = {"main": SAIDA / "manuscript.pdf", "title_page": SAIDA / "title_page.pdf",
+                  "highlights": SAIDA / "highlights.pdf",
+                  "main_pc": SAIDA / "publicchoice" / "manuscript.pdf",
+                  "title_page_pc": SAIDA / "publicchoice" / "title_page.pdf"}
+        for base, dest in copias.items():
+            shutil.copy(dirb / f"{base}.pdf", dest)
+        print(f"PDFs em {SAIDA} e {SAIDA / 'publicchoice'}")
+        print(f"tabelas reais do pipeline: {usados['tabelas_reais']} de {len(TABELAS) + 2}; "
+              f"figuras reais: {usados['figuras_reais']} de {nfig} (as demais: galeria ou quadro)")
+        for base in ("main", "main_pc"):
+            a = avisos(dirb, base)
+            print(f"{base}: {len(a)} avisos de referencia/citacao indefinida")
+            for x in a[:10]:
+                print("   ", x)
 
 
 if __name__ == "__main__":

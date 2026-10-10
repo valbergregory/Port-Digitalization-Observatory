@@ -369,3 +369,20 @@ Formato: data — decisão — justificativa — alternativas rejeitadas.
     Riacho, pedidos no Fala.BR, não constam como porto público com carga —
     o teste mostra como estão classificados no cadastro. Não acrescentei
     códigos sem conferir: incluir um TUP na lista o tiraria do desenho B.
+47. **Versão para a Public Choice (Springer), 10/10 — decisão do
+    é `main_pc.tex` + `title_page_pc.tex`. Compartilha as seções 2, 3, 6–12,
+    15 e os apêndices A–C; tem introdução, teoria, discussão, implicações,
+    conclusão e apêndice de dados próprios (`sections/pc_*.tex`), com
+    enquadramento de economia política da burocracia (discricionariedade,
+    monitoramento sem consequências, multitarefa, mandato central com
+    execução local). Hipóteses H1–H5 e todos os números iguais aos da GIQ.
+    Formato: estudo anônimo, espaço duplo, linhas numeradas, autor-ano,
+    abstract de 150–250 palavras (216), palavras-chave e JEL (D73, H83, L91,
+    O33). O modelo `sn-jnl` da Springer não está disponível no ambiente;
+    trocar a classe se o editor pedir. Dez referências novas (Niskanen 1971,
+    Tullock 1965, Wilson 1989, Prendergast 2003, Holmström & Milgrom 1991,
+    Shleifer & Vishny 1993, Djankov et al. 2002, Muralidharan et al. 2016,
+    Banerjee et al. 2020, McCubbins & Schwartz 1984) **lançadas de memória:
+    conferir no Crossref antes de submeter (regra 19)**. A seção 5
+    (observatório, design science) virou o Apêndice D, condensado.
+    compila as duas versões com as tabelas e figuras reais do pipeline.
